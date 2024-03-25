@@ -1,0 +1,99 @@
+{% if seeMore is defined and seeMore is not empty %}
+<div class="fr-container fr-mt-6w">
+    <div class="bg-banner-guide">
+        <div class="fr-grid-row fr-px-md-8w fr-px-1w">
+            <div class="fr-col">
+                <p class="fr-text--lg fw-bold fr-mt-md-7w fr-mt-3w fr-mb-3w fr-px-3v">{{ 'front.oneguide.seetoo'|trans }}</p>
+            </div>
+        </div>
+        {% if seeMore|length > 2 and seeMore|length < 5 %}
+            <div class="fr-grid-row fr-grid-row--gutters fr-px-md-8w fr-px-1w fr-pt-0 fr-mx-0 fr-pb-2w">
+                {% for additionalHelp in seeMore|slice(0, 2) %}
+                    <div class="fr-col-12 fr-col-lg">
+                        <div class="fr-card fr-enlarge-link">
+                            <div class="fr-card__body">
+                                <h4 class="fr-card__title">
+                                    <a href="{{ additionalHelp.link }}" class="fr-card__link">{{ additionalHelp.name }}</a>
+                                </h4>
+                                <p class="fr-card__desc">{{ additionalHelp.description|striptags|u.truncate(150, '...', false)|raw }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="fr-grid-row fr-grid-row--gutters fr-px-md-8w fr-px-1w fr-pt-0 fr-mx-0 fr-pb-6w fr-mb-6w">
+                {% for additionalHelp in seeMore[2:2] %}
+                    <div class="fr-col-12 fr-col-lg">
+                        <div class="fr-card fr-enlarge-link">
+                            <div class="fr-card__body">
+                                <h4 class="fr-card__title">
+                                    <a href="{{ additionalHelp.link }}" class="fr-card__link">{{ additionalHelp.name }}</a>
+                                </h4>
+                                <p class="fr-card__desc">{{ additionalHelp.description|striptags|u.truncate(150, '...', false)|raw }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% elseif seeMore|length > 2 and seeMore|length > 4 %}
+            <div class="fr-grid-row fr-grid-row--gutters fr-px-md-8w fr-px-1w fr-pt-0 fr-mx-0 fr-pb-2w">
+                {% for additionalHelp in seeMore|slice(0, 2) %}
+                    <div class="fr-col-12 fr-col-lg">
+                        <div class="fr-card fr-enlarge-link">
+                            <div class="fr-card__body">
+                                <h4 class="fr-card__title">
+                                    <a href="{{ additionalHelp.link }}" class="fr-card__link">{{ additionalHelp.name }}</a>
+                                </h4>
+                                <p class="fr-card__desc">{{ additionalHelp.description|striptags|u.truncate(150, '...', false)|raw }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="fr-grid-row fr-grid-row--gutters fr-px-md-8w fr-px-1w fr-pt-0 fr-mx-0 fr-pb-2w">
+                {% for additionalHelp in seeMore[2:2] %}
+                    <div class="fr-col-12 fr-col-lg">
+                        <div class="fr-card fr-enlarge-link">
+                            <div class="fr-card__body">
+                                <h4 class="fr-card__title">
+                                    <a href="{{ additionalHelp.link }}" class="fr-card__link">{{ additionalHelp.name }}</a>
+                                </h4>
+                                <p class="fr-card__desc">{{ additionalHelp.description|striptags|u.truncate(150, '...', false)|raw }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="fr-grid-row fr-grid-row--gutters fr-px-md-8w fr-px-1w fr-pt-0 fr-mx-0 fr-pb-6w fr-mb-6w">
+                {% for additionalHelp in seeMore[4:2] %}
+                    <div class="fr-col-12 fr-col-lg">
+                        <div class="fr-card fr-enlarge-link">
+                            <div class="fr-card__body">
+                                <h4 class="fr-card__title">
+                                    <a href="{{ additionalHelp.link }}" class="fr-card__link">{{ additionalHelp.name }}</a>
+                                </h4>
+                                <p class="fr-card__desc">{{ additionalHelp.description|striptags|u.truncate(150, '...', false)|raw }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="fr-grid-row fr-grid-row--gutters fr-px-md-8w fr-px-1w fr-pt-0 fr-mx-0 fr-pb-6w fr-mb-6w">
+                {% for additionalHelp in seeMore %}
+                <div class="fr-col-12 fr-col-lg">
+                    <div class="fr-card fr-enlarge-link">
+                        <div class="fr-card__body">
+                            <h4 class="fr-card__title">
+                                <a href="{{ additionalHelp.link }}" class="fr-card__link">{{ additionalHelp.name }}</a>
+                            </h4>
+                            <p class="fr-card__desc">{{ additionalHelp.description|striptags|u.truncate(150, '...', false)|raw }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ 'guides.meta_description'|trans }}{% endblock %}
+{% block title %}{{ 'front.guide.homepage'|trans }}{% endblock %}
+
+{% block body %}
+    
+    {% include 'partials/header/_header.html.twig' %}
+    
+    <main class="fr-fluid" role="main">
+        
+        {% if introBanner.isEnable %}
+            {% include 'partials/common/_breadcrumbpages.html.twig' %}
+            <div class="fr-container fr-pb-3w padding-body fr-mx-0 fr-mx-md-1w mx-lg-3">
+                <div class="fr-grid-row">
+                    <div class="fr-col">
+                        <h1 class="fr-h1 actu-title-border fr-mb-2w">{{ introBanner.title }}</h1>
+                        <p class="fr-text fr-mt-2w">{{ introBanner.description|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="fr-pl-md-2w">
+                {% include 'partials/common/_breadcrumbpages.html.twig' %}
+            </div>
+        {% endif %}
+
+        <div class="fr-fluid">
+            <div class="fr-grid-row">
+
+                <div class="fr-col-lg-4 fr-col-md-4 fr-col-sm-12">
+                    {% if guideMenu is defined and guideMenu is not empty %}
+                        <nav class="fr-sidemenu fr-sidemenu--sticky-full-height" role="navigation" aria-label="{{ 'front.header.side.menu'|trans }}">
+                            <div class="fr-sidemenu__inner">
+                                <button class="fr-sidemenu__btn" aria-controls="fr-sidemenu-wrapper" aria-expanded="false" data-fr-js-collapse-button="true">{{ 'front.oneguide.menu'|trans }}</button>
+                                <div class="fr-collapse" id="fr-sidemenu-wrapper">
+                                    <ul class="fr-sidemenu__list fr-pl-0">
+                                    {% for items in guideMenu %}
+                                        <li class="fr-sidemenu__item {{ items.selected ? 'fr-sidemenu__item--active' : '' }}">
+                                            <button class="fr-sidemenu__btn" aria-expanded="{{ items.selected ? 'true' : 'false' }}" aria-controls="fr-sidemenu-item-{{ loop.index0 }}" {{ items.selected ? 'aria-current="true"' : '' }}>{{ items.category }}</button>
+                                            <div class="fr-collapse" id="fr-sidemenu-item-{{ loop.index0 }}">
+                                                <ul class="fr-sidemenu__list fr-pl-0">
+                                                {% for itemGuide in items.guides|sort((a, b) => a.weight <=> b.weight) %}
+                                                    <li class="fr-sidemenu__item {{ itemGuide.selected ? 'fr-sidemenu__item--active' : '' }}">
+                                                        <a class="fr-sidemenu__link" href="{{ itemGuide.url }}" {{ itemGuide.selected ? 'aria-current="page"' : '' }} target="_self">{{ itemGuide.title }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    {% endif %}
+                </div>
+
+                {% if guides is not empty and mainCategory is not empty %}
+                    <div class="fr-col-lg-8 fr-col-md-8 fr-col-sm-12">
+                        {% include 'partials/common/_printmenu.html.twig' %}
+                        <div id="print-area"> 
+                            {% for item in guides[0:1] %}
+                                <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ item.title }}</h1>
+                                <div class="fr-mt-2w">
+                                    {% if item.imageLocale is not empty %}
+                                    <div class="fr-card__img">
+                                        <img src="{{ item.imageLocale }}" class="fr-responsive-img" style="width: 100%" alt="{{ item.title }}">
+                                    </div>
+                                        {% if item.imgLicence or item.imgLegend is not empty  %}
+                                        <div class="color-grey-666">
+                                            <figcaption>{{ item.imgLegend }}</figcaption><small>{{ item.imgLicence }}</small><br/>
+                                        </div>
+                                        {% endif %}
+                                    {% endif %}
+                                    <span class="fr-text--xs color-grey-666">{{ 'front.updatedAt'|trans }} {{ item.updatedAt|date("d/m/Y") }}</span>
+                                    <div class="fr-my-4w">
+                                        {{ item.content|raw }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                
+            </div>
+        </div>
+
+    </main>
+
+    {% include 'partials/footer/_footer.html.twig' %}
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ metaDescription|u.truncate(155, '...', false) }}{% endblock %}
+{% block title %}{{ entity.publicationTitle }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/datasetReuseds/_maindatasetReused.html.twig' %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

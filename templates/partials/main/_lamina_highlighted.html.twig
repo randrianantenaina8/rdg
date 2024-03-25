@@ -1,0 +1,42 @@
+{% set highlighted = 'highlighted' %}
+{% for lamina in laminas %}
+    {% if lamina.type is same as(highlighted) %}
+        <div class="fr-fluid fr-bt-4">
+        {% set pathDataset = path('front.dataset.show', {'slug': lamina.lamina.entity.slug}) %}
+            <div class="fr-grid-row fr-grid-row--center fr-grid-row--middle bg-banner-data fr-pb-3w pb-lg-0">
+                <div class="fr-col-lg fr-col-10 fr-mx-3w">
+                    <h3 class="fr-h3 link-banner-data fr-pt-4w fr-pb-md-2w">{{ lamina.lamina.title }}</h3>
+                </div>
+                <div class="fr-col-lg-7 fr-col-10 fr-my-md-7w me-lg-5">
+                    <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-enlarge-link align-items-center">
+                        <div class="fr-card__body fr-p-2w">
+                            <p class="fr-text fr-text--bold fr-mb-0 fr-pb-0 fr-py-1w">{{ lamina.lamina.entity.title }}
+                            </p>
+                            <p class="fr-card__desc">{{ lamina.lamina.entity.content|striptags|u.truncate(lame_highlighted_len_max_title, '...', false)|raw }}</p>
+                            <p class="fr-card__detail fr-mb-0 fr-pb-0">{{ lamina.lamina.entity.updatedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</p>
+                            {% if lamina.lamina.entity.taxonomies is not empty %}
+                                <div class="fr-py-2w">
+                                {% for taxonomy in lamina.lamina.entity.taxonomies %}
+                                    <a href="{{ pathDataset }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs" aria-label="{{ lamina.lamina.entity.title }}">{{ taxonomy.term }}</a>
+                                {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="link-hover-background fr-py-1w new-tag-order">
+                                    <a href="{{ pathDataset }}" class="deposer-link-extern-content text-decoration-none fr-text--xs" aria-label="{{ lamina.lamina.entity.title }}"></a>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="fr-card__img fr-mx-2w">
+                            {% if lamina.lamina.entity.imageLocale is not empty %}
+                                <img class="fr-responsive-img" src="{{ lamina.lamina.entity.imageLocale }}" class="fr-responsive-img" alt="{{ lamina.lamina.entity.title }}"> 
+                            {% else %}
+                                <img class="fr-responsive-img" src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="{{ 'content.dataset'|trans }}">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

@@ -1,0 +1,9 @@
+<main class="fr-fluid" role="main">
+    {% block main %}
+        {% include 'partials/pages/_bannerpage.html.twig' %}
+        {% block page %}
+            {% include 'partials/datasetReuseds/_datasetReused.html.twig' %}
+        {% endblock %}
+        {% include 'partials/common/_search-footer.html.twig' %}
+    {% endblock %}
+</main>

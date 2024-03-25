@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ metaDescription|u.truncate(155, '...', false) }}{% endblock %}
+{% block title %}{{ entity.name }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/dataRepositories/_mainDataRepository.html.twig' %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

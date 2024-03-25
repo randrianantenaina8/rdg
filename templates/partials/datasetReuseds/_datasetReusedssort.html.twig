@@ -1,0 +1,28 @@
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %} 
+{% set requestURI = app.request.requestUri|split('/') %} 
+{% set paramsGET = null %}
+{% set paramsGET = requestURI|last %}
+<div class="fr-form-group">
+    <fieldset class="fr-fieldset fr-fieldset--inline">
+        <legend class="fr-fieldset__legend fr-text--regular fw-bold" id='radio-inline-legend'>
+            {{ 'front.events.refine'|trans }}
+        </legend>
+        <div class="fr-fieldset__content">
+            <div class="fr-radio-group">
+                <input type="radio" {{ paramsGET is same as("passe") or paramsGET is same as("past")  ? 'checked' : '' }} id="radio-inline-1" name="radio-inline" onclick="location.href='{{ path("front.event.list.past") }}'">
+                <label class="fr-label" for="radio-inline-1">{{ 'front.events.past'|trans }}
+                </label>
+            </div>
+            <div class="fr-radio-group">
+                <input type="radio" {{ paramsGET is same as("evenements") or paramsGET is same as("events")  ? 'checked' : '' }} id="radio-inline-2" name="radio-inline" onclick="location.href='{{ path("front.event.list") }}'">
+                <label class="fr-label" for="radio-inline-2">{{ 'front.events.all'|trans }}
+                </label>
+            </div>
+            <div class="fr-radio-group">
+                <input type="radio" {{ paramsGET is same as("futur") or paramsGET is same as("next")  ? 'checked' : '' }} id="radio-inline-3" name="radio-inline" onclick="location.href='{{ path("front.event.list.next") }}'">
+                <label class="fr-label" for="radio-inline-3">{{ 'front.events.come'|trans }}
+                </label>
+            </div>
+        </div>
+    </fieldset>
+</div>

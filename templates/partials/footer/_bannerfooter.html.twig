@@ -1,0 +1,104 @@
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %} 
+{% set requestURI = app.request.requestUri|split('?') %} 
+{% set paramsGET = null %}
+{% if requestURI|length > 1 %}
+    {% set paramsGET = '?' ~ requestURI[1] %}
+{% endif %}
+<footer class="fr-footer padding-body fr-pt-6w" role="contentinfo" id="footer">
+    <div class="fr-fluid">
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <div class="fr-grid-row">
+                    <div class="fr-col-12 fr-col-lg border-footer-mobile fr-pb-2w pb-lg-0">
+                        <div class="fr-footer__brand fr-enlarge-link">
+                            <a href="{{ ministry_url }}" title="{{'front.ministry.logo.url'|trans}}" target="_blank">
+                                <p class="fr-logo" title="république française">
+                                    ministère
+                                    <br>de l'enseignement
+                                    <br>supérieur
+                                    <br>et de la recherche
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="fr-col-12 fr-col-md-6 fr-col-xl-6">
+                        <div class="fr-grid-row align-items-center h-100">
+                            <div class="fr-col-md-12 fr-col-sm-12 fr-pt-2w fr-py-md-2">
+                                <h6 class="fr-h6 fr-px-0 px-xl-2 fr-mb-1v">{{'front.footer.contact'|trans}}</h6>
+                                <a class="fr-link fr-px-0 px-xl-2 fr-fi-arrow-right-line fr-link--icon-right fr-text--sm" href="{{ url('front.contact') }}">{{'front.footer.contact.link'|trans}}</a>
+                            </div>
+                            <div class="fr-col-md-12 fr-col-sm-12 fr-pt-2w fr-py-md-2">
+                                <h6 class="fr-h6 fr-px-0 px-xl-2 fr-mb-1v">{{'front.footer.communication'|trans}}</h6>
+                                <a class="fr-link fr-px-0 px-xl-2 fr-fi-arrow-right-line fr-link--icon-right fr-text--sm" href="{{ '/en' in currentPath ? url_communication_kit_en : url_communication_kit_fr }}">{{'front.footer.communication.link'|trans}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fr-col border-footer-left">
+                        <div class="fr-follow__social d-flex h-100 flex-column justify-content-center ps-xl-4 fr-pt-2w pt-xl-0">
+                            {% if footerDatas is defined and footerDatas.networks|length > 0 %}
+                            <p class="fr-h6 fr-mb-3v">{{ 'front.footer.follow'|trans }}
+                                <br> {{ 'front.footer.social'|trans }}</p>
+                                <ul class="fr-links-group fr-links-group--lg fr-pl-0">
+                                    {% for network in footerDatas.networks %}
+                                    <li>
+                                        <a class="fr-link--{{ network.name|lower }} fr-link hover-round-icon" title="{{ network.name|capitalize }} - {{'front.footer.window'|trans}}" href="{{ network.link }}" target="_blank"><span class="{{ network.imgCss }} align-auto-network" aria-hidden="true"></span></a>
+                                    </li>
+                                    {% endfor %}  
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        <div class="fr-grid-row pt-lg-2 fr-pt-0 fr-mt-0 mt-lg-3">
+            <div class="fr-col">
+                <div class="fr-footer__content fr-mt-0">
+                    <ul class="fr-footer__content-list fr-pl-0">
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link" href="https://legifrance.gouv.fr">legifrance.gouv.fr</a>
+                        </li>
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link" href="https://gouvernement.fr">gouvernement.fr</a>
+                        </li>
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link" href="https://service-public.fr">service-public.fr</a>
+                        </li>
+                        <li class="fr-footer__content-item">
+                            <a class="fr-footer__content-link" href="https://data.gouv.fr">data.gouv.fr</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="fr-fluid">
+    <div class="fr-grid-row">
+        <div class="fr-col">
+            <div class="fr-footer__bottom fr-mt-2w shadow-none">
+                {% if footerDatas is defined %}
+                <ul class="fr-footer__bottom-list footer-link-none">
+                    {% for elem in footerDatas.links %}
+                    <li class="fr-footer__bottom-item">
+                        <a class="fr-footer__bottom-link shadow-none text-decoration-none link" href="{{ elem.link }}">{{ elem.wording }}</a>
+                    </li>
+                    {% endfor %} 
+                    <li class="fr-footer__bottom-item">
+                        <a class="fr-footer__bottom-link shadow-none text-decoration-none link" href="{{ currentPath  ~ paramsGET ~ "#consentement"}}">{{'front.cookies.url'|trans}}</a>
+                    </li>
+                </ul>
+                {% endif %}
+                <div class="fr-footer__bottom-copy">
+                    <p>{{ 'front.footer.mention'|trans }} <a href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" class="link" target="_blank">licence etalab-2.0</a>,
+                        {{ 'front.footer.mention.gnu'|trans }} <a href="https://www.gnu.org/licenses/" class="link" target="_blank">GNU GPL V3</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="backtotop d-flex flex-column align-items-center fr-pt-2w fr-pt-md-0" id="backtotop">
+    <button type="button" class="fr-btn fr-fi-arrow-up-line"  title="Retour en haut"></button>
+    <p class="fr-text--xs br-gg__white">{{ 'front.footer.top'|trans }}</p>
+</div>

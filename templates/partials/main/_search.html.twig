@@ -1,0 +1,24 @@
+<div class="search-up-data  fr-bt-4">
+    <div class="fr-grid-row justify-content-center justify-content-lg-evenly align-items-lg-center fr-fluid" id="search-data">
+        <div class="fr-col-md-8 fr-col-xl-6 fr-pt-4w fr-pb-2w py-xl-5">
+            <form id="searchDataverse" target="_blank" data-deposit-url="{{ search }}">
+                <div class="fr-search-bar fr-search-bar--lg" id="search-2" role="search">
+                    <label class="fr-label" for="search-787-input">
+                        {{ 'front.search.label'|trans }}
+                    </label>
+                    <input class="fr-input search-size" placeholder="{{ 'front.search.dataset'|trans }}" type="search" id="search-787-input" name="search-787-input">
+                    <button type="submit" class="btn-remove btn-size-home fr-btn d-none d-lg-block" id="search-submitData">
+                        {{ 'front.search.data'|trans }} <span class="fr-pl-1w fr-fi-external-link-line" aria-hidden="true"></span> 
+                    </button>
+                    <button type="submit" class="btn-remove btn-size-home fr-btn d-lg-none d-block" id="search-submitData-short">
+                        {{ 'front.searchshort.data'|trans }} <span class="fr-pl-1w fr-fi-external-link-line fr-fi--sm" aria-hidden="true"></span> 
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="fr-col--8 fr-col search-up-data-padding-top fr-pt-2w fr-pb-4w py-xl-5 fr-pl-md-2w fr-pl-0 text-center">
+            <a href="{{ deposit }}" target="_blank" rel="noopener" class="text-decoration-none shadow-none deposer-link-extern-content"><span class="fr-pr-1w txt-color fr-text fr-text-md--lg">{{ 'front.deposit.search'|trans }}</span>
+            <span class="txt-color fr-fi-upload-2-line fr-fi--sm fr-pr-md-2w" aria-hidden="true"></span></a>
+        </div>
+    </div>
+</div>

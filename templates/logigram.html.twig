@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="fr-fluid">
+        <div>
+            <div class="fr-header__body-row justify-content-between fr-pb-1w">
+                <div class="fr-header__brand fr-enlarge-link">
+                    <div class="fr-header__brand-top">
+                        <div class="fr-header__logo">
+                            <a href="/{{ app.request.locale }}" title="{{ 'front.header.home'|trans }} - recherche.data.gouv.fr">
+                                <p class="fr-logo">
+                                    République
+                                    <br>Française
+                                </p>
+                            </a>
+                        </div>
+                            <div class="fr-header__operator size-logo">
+                            <img src="{{ asset('build/images/logo-rdg.svg') }}" class="fr-responsive-img" alt="recherche.data.gouv.fr" />
+                        </div>
+                        <div class="fr-header__navbar">
+                            {# add d-none class to remove search bar #}
+                            <button class="fr-btn--search fr-btn d-none" data-fr-opened="false" aria-controls="modal-866" title="{{ 'front.header.search'|trans }}">
+                                {{ 'front.header.search'|trans }}
+                            </button>
+                            <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-menu" data-fr-js-modal-button="true" aria-haspopup="menu" title="{{ 'front.header.menu'|trans }}" id="fr-btn-menu-mobile">
+                                {{ 'front.header.menu'|trans }}
+                            </button>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'partials/logigrams/_logigram.html.twig' %}
+{% endblock %}

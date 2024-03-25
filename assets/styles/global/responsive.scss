@@ -1,0 +1,107 @@
+@media (max-width: 767px) { 
+    .backtotop {
+        display: none;
+    }
+ }
+
+@media (min-width: 768px) { 
+    .backtotop {
+        bottom: 50px;
+        position: fixed;
+        right: 60px;
+        z-index: 100;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: all .5s ease;
+    }
+
+}
+
+@media (min-width: 992px) {
+
+    .size-logo {
+        width: 240px;
+    }
+    .search-up-data-padding-top {
+        min-width: 380px;
+    }
+    .padding-body {
+        padding: 0 4rem 0 4rem;
+    }
+    .header-search-max-size {
+        max-width: 21rem !important;
+    }
+    .search-footer-size {
+        min-width: 19rem;
+    }
+    .btn-search-footer-data-text-large {
+        display:block;
+        min-width: 15rem;
+    }
+    .btn-size {
+        min-width: 15rem !important;
+    }
+    .btn-size-home {
+        min-width: 18rem !important;
+    }
+    .bg-banner-data {
+        background-position: -25%;
+    }
+    .search-size {
+        min-width: 18rem;
+    }
+
+}
+
+@media (max-width: 993px) {
+
+    .size-logo {
+        width: 160px;
+    }
+    .padding-body {
+        padding: 0;
+    }
+    .search-footer-size {
+        min-width: auto;
+    }
+    .btn-search-footer-data-text-large {
+        display:none;
+    }
+    .btn-size {
+        min-width: 7rem !important;
+    }
+    .btn-size-home {
+        min-width: 7rem !important;
+    }
+    .bg-banner-data {
+        background-position: top right;
+    }
+    .border-footer-mobile {
+        box-shadow: inset 0 -1px 0 0 var(--border-default-grey);
+    }
+    .center-faq-mobile {
+        justify-content: center;
+    }
+    .search-size {
+        min-width: auto;
+    }
+    .search-up-data {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .border-footer-left {
+        border-left: 1px solid var(--artwork-minor-blue-france);
+    }
+}
+
+@media (max-width: 1201px) {
+    .border-footer-left {
+        border-left: none;
+    }
+}

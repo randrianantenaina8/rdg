@@ -1,0 +1,30 @@
+{
+    "name": "dipso/lockedit-bundle",
+    "description": "Bundle handling pessimistic lock on entity",
+    "type": "symfony-bundle",
+    "homepage": "https://www6.inrae.fr/dipso/",
+    "keywords": ["symfony", "lock", "edit", "user", "dipso"],
+    "require": {
+        "php": ">=7.4",
+        "symfony/framework-bundle": "^5.4"
+    },
+    "license": "CECILL-2.1",
+    "autoload": {
+        "psr-4": {
+            "Dipso\\LockeditBundle\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/acme/my-private-package.git"
+        }
+    ],
+    "authors": [
+        {
+            "name": "jbgenicot",
+            "email": "jean-baptiste.genicot@inrae.fr"
+        }
+    ],
+    "minimum-stability": "stable"
+}

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'front.institutions.list'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/institution/_maininstitution.html.twig' with { 'title' : 'front.institutions.list'|trans } %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

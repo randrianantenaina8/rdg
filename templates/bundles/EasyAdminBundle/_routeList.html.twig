@@ -1,0 +1,86 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+
+{% block content_title %}
+    Routes
+{% endblock %}
+
+{% block page_actions %}
+    <a class="action-index btn btn-secondary" href="{{ ret.url }}">{{ 'bo.config.back'|trans }}</a>
+    <a class="action-new btn btn-primary" href="{{ addUrl }}">{{ 'bo.add'|trans|capitalize }} {{ 'config.route.route'|trans }}</a>
+{% endblock %}
+
+{% block main %}
+    <table class="table datagrid">
+        <thead>
+            <tr>
+                <th>{{ 'config.route.name'|trans|capitalize }}</th>
+                <th>{{ 'config.route.route'|trans|capitalize }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for  route in routes %}
+            <tr>
+                <td data-label="name">{{ route.name }}</td>
+                <td data-label="route">{{ route.route }}</td>
+                <td class="actions">
+                    <div class="dropdown dropdown-actions">
+                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {# don't use FontAwesome 'fa-ellipsis-h' icon here because it doesn't look good #}
+                            {# this icon is 'dots-horizontal' icon from https://heroicons.com/ #}
+                            <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item action-edit"
+                               href="{{ route.edit }}"
+                               data-action-name="edit"
+                            >
+                                {{ 'bo.edit'|trans|capitalize }}
+                            </a>
+                            <a class="dropdown-item action-delete text-danger"
+                               href="{{ route.del }}"
+                               data-bs-toggle="modal" data-bs-target="#modal-delete" data-action-name="delete"
+                               formaction="{{ route.del }}"
+                            >
+                                {{ 'bo.del'|trans|capitalize }}
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% include 'bundles/EasyAdminBundle/_delete_form.html.twig' %}
+
+{% endblock %}
+
+{% block body_javascript %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        createModalWindowsForDeleteActions();
+    });
+         const delRoute = createModalWindowsForDeleteActions {
+            document.querySelectorAll('.action-delete').forEach((actionElement) => {
+                actionElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    document.querySelector('#modal-delete-button').addEventListener('click', () => {
+                        const deleteFormAction = actionElement.getAttribute('formaction');
+                        const deleteForm = document.querySelector('#delete-form');
+                        deleteForm.setAttribute('action', deleteFormAction);
+                        deleteForm.submit();
+                    });
+                });
+            });
+        }
+
+</script>
+{% endblock body_javascript %}
+

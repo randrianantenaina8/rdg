@@ -1,0 +1,69 @@
+{# startBegin and startEnd are breakpoints to display first or last elements in pagination. #}
+{% set mid = (pageRange / 2)|round(0, 'floor') %}
+{% if (mid % 2 == 0) %}
+    {% set startBegin = mid - 1 %}
+    {% set startEnd = last %}
+{% else %}
+    {% set startBegin = mid %}
+    {% set startEnd = last + 1 %}
+    {% if (pageRange <= last) %}
+        {% set startEnd = endPage %}
+    {% endif %}
+{% endif %}
+
+{% if pageCount > 1 %}
+<div class="fr-grid-row">
+    <div class="fr-col-12 fr-col-lg">
+        <div class="d-flex justify-content-between align-content-center">
+            <nav role="navigation" class="fr-pagination" aria-label="Pagination">
+                <ul class="fr-pagination__list fr-pl-0">
+                    {% if first is defined and current != first and startPage > startBegin %}
+                        <li>
+                            <a class="fr-pagination__link"
+                               href="{{ path(route, query|merge({(pageParameterName): first})) }}"
+                               title="Page {{ first }}">
+                                {{ first }}
+                            </a>
+                        </li>
+                        {% if  startPage > first + 1 %}
+                            <li><a class="fr-pagination__link">…</a></li>
+                        {% endif %}
+                    {% endif %}
+        
+                    {% for page in pagesInRange %}
+                        {% if page != current %}
+                            <li>
+                                <a class="fr-pagination__link" href="{{ path(route, query|merge({(pageParameterName): page})) }}" title="Page {{ page }}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a class="fr-pagination__link" aria-current="page" title="Page {{ page }}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+        
+                    {% if last is defined and current != last and endPage < startEnd %}
+                        {% if  endPage < last - 1 %}
+                            <li><a class="fr-pagination__link">…</a></li>
+                        {% endif %}
+                        <li>
+                            <a class="fr-pagination__link" href="{{ path(route, query|merge({(pageParameterName): last})) }}" title="Page {{ last }}">
+                               {{ last }}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="fr-col-12 fr-col-lg d-lg-flex justify-content-lg-end fr-pl-3v fr-pl-md-0">
+        <div class="fr-pt-1v">
+            <p class="fr-text color-grey-666">{{ firstItemNumber }} - {{ lastItemNumber}} sur {{ totalCount }} publications</p>
+        </div>           
+    </div>
+</div>
+{% endif %}

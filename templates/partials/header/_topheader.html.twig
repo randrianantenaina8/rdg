@@ -1,0 +1,61 @@
+<div class="fr-header__body">
+    <div class="fr-fluid">
+        <div class="fr-header__body-row justify-content-between fr-pb-1w">
+            <div class="fr-header__brand fr-enlarge-link">
+                <div class="fr-header__brand-top">
+                    <div class="fr-header__logo">
+                        <a href="/{{ app.request.locale }}" title="{{ 'front.header.home'|trans }} - recherche.data.gouv.fr">
+                            <p class="fr-logo">
+                                République
+                                <br>Française
+                            </p>
+                        </a>
+                    </div>
+                        <div class="fr-header__operator size-logo">
+                        <img src="{{ asset('build/images/logo-rdg.svg') }}" class="fr-responsive-img" alt="recherche.data.gouv.fr" />
+                    </div>
+                    <div class="fr-header__navbar">
+                        {# add d-none class to remove search bar #}
+                        <button class="fr-btn--search fr-btn d-none" data-fr-opened="false" aria-controls="modal-866" title="{{ 'front.header.search'|trans }}">
+                            {{ 'front.header.search'|trans }}
+                        </button>
+                        <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-menu" data-fr-js-modal-button="true" aria-haspopup="menu" title="{{ 'front.header.menu'|trans }}" id="fr-btn-menu-mobile">
+                            {{ 'front.header.menu'|trans }}
+                        </button>
+                    </div>
+                </div>  
+            </div>
+            <div class="fr-header__tools">
+                <div class="fr-header__tools-links">
+                    <div class="d-flex justify-content-lg-end align-items-center">
+                        <a class="text-decoration-none txt-color fr-text--sm fr-mr-1w" href="{{ deposit }}" target="_blank" rel="noopener"><span class="fr-pr-1w txt-color fr-text--sm" title="{{'rgaa.header.publish'|trans}}">{{ 'front.deposit.search'|trans }}</span>
+                        <span class="txt-color fr-fi-upload-2-line fr-fi--sm fr-pr-2w" aria-hidden="true"></span></a> 
+                        <div class="fr-select-group">
+                            {% if switcherLng is defined %}
+                            <select class="fr-select" id="topheader-select" name="select" onchange="location = this.value;">
+                                {% for lng, url in switcherLng %}
+                                <option value="{{ url }}" {% if lng == app.request.locale %} selected {% endif %}>{{ lng|upper }}</option>
+                                {% endfor %}
+                            </select>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {# add d-none class to remove search bar in modal when mobile size #}
+                <div class="fr-header__search fr-modal header-search-max-size d-none" id="modal-866">
+                    <div class="fr-container fr-container-lg--fluid">
+                        <button class="fr-link--close fr-link" aria-controls="modal-866">{{ 'front.search.close'|trans }}</button>
+                        <div class="fr-search-bar" id="search-865" role="search">
+                            <label class="fr-label" for="search-865-input">{{ 'front.search.label'|trans }}
+                            </label>
+                            <input class="fr-input" placeholder="{{'front.header.search'|trans}}" type="search" id="search-865-input" name="search-865-input">
+                            <button class="fr-btn" title="{{ 'front.header.search'|trans }}">
+                                {{ 'front.header.search'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

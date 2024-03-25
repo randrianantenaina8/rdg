@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ 'guides.meta_description'|trans }}{% endblock %}
+{% block title %}{{ 'front.guide.homepage'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/guides/_mainguides.html.twig' with { 'title' : 'front.guide.homepage'|trans } %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

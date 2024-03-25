@@ -1,0 +1,23 @@
+<main class="w-100" role="main" id="content">
+{% block main %}
+    {% include 'partials/main/_banner.html.twig' %}
+    {% include 'partials/main/_search.html.twig' %}
+    {% for lamina in laminas %}
+        {% if lamina.type is same as('carousel') %}
+            {% include 'partials/main/_lamina_carousel.html.twig' %}
+        {% endif %}
+        {% if lamina.type is same as('spotlight') %}
+            {% include 'partials/main/_lamina_spotlight.html.twig' %}
+        {% endif %}
+        {% if lamina.type is same as('highlighted') %}
+            {% include 'partials/main/_lamina_highlighted.html.twig' %}
+        {% endif %}
+        {% if lamina.type is same as('news') %}
+            {% include 'partials/main/_lamina_news_and_events.html.twig' %}
+        {% endif %}
+        {% if lamina.type is same as('map') %}
+            {% include 'partials/main/_lamina_centermap.html.twig' %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+</main>

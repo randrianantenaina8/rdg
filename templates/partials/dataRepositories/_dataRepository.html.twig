@@ -1,0 +1,249 @@
+{% set volumeLimitUnit = '/en/' in currentPath ? 'GB' : 'Go' %}
+
+<main class="fr-fluid" role="main">
+    {# Print component #}
+    {% include 'partials/common/_printmenu.html.twig' %}
+    
+    <div id="print-area" class="content fr-container fr-mb-5w">
+        
+        <h1 class="fr-h1 actu-title-border fr-mb-7v">
+            {{ entity.name }}
+        </h1>
+        
+        <div class="fr-grid-row fr-grid-row--gutters mb-5">
+            <div class="fr-col-lg-4 fr-col-md-4 fr-col-sm-12">
+                <p class="fr-text--sm mb-1">{{ 'content.dataRepository.disciplinary.area'|trans|capitalize }}</p>
+                <p class="fr-tags-group">
+                    {% for disciplinaryArea in entity.disciplinaryAreas %}
+                        <span class="fr-tag">{{ disciplinaryArea }}</span>
+                    {% endfor %}
+                </p>
+            </div>
+
+            <div class="fr-col-lg-4 fr-col-md-4 fr-col-sm-12">
+                <p class="fr-text--sm mb-1">{{ 'content.dataRepository.disciplines'|trans|capitalize }}</p>
+                <p class="fr-tags-group">
+                    {% for discipline in entity.disciplines %}
+                        <span class="fr-tag">{{ discipline }}</span>
+                    {% endfor %}
+                </p>
+            </div>
+
+            <div class="fr-col-lg-4 fr-col-md-4 fr-col-sm-12">
+                <p class="fr-text--sm mb-1">{{ 'content.dataRepository.keywords'|trans|capitalize }}</p>
+                    <p class="fr-tags-group">
+                    {% for keyword in entity.keywords %}
+                        <span class="fr-tag">{{ keyword }}</span>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+
+        <div class="fr-grid-row fr-grid-row--gutters mb-5">
+
+            <div class="fr-col-lg-4 fr-col-md-4 fr-col-sm-12">
+                <div class="fr-grid-row fr-grid-row--center">
+                    <img src="{{ entity.logo }}" class="fr-responsive-img" alt="{{ entity.name }}">
+                </div>
+            </div>
+
+            <div class="fr-col-lg-8 fr-col-md-8 fr-col-sm-12">
+                {% if entity.description is defined and entity.description is not empty %}
+                    <h2 class="fr-card__title">
+                        {{ 'content.dataRepository.description'|trans|capitalize }}
+                    </h2>
+                    <div class="fr-text--sm fr-mt-0 fr-mb-3v">
+                        {{ entity.description|raw }}
+                    </div>
+                {% endif %}
+                {% if entity.supportingInstitutions is defined and entity.supportingInstitutions is not empty %}
+                    <p class="fr-card__title">
+                        {{ 'content.dataRepository.supportingInstitution'|trans|capitalize }}
+                    </p>
+                    <div class="fr-text--sm fr-mt-0 fr-mb-3v">
+                        {% for supportingInstitution in entity.supportingInstitutions %}
+                            <p class="fr-tag">
+                                {{ supportingInstitution }}
+                            </p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if entity.dataType is defined and entity.dataType is not empty %}
+                    <p class="fr-card__title">
+                        {{ 'content.dataRepository.dataType'|trans|capitalize }}
+                    </p>
+                    <div class="fr-text--sm fr-mt-0 fr-mb-3v">
+                        {{ entity.dataType|raw }}
+                    </div>
+                {% endif %}
+
+                <div class="fr-grid-row fr-grid-row--gutters">
+                    {% if entity.repositoryIdentifier is defined and entity.repositoryIdentifier is not empty %}
+                        <div class="fr-col-lg-6 fr-col-md-6 fr-col-sm-12">
+                            <p class="fr-card__title">
+                                {{ 'content.dataRepository.repositoryIdentifier'|trans|capitalize }}
+                            </p>
+                            <div class="fr-text--sm fr-mt-0 fr-mb-3v">
+                                <p class="fr-tag">
+                                    {{ entity.repositoryIdentifier|raw }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if entity.url is defined and entity.url is not empty %}
+                        <div class="fr-col-sm-12 d-flex flex-column">
+                            <div class="fr-text--sm fr-mt-0 fr-mb-3v align-self-end">
+                                <a href="{{ entity.url }}" class="fr-link fr-px-0 px-xl-2 fr-fi-arrow-right-line fr-link--icon-right fr-text--sm" target="_blank">
+                                    {{ 'front.dataRepositories.goto'|trans|capitalize }}
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="fr-grid-row fr-grid-row--gutters">
+            
+            {% if entity.catopidorIdentifier is not empty or entity.re3dataIdentifier is not empty %}
+                <div class="fr-col-12 fr-col-sm-12 fr-col-lg-4">
+                    <article class="fr-tile fr-tile--left">
+                        <div class="fr-tile__body">
+                            {% if entity.catopidorLink is defined and entity.catopidorLink is not empty %}
+                                <p class="fr-card__title">
+                                    {{ 'content.dataRepository.catopidorIdentifier'|trans|capitalize }}
+                                </p>
+                                <a href="{{ entity.catopidorLink }}" class="fr-link fr-text--sm" target="_blank">
+                                    <span>
+                                        {{ entity.catopidorIdentifier|raw }}
+                                    </span>
+                                </a>
+                            {% endif %}
+
+                            {% if entity.re3dataLink is defined and entity.re3dataLink is not empty %}
+                                <p class="fr-card__title mt-2">
+                                    {{ 'content.dataRepository.re3dataIdentifier'|trans|capitalize }}
+                                </p>
+                                <a href="{{ entity.re3dataLink }}" class="fr-link fr-text--sm" target="_blank">
+                                    <span>
+                                        {{ entity.re3dataIdentifier|raw }}
+                                    </span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </article>
+                </div>
+            {% endif %}
+
+            {% if entity.repositoryCreationDate is not empty or entity.retentionPeriod is not empty %}
+                <div class="fr-col-12 fr-col-sm-12 fr-col-lg-4">
+                    <article class="fr-tile fr-tile--left">
+                        <div class="fr-tile__body">
+                        {% if entity.repositoryCreationDate is defined and entity.repositoryCreationDate is not empty %}
+                            <p class="fr-card__title">
+                                {{ 'content.dataRepository.repository.creation'|trans|capitalize }}
+                            </p>
+                            <p class="fr-tile__desc fr-mb-3w">
+                                <span class="fr-h2 fr-m-0 block">{{ entity.repositoryCreationDate|raw }}</span>
+                            </p>
+                        {% endif %}
+                        {% if entity.retentionPeriod is defined and entity.retentionPeriod is not empty %}
+                            <p class="fr-card__title">
+                                {{ 'content.dataRepository.retentionPeriod'|trans|capitalize }}
+                            </p>
+                            <p class="fr-tile__desc fr-mb-3w">
+                                <span class="fr-h2 fr-m-0 block">{{ entity.retentionPeriod|raw }}</span>
+                            </p>
+                        {% endif %}
+                        </div>
+                    </article>
+                </div>
+            {% endif %}
+            
+            {% if entity.fileVolumeLimit is not empty or entity.datasetVolumeLimit is not empty %}
+                <div class="fr-col-12 fr-col-sm-12 fr-col-lg-4">
+                    <article class="fr-tile fr-tile--left">
+                        <div class="fr-tile__body">
+                        {% if entity.fileVolumeLimit is defined and entity.fileVolumeLimit is not empty %}
+                            <p class="fr-card__title">
+                                {{ 'content.dataRepository.file.volumeLimit'|trans|capitalize }}
+                            </p>
+                            <p class="fr-tile__desc fr-mb-3w">
+                                <span class="fr-h2 fr-m-0 block">{{ entity.fileVolumeLimit|raw }} {{ volumeLimitUnit }}</span>
+                            </p>
+                        {% endif %}
+                        {% if entity.datasetVolumeLimit is defined and entity.datasetVolumeLimit is not empty %}
+                            <p class="fr-card__title">
+                                {{ 'content.dataRepository.dataset.volumeLimit'|trans|capitalize }}
+                            </p>
+                            <p class="fr-tile__desc fr-mb-3w">
+                                <span class="fr-h2 fr-m-0 block">{{ entity.datasetVolumeLimit|raw }} {{ volumeLimitUnit }}</span>
+                            </p>
+                        {% endif %}
+                        </div>
+                    </article>
+                </div>
+            {% endif %}
+            
+            {% if entity.repositoryModeration is not empty %}
+                <div class="fr-col-12 fr-col-sm-12 fr-col-lg-4">
+                    <article class="fr-tile fr-tile--left">
+                        <div class="fr-tile__body">
+                            {% if entity.repositoryModeration is defined and entity.repositoryModeration is not empty %}
+                                <p class="fr-card__title">
+                                    {{ 'content.dataRepository.repository.moderation'|trans|capitalize }}
+                                </p>
+                                <p class="fr-tile__desc fr-mb-3w">
+                                    {{ entity.repositoryModeration|raw }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </article>
+                </div>
+            {% endif %}
+
+             {% if entity.embargo is defined and entity.embargo is not empty %}
+                <div class="fr-col-12 fr-col-sm-12 fr-col-lg-4">
+                    <article class="fr-tile fr-tile--left">
+                        <div class="fr-tile__body">
+                            <p class="fr-card__title">
+                                {{ 'content.dataRepository.embargo'|trans|capitalize }}
+                            </p>
+                            <p class="fr-tile__desc fr-mb-3w">
+                                {{ entity.embargo|raw }}
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            {% endif %}
+
+            {% if entity.certificate is defined and entity.certificate is not empty %}
+                <div class="fr-col-12 fr-col-sm-12 fr-col-lg-4">
+                    <article class="fr-tile fr-tile--left">
+                        <div class="fr-tile__body">
+                            <p class="fr-card__title">
+                                {{ 'content.dataRepository.certificate'|trans|capitalize }}
+                            </p>
+                            <p class="fr-tile__desc fr-mb-3w">
+                                {{ entity.certificate|raw }}
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</main>
+
+<!-- Hide page elements for print commands -->
+<style type="text/css" media="print">
+    .fr-header, .fr-container, .fr-sidemenu,
+    .search-up-data, .fr-footer, .fr-footer__bottom,
+    .backtotop, .print-input { display: none !important }
+</style>

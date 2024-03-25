@@ -1,0 +1,29 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+
+{% block content_title %}
+    Profil : {{ user.username }}
+{% endblock %}
+
+{% block main %}
+
+    <section>
+        {% form_theme formProfile 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(formProfile) }}
+        {{ form_widget(formProfile) }}
+
+        <input type="hidden" name="_token" value="{{ csrf_token('profile' ~ user.id) }}"/>
+
+        {{ form_end(formProfile) }}
+    </section>
+
+    <section>
+        {% form_theme formPass 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(formPass) }}
+        {{ form_widget(formPass) }}
+
+        <input type="hidden" name="_token" value="{{ csrf_token('password' ~ user.id) }}"/>
+
+        {{ form_end(formPass) }}
+    </section>
+
+{% endblock %}

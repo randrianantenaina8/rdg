@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ 'faqs.meta_description'|trans }}{% endblock %}
+{% block title %}{{ 'front.faqs'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+
+    <main class="w-100" role="main">
+        <div class="fr-fluid">
+        {% include 'partials/common/_breadcrumb.html.twig' with {'title': 'front.faqs'|trans} %}
+    </div>
+        {# INTRO BANNER #}
+        {% if introBanner.isEnable %}
+            <div class="fr-grid-row fr-fluid">
+                <div class="fr-col">
+                    <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ introBanner.title }}</h1>
+                    <p class="fr-text fr-mt-2w">{{ introBanner.description }}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="fr-grid-row fr-fluid">
+                <div class="fr-col">
+                    <h1 class="fr-h1 actu-title-border fr-mb-2w">{{'front.faqs'|trans }}</h1>
+                </div>
+            </div>
+        {% endif %}
+
+        {% block page %}
+        {# CONTENT #}
+        <div class="fr-fluid">
+            <div class="fr-grid-row">
+                {# Headings #}
+                <div class="fr-col fr-col-lg-4">
+                    <ul class="fr-sidemenu">
+                        {% for heading in headings %}
+                            <li class="fr-sidemenu__item sidemenu-faq__control">
+                                <a class="fr-sidemenu__link fr-sidemenu__faq" href="#{{ heading.name|slug }}">{{ heading.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {# FAQ #}
+                <div class="fr-col fr-col-lg-8">
+                    <div class="fr-col fr-col-lg-4 float-end mb-4 px-5">
+                        <button class="expand__btn">{{'front.faqs.open.all'|trans }}</button>
+                    </div>
+                    {% for headingName, faqCollection in faq %}
+                        {% set headingSlug = headingName|slug %}
+                        <h4 id="{{ headingSlug }}" class="pt-5">{{ headingName }}</h4>
+                        <ul class="fr-accordions-group fr-py-2w fr-pl-0">
+                        {% for item in faqCollection|sort((a, b) => a.weight <=> b.weight) %}
+                            <li>
+                                <div class="d-flex align-items-center justify-content-end order-first">
+                                </div>
+                                <h5 class="fr-accordion__title">
+                                    <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-{{ loop.index0 ~ headingSlug}}">{{ item.faqItem.title }}</button>
+                                </h5>
+                                <div class="fr-collapse faq_right" id="accordion-{{ loop.index0 ~ headingSlug }}">
+                                    {{ item.faqItem.content|raw }}
+                                </div>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+        <script>
+                const getAnchorElement = (item) => {
+                    let elem = item.querySelector('.fr-sidemenu__link')
+                    if(!elem) return null
+                    return elem.getAttribute('href')
+                }
+                const arialabelize = (item, labelize = false) => {
+                    let elem = item.querySelector('.fr-sidemenu__link')
+                    if(!elem) return
+                    if(!labelize) return elem.removeAttribute('aria-current')
+                    elem.setAttribute('aria-current','page')
+                }
+                const decorate = (item, decore=false) => {
+                    if(!item) return
+                    if (!decore) {
+                        if(item.classList.contains('fr-sidemenu__item--active')) item.classList.remove('fr-sidemenu__item--active')
+                        return arialabelize(item, false)
+                    }
+                    item.classList.add('fr-sidemenu__item--active')
+                    arialabelize(item, true)
+                }
+                const ElementSelecto = (anchor) => {
+                    Array.from(document.querySelectorAll('.sidemenu-faq__control')).forEach(elem=>{
+                        const link = getAnchorElement(elem)
+                        if(link !== anchor) {
+                            return decorate(elem, false)
+                        }
+                        decorate(elem, true)
+                    })
+                }
+                const anchor = window.location.hash;
+                if (anchor.length > 1) {
+                    ElementSelecto(anchor)
+                }
+                const menuSelect = (ev) => {
+                    const anchor = ev.target.getAttribute('href')
+                    ElementSelecto(anchor)
+                }
+                Array.from(document.querySelectorAll('.sidemenu-faq__control .fr-sidemenu__link')).forEach(elem=>{
+                    elem.addEventListener('click', menuSelect)
+                })
+
+                // Faqs Open/Close 
+                let mainButton = document.querySelector('.expand__btn')
+                let buttons = document.querySelectorAll('.fr-accordion__btn')
+                let openAll = `{{'front.faqs.open.all'|trans }}`
+                let closeAll = `{{'front.faqs.close.all'|trans }}`
+                let y = document.querySelector('.actu-title-border')
+
+                if (mainButton) {
+                    mainButton.addEventListener('click', () => {
+                        Array.from(buttons).forEach((button) => {
+                            const ariaExpanded = button.getAttribute('aria-expanded')
+                            if (mainButton.textContent === openAll) {
+                                button.setAttribute('aria-expanded', 'true')
+                            } else {
+                                button.setAttribute('aria-expanded', 'false')
+                            }
+                        })
+
+                        if (mainButton.textContent === closeAll) {
+                            mainButton.textContent = openAll
+                        } else {
+                            mainButton.textContent = closeAll
+                        }
+                        // fix scroll to bottom after closing answers
+                        setTimeout(function () {
+                            window.scrollTo(0, y)
+                        }, 10)
+                    })
+                }
+        </script>
+        {% include 'partials/common/_search-footer.html.twig' %}
+    </main>
+
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

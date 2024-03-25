@@ -1,0 +1,23 @@
+<div class="row row-cols-12">
+    <div class="col-md-6">
+        {{ 'form.lam.support'|trans|raw }}
+    </div>
+    <div class="col-md-6">
+        <h4>{{ 'form.lame.add'|trans|capitalize }}</h4>
+        {% form_theme selectForm 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(selectForm, {'method': 'POST'}) }}
+
+        <div class="form-row align-items-center">
+            <div class="col-auto my-1">
+                {{ form_widget(selectForm.type, {'attr': {'class': 'custom-select mr-sm-2'}}) }}
+            </div>
+            <input type="hidden" name="_token" value="{{ csrf_token('lame') }}"/>
+            <div class="col-auto my-1">
+                <button type="submit" class="btn btn-info">{{ 'bo.next'|trans }}</button>
+            </div>
+        </div>
+
+        {{ form_end(selectForm) }}
+    </div>
+
+</div>

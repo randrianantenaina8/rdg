@@ -1,0 +1,70 @@
+{% set news = 'news' %}
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% for lamina in laminas %}
+    {% if lamina.type is same as(news) %}
+        <div class="fr-fluid fr-bt-4">
+            <h4 class="fr-h4">{{ lamina.lamina.title }}</h4>
+                <div class="fr-lam">
+                {% if lamina.lamina.news.actualities is defined %}
+                    {% for news in lamina.lamina.news.actualities %}
+                        {% set entityUrl = path('front.actuality.show', {'slug': news.slug }) %}
+                        <div class="fr-card fr-card--no-arrow fr-enlarge-link">
+                            <div class="fr-card__body fr-px-2w">
+                                <h4 class="fr-card__title link-hover-background">
+                                    <a href="{{ entityUrl }}" class="fr-card__link">{{ news.title }}</a>
+                                </h4>
+                                <div class="fr-card__desc">{{ news.content|striptags|u.truncate(lame_news_len_max_title, '...', false)|raw }}</div>
+                                <p class="fr-card__detail new-date-order fr-pt-2w">{{ 'front.pages.published'|trans }} {{ news.publishedAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}</p>
+                                {% if news.taxonomies is not empty %}
+                                    <div class="fr-py-1w new-tag-order">
+                                        {% for taxonomy in news.taxonomies %}
+                                            <a href="{{ entityUrl }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs" aria-label="{{ news.title }}" target="_self">{{ taxonomy.term }}</a>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <div class="link-hover-background fr-py-1w new-tag-order">
+                                        <a href="{{ entityUrl }}" class="text-decoration-none fr-text--xs" aria-label="{{ news.title }}" target="_self"></a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="fr-card__img fr-card__img--fill">
+                                    {% if news.imageLocale is not empty %}
+                                    <img src="{{ news.imageLocale }}" class="fr-responsive-img" alt="{{ news.title }}">
+                                {% else %}
+                                    <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="">
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <a class="fr-link fr-fi-arrow-right-line fr-link--icon-right fr-lam__actus-link" href="{{ url('front.actuality.list') }}">{{ 'front.news.link'|trans }}</a>
+                {% endif %}
+                    {% if lamina.lamina.news.events is defined %}
+                    <div class="fr-lam__event">
+                        {% for event in lamina.lamina.news.events %}
+                            {% set path_event = path('front.event.show', {'slug': event.slug }) %}
+                            <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-enlarge-link new-card-size shadow-none fr-py-2w">
+                                <div class="fr-card__body fr-py-0">
+                                    <h4 class="fr-card__title link-hover-background">
+                                        <a href="{{ path_event }}" class="fr-card__link" target="_self">{{ event.title }}</a>
+                                    </h4>
+                                    <div class="fr-card__desc">{{ event.hook|striptags|u.truncate(event_len_max_hook, '...', false)|raw }}</div>
+                                    <div class="fr-card__detail actu-color-date-event fw-bold fr-text--sm fr-m-0">
+                                    {% if event.end and event.end|format_datetime(locale='fr', pattern="dd MMMM YYYY") > event.begin|format_datetime(locale='fr', pattern="dd MMMM YYYY") %}
+                                        <span class="fr-fi-calendar-line fr-fi--sm fr-pr-1v" aria-hidden="true"></span>
+                                        {{ 'front.events.published.from'|trans }} {{ event.begin|format_datetime('long', 'short', locale=('/en' in currentPath ? 'en' : 'fr')) }}<br />
+                                        <span class="fr-fi-calendar-line fr-fi--sm fr-pr-1v" aria-hidden="true"></span>
+                                        {{ 'front.events.published.to'|trans }} {{ event.end|format_datetime('long', 'short', locale=('/en' in currentPath ? 'en' : 'fr')) }}
+                                    {% else %}
+                                        <span class="fr-fi-calendar-line fr-fi--sm fr-pr-1v" aria-hidden="true"></span>
+                                        {{ 'front.events.published.one.day'|trans }} {{ event.begin|format_datetime('long', 'short', locale=('/en' in currentPath ? 'en' : 'fr')) }}<br />
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+        </div>
+    {% endif %}
+{% endfor %}

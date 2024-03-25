@@ -1,0 +1,164 @@
+.alert-error {
+  background-color: red;
+}
+
+body.body_login_rdg {
+  background-color: #6a6af4;
+}
+
+.login-wrapper .logo {
+  font-size: medium;
+  font-weight: bold;
+}
+
+#reset_password_request_form_email_help {
+  color: #475569;
+  display: block;
+  font-size: 13px;
+  margin-top: 5px;
+  transition: color .5s ease;
+}
+
+.a2lix_translations {
+  padding: 10px;
+  border: solid 1px #cbd5e1;
+}
+
+.main-header #header-logo a.portal-link {
+  font-weight: 350;
+  padding: 0 0 14px;
+  line-height: 10px;
+  text-decoration: underline;
+}
+
+#center-map {
+  text-align: center;
+}
+
+#center-map--preview {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stepChoice .form-control-label{
+  display: none;
+}
+
+.stepNextStep legend {
+  display: none;
+}
+
+.stepNextStep .accordion-button {
+  font-size: 0;
+}
+
+.stepNextStep .accordion-button .fas {
+  font-size: initial;
+}
+
+#Logigram_logigramSteps .accordion-button {
+  font-size: 0;
+}
+
+#Logigram_logigramSteps .accordion-button .fas {
+  font-size: initial;
+}
+
+.logigramBody {
+  width: 100%;
+}
+
+.logigramTitle {
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.logigramSubTitle {
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.logigram {
+  width: 100%;
+  padding: 20px;
+  background-color: #d9f0f0;
+  text-align: center;
+}
+
+.step {
+  text-align: center;
+}
+
+.logigramContent {
+  width: 60%;
+  display: inline-block;
+}
+
+.logigramStepTitle {
+  margin-top: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 4px 4px #baded9;
+}
+
+.logigramStepChoice {
+  margin: 1em;
+  padding: 10px;
+  background-color: #03989d;
+  border: none;
+  outline: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.choiceClicked {
+  background-color: #026569;
+}
+
+.logigramStepInfo {
+  font-size: 0.8em;
+  font-style: italic;
+  margin: 10px;
+}
+
+.logigramNextStepChoice {
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 6px 6px #03989d;
+}
+
+.infoIcon {
+  transform: translateX(-20%);
+}
+
+.logigramArrow {
+  height: 100px;
+}
+
+.comment-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.comment-tooltip::after {
+  content: attr(data-reply);
+  display: none;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  padding: 5px;
+  background-color: #000;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.comment-tooltip:hover::after {
+  display: block;
+}

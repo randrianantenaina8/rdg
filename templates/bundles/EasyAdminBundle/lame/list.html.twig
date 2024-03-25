@@ -1,0 +1,118 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+
+{% block content_title %}
+    {{ 'content.lames'|trans|capitalize }}
+{% endblock %}
+
+{% block main %}
+
+    <section>
+    {% include 'bundles/EasyAdminBundle/lame/select.html.twig' %}
+    </section>
+
+    <hr>
+
+    <section>
+    <table class="table datagrid">
+        {% if lames is iterable %}
+        <thead>
+        <tr>
+            <th class="field-virtual header-for-field-text text-left"><span>{{ 'lame.prop.title'|trans|capitalize }}</span></th>
+            <th class="field-virtual header-for-field-text text-left"><span>{{ 'lame.prop.type'|trans|capitalize }}</span></th>
+            <th class="field-virtual header-for-field-boolean text-left"><span>{{ 'lame.prop.isPublished'|trans|capitalize }}</span></th>
+            <th class="field-virtual header-for-field-text text-left"><span>{{ 'prop.weight'|trans|capitalize }}</span></th>
+            <th class="header-for-field-datetime text-left"><span>{{ 'prop.publishedAt'|trans|capitalize }}</span></th>
+            <th class="header-for-field-datetime text-left"><span>{{ 'prop.createdAt'|trans|capitalize }}</span></th>
+            <th class="header-for-field-datetime text-left"><span>{{ 'prop.updatedAt'|trans|capitalize }}</span></th>
+            <th class="field-virtual header-for-field-text text-left"><span>{{ 'prop.createdBy'|trans|capitalize }}</span></th>
+            <th class="field-virtual header-for-field-text text-left"><span>{{ 'prop.updatedBy'|trans|capitalize }}</span></th>
+            <th width="10px" dir="ltr"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for  lame in lames %}
+            <tr>
+                <td data-label="title">
+                    {% if  lame.title is empty %}
+                        <span class="badge badge-secondary">{{ 'label.null'|trans(domain = 'EasyAdminBundle') }}</span>
+                    {% else %}
+                        {{ lame.title }}
+                    {% endif %}
+                </td>
+                <td data-label="type">{{ lame.type|trans }}</td>
+                <td data-label="isPublished">{{ lame.isPublished ? 'bo.yes'|trans : 'bo.no'|trans }}</td>
+                <td data-label="weight">{{ lame.weight }}</td>
+                <td data-label="publishedAt">{{ lame.publishedAt|format_datetime(locale=app.request.locale) }}</td>
+                <td data-label="createdAt">{{ lame.createdAt|format_datetime(locale=app.request.locale) }}</td>
+                <td data-label="updatedAt">{{ lame.updatedAt|format_datetime(locale=app.request.locale) }}</td>
+                <td data-label="createdBy">{{ lame.createdBy }}</td>
+                <td data-label="updatedBy">{{ lame.updatedBy }}</td>
+                <td class="actions">
+                    <div class="dropdown dropdown-actions">
+                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {# don't use FontAwesome 'fa-ellipsis-h' icon here because it doesn't look good #}
+                            {# this icon is 'dots-horizontal' icon from https://heroicons.com/ #}
+                            <svg xmlns="http://www.w3.org/2000/svg" height="21" width="21" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item action-edit"
+                               href="{{ lame.edit }}"
+                               data-action-name="edit"
+                            >
+                                {{ 'bo.edit'|trans|capitalize }}
+                            </a>
+                            <a class="dropdown-item action-delete text-danger"
+                               href="{{ lame.del }}"
+                               data-bs-toggle="modal" data-bs-target="#modal-delete" data-action-name="delete"
+                               formaction="{{ lame.del }}"
+                            >
+                                {{ 'bo.del'|trans|capitalize }}
+                            </a>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        {% else %}
+            <tr class="no-results">
+                <td colspan="100">
+                    {{ 'datagrid.no_results'|trans(ea.i18n.translationParameters, 'EasyAdminBundle') }}
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+
+    {% include 'bundles/EasyAdminBundle/_delete_form.html.twig' %}
+
+    </section>
+
+{% endblock %}
+
+{% block body_javascript %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            createModalWindowsForDeleteActions();
+        });
+        const delRoute = createModalWindowsForDeleteActions {
+            document.querySelectorAll('.action-delete').forEach((actionElement) => {
+                actionElement.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    document.querySelector('#modal-delete-button').addEventListener('click', () => {
+                        const deleteFormAction = actionElement.getAttribute('formaction');
+                        const deleteForm = document.querySelector('#delete-form');
+                        deleteForm.setAttribute('action', deleteFormAction);
+                        deleteForm.submit();
+                    });
+                });
+            });
+        }
+
+    </script>
+{% endblock body_javascript %}
+

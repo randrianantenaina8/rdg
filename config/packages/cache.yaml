@@ -1,0 +1,6 @@
+framework:
+    cache:
+        prefix_seed: 'rdg_'
+        app: cache.adapter.redis
+        system: cache.adapter.redis
+        default_redis_provider: snc_redis.default

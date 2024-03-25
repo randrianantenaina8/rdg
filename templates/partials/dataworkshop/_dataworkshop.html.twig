@@ -1,0 +1,88 @@
+<div class="fr-container fr-pb-3w padding-body fr-mx-0 mx-lg-3">
+    {% if introBanner.isEnable %} 
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ introBanner.title }}</h1>
+                <p class="fr-text fr-mt-2w">{{ introBanner.description|raw }}</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-2w">{{'front.dataworkshop.list'|trans }}</h1>
+            </div>
+        </div>
+    {% endif %}
+    <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col">
+        {% if entity is defined and entity is not empty %}
+            <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+                <div class="fr-col">   
+                    <ul class="fr-accordions-group fr-py-2w fr-pl-0">
+                        {% for dataworkshop in entity %}
+                        <li>
+                            <section class="fr-accordion">
+                                <div class="d-flex align-items-center justify-content-end order-first">
+                                </div>
+                                <h3 class="fr-accordion__title">
+                                    <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-{{ loop.index0 }}" data-workshop="{{dataworkshop.id}}">{{ dataworkshop.acronym }}</button>
+                                </h3>
+                                <div class="fr-collapse" id="accordion-{{ loop.index0 }}">
+                                    <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-mb-4w">
+                                        <div class="fr-card__body">
+                                           <h4 class="fr-card__title">
+                                               {{ dataworkshop.extendedName }}
+                                           </h4>
+                                           <p class="fr-card__detail">{{ dataworkshop.acronym }}</p>
+                                        </div>
+                                        {% if dataworkshop.image is not empty %}
+                                            <div class="fr-card__img d-flex align-items-center img_cover">
+                                                <img src="{{ dataworkshop.image }}" class="fr-responsive-img img-thumbnail" alt="{{ dataworkshop.acronym }}" />
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    {{ dataworkshop.description|raw }}
+                                    {% if dataworkshop.institutions|length > 0 %}
+                                        <h5 class="fr-h5 fr-pt-2w">{{ 'front.instituts.related'|trans }}</h5>
+                                        {% for institution in dataworkshop.institutions %}
+                                            {% if institution is not empty %}
+                                                {% if institution.urlInstitution %}
+                                                    <ul>
+                                                        <li>
+                                                            <a title="{{ institution }}" href="{{ path('front.institutions.list') }}" rel="noopener" data-institution="{{institution.id}}">{{ institution }}</a>
+                                                        </li>
+                                                    </ul>
+                                                {% else %}
+                                                    <ul>
+                                                        <li>
+                                                            {{ institution }}
+                                                        </li>
+                                                    </ul>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    <div class="d-flex justify-content-end fr-pt-4w">
+                                        <ul class="fr-tags-group fr-pl-0">
+                                            {% if dataworkshop.urlDataWorkshop is not empty %}
+                                            <li>
+                                                <a href="{{ dataworkshop.urlDataWorkshop }}" class="fr-tag fr-fi-arrow-right-line fr-tag--icon-right" target="_blank">{{ 'front.institutions.urldataworkshop'|trans }}</a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        <script>
+            const hash = localStorage.getItem('hsh'); const openMenu = () => {localStorage.removeItem('hsh'); const elem = document.querySelector('[data-workshop="'+hash+'"]'); elem.dispatchEvent(new Event('click')); }; if(hash){setTimeout(openMenu, 1000); }; const aClick = (ev) => {ev.preventDefault(); localStorage.setItem('hsh', ev.target.dataset.institution);document.location.href=ev.target.href}; Array.from(document.querySelectorAll('a[data-institution]')).forEach(el=>{el.addEventListener('click', aClick)});
+        </script>
+        </div>
+    </div>
+    {{ knp_pagination_render(entity) }}
+</div>

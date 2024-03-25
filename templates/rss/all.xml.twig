@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:content="http://purl.org/rss/1.0/modules/content/"
+         xmlns:image="http://purl.org/rss/1.0/modules/image/"
+>
+    <channel>
+        <title>{{ 'app.title'|trans }}</title>
+        <link>{{ url }}</link>
+        <description>{{ 'rss.all.desc'|trans }}</description>
+        <language>{{ app.request.locale }}</language>
+{% block body %}
+{% include('rss/actu.xml.twig') with {'actualities': actualities} %}
+{% endblock %}
+    </channel>
+</rdf:RDF>

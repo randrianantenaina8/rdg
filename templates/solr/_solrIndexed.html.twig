@@ -1,0 +1,22 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+{% trans_default_domain ea.i18n.translationDomain %}
+
+{% block content_title %}
+    {{ 'content.config'|trans }}
+{% endblock %}
+
+{% block main %}
+    <div class="row row-cols-12">
+        <div class="col-md-12">
+            <h2>{{ 'bo.config.solr.indexed'|trans }}</h2>
+            <fieldset>
+                <h3>{{ 'bo.config.solr.results'|trans }}</h3>
+                <p><strong>{{ content }}</strong></p>
+                <h3>{{ 'bo.config.solr.index.query'|trans }}</h3>
+                <p>{{ response }}</p>
+                <i class="menu-icon fa-fw fa fa-home"></i>
+                <a href="{{ path('admin.config.board') }}">{{ 'bo.config.solr.index.back'|trans }}</a>  
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}

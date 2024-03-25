@@ -1,0 +1,18 @@
+{% if introBanner.isEnable %} 
+    <div class="container-fluid d-flex flex-column align-items-center">
+        {% include 'partials/common/_breadcrumbpages.html.twig' %}
+        <h1 class="text-center txt-color fr-col-10 fw-bold">{{ introBanner.title }}</h1>
+        <p class="text-center fr-col-10 fr-col-lg-6">{{ introBanner.description|raw }}</p>
+    </div>
+{% else %}
+    <div class="fr-pl-md-2w">
+        {% include 'partials/common/_breadcrumbpages.html.twig' %}
+    </div>
+    <div class="fr-container fr-pb-3w padding-body fr-mx-0 fr-mx-md-3w">
+        <div class="fr-grid-row justify-content-center">
+            <div class="fr-col-lg-6 fr-col-12">
+                <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ 'front.footer.contact'|trans }}</h1>
+            </div>
+        </div>
+    </div>
+{% endif %}

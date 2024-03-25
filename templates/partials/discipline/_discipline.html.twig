@@ -1,0 +1,69 @@
+<div class="fr-container fr-pb-3w padding-body fr-mx-0 mx-lg-3">
+    
+    {% if introBanner.isEnable %} 
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ introBanner.title }}</h1>
+                <p class="fr-text fr-mt-2w">{{ introBanner.description|raw }}</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-2w">{{'front.dataRepository.list'|trans }}</h1>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col">
+        
+            {% if disciplines is defined and disciplines is not empty %}
+                <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+                    <div class="fr-col">   
+                        <ul class="fr-accordions-group fr-py-2w fr-pl-0">
+                            {% for discipline in disciplines %}
+                                <li>
+                                    <section class="fr-accordion">
+                                        <div class="d-flex align-items-center justify-content-end order-first"></div>
+                                        <h3 class="fr-accordion__title">
+                                            <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-{{ loop.index0 }}" data-workshop="{{discipline.id}}">{{ discipline.title }}</button>
+                                        </h3>
+                                        <div class="fr-collapse" id="accordion-{{ loop.index0 }}">
+                                            {% if discipline.dataRepositories|length > 0 %}
+                                                {% for dataRepository in discipline.dataRepositories %}
+                                                    {% if dataRepository is not empty %}
+                                                            <ul class="dataRepository">
+                                                                <li class="mt-2 mb-2">
+                                                                    <a title="{{ dataRepository }}" href="{{ path('front.dataRepository.show', {'id': dataRepository.id}) }}" rel="noopener" data-institution="{{dataRepository.id}}">{{ dataRepository }}</a>
+                                                                    <div class="list-keyword">
+                                                                        {% for keyword in dataRepository.keywords %}
+                                                                            <span class="fr-tag tags-group">
+                                                                                {{ keyword }}
+                                                                            </span>
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </section>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        
+            <script>
+                const hash = localStorage.getItem('hsh'); const openMenu = () => {localStorage.removeItem('hsh'); const elem = document.querySelector('[data-workshop="'+hash+'"]'); elem.dispatchEvent(new Event('click')); }; if(hash){setTimeout(openMenu, 1000); }; const aClick = (ev) => {ev.preventDefault(); localStorage.setItem('hsh', ev.target.dataset.institution);document.location.href=ev.target.href}; Array.from(document.querySelectorAll('a[data-institution]')).forEach(el=>{el.addEventListener('click', aClick)});
+            </script>
+        
+        </div>
+    </div>
+
+    {{ knp_pagination_render(disciplines) }}
+
+</div>

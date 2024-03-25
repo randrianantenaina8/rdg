@@ -1,0 +1,49 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+
+{% block content_title %}
+    {{ 'content.config'|trans }}
+{% endblock %}
+
+{% block main %}
+    <div class="row row-cols-12">
+        <div class="col-md-6">
+            <fieldset>
+                <h2>{{ 'bo.config.route'|trans }}</h2>
+                <ul>
+                    <li><a class="text-decoration-none" href="{{ config.route.list.url }}">
+                            <i class="fas fa-play"></i>
+                            {{ config.route.list.label|trans }}
+                        </a>
+                    </li>
+                    <li><a class="text-decoration-none" href="{{ config.route.add.url }}">
+                            <i class="fas fa-play"></i>
+                            {{ config.route.add.label|trans }}
+                        </a>
+                    </li>
+                </ul>
+            </fieldset>
+        </div>
+        <div class="col-md-6">
+            <fieldset>
+                <h2>{{ 'bo.config.solr'|trans }}</h2>
+                <ul>
+                    <li><a href="{{ path('bo.solr.index') }}" class="text-decoration-none">
+                            <i class="fas fa-play"></i>
+                            {{ 'bo.config.solr.index'|trans }}
+                        </a>
+                    </li></br>
+                    <small>{{ 'bo.config.solr.index.notice'|trans }}</small>
+                </ul>
+            </fieldset>
+        </div>
+    </div>
+    <div class="row row-cols-12">
+        <div class="col-md-6">
+            <fieldset>
+                <h2>{{ 'bo.config.cron'|trans }}</h2>
+                <ul>
+                </ul>
+            </fieldset>
+        </div>
+    </div>
+{% endblock %}

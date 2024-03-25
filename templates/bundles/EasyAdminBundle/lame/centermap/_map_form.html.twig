@@ -1,0 +1,67 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('build/bo_centermap.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content_title %}
+    {{ 'content.centerlame'|trans|capitalize }}
+{% endblock %}
+
+{% block page_actions %}
+    <a class="action-index btn btn-secondary" href="{{ backUrl }}">{{ 'bo.map.backtolamina'|trans }}</a>
+{% endblock %}
+
+{% block main %}
+    <div class="container split">
+        <div class="card-interact__menu">
+            <form class="card-interact__form">
+                <h3>Ajouter des données</h3>
+                <hr>
+
+                {# SYMFONY FORM #}
+                
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form, {'method': 'POST'}) }}
+                {{ form_row(form.id) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.x) }}
+                {{ form_row(form.y) }}
+                <strong>{{ 'centermapcoord.centers.help'|trans }}</strong>
+                {{ form_row(form.dataworkshop) }}
+
+                <div class="col-auto my-1">
+                    <button type="reset" class="button button-warning" style="width:100%;margin-bottom: 0.5em;">{{ 'bo.map.reset.point'|trans }}</button>
+                    <button type="submit" class="button button-primary" style="width:100%;">{{ 'bo.map.save.point'|trans }}</button>
+                    <button class="btn-point-delete button button-danger button-hidden" style="width:100%; margin-top:5rem; ">{{ 'bo.map.delete.point'|trans }}</button>
+                </div>
+                {{ form_end(form) }}
+            </form>
+            
+        </div>
+        <div>
+            <button class="button button-secondary add-interactive" style="margin:2rem auto 4rem;" data-btn="add">{{ 'bo.map.btn.add'|trans }}</button><br>
+            <div class="card-interact">
+                <img src="{{ asset('build/images/France-departements-dom-tom.svg') }}" alt="">
+            </div>
+        </div>
+    </div>
+    <script>
+        const POINTS = {{ points|json_encode|raw }};
+        if(!window.mapUtils) { 
+            window.mapUtils = {
+                translate: { 
+                    labelAdd: "{{ 'bo.map.btn.add'|trans }}", 
+                    labelModify: "{{ 'bo.map.btn.modify'|trans }}" 
+                } 
+            } 
+        } 
+    </script>
+{% endblock %}
+
+{% block webpack_encore %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('bo_centermap') }}
+{% endblock %}

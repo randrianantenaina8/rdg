@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ 'content.team'|trans }}{% endblock %}
+{% block title %}{{ 'content.team'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/common/_breadcrumb.html.twig' %}
+    {% include 'partials/team/_repositoryteam.html.twig' %}
+    {% include 'partials/logigrams/_logigram.html.twig' %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

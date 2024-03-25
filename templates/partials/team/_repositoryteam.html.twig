@@ -1,0 +1,107 @@
+
+<main class="fr-fluid" role="main">
+    {# INTRO BANNER #}
+    <div class="row">
+        <div class="fr-col-lg-12">
+        {% if introBanner.isEnable %}
+            <div class="fr-grid-row">
+                <div class="fr-col">
+                    <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ introBanner.title }}</h1>
+                    <p class="fr-text fr-mt-2w">{{ introBanner.description|raw }}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="fr-grid-row">
+                <div class="fr-col">
+                    <h1 class="fr-h1 actu-title-border fr-mb-2w"></h1>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+    {# END BANNER #}
+
+    {% if members is defined %}
+
+    {# First Row #}
+    <div class="row">
+        {% for member in members %}
+            {% set memberFirstRow = member.weight is same as 1 and member.weight is same as 2 %}
+            {% if member.weight is same as 1 %}
+                <div class="fr-col-xs-12 fr-col-md-4 fr-col-lg-3 my-3">
+                    <div class="fr-card fr-card--no-arrow fr-card--vertical fr-enlarge-link align-items-stretch">    
+                        <div class="fr-card__body">
+                            <div class="fr-card__img h-75 fr-mx-2w align-self-center">
+                                {% if member.image is not empty %}
+                                    <img class="img-thumbnail rounded mx-auto d-block" src="{{ member.image }}" class="fr-responsive-img" aria-label="{{ member.name|raw }}">
+                                {% else %}
+                                    <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="{{ 'content.dataset'|trans }}">
+                                {% endif %}
+                            </div>
+                            {% if member.imgLicence is defined %}
+                                <small class="text-small pb-3">{{ member.imgLicence|raw }}</small>
+                            {% endif %}
+                                <p class="fr-text--bold fr-text--sm fr-mb-0 fr-pb-0">{{ member.name }}</p>
+                            {% if member.role is defined %}
+                                <p class="fr-text--sm">{{ member.role|raw }}</p>
+                            {% endif %}
+                            {% if member.description is defined %}
+                                <p class="fr-text">{{ member.description|raw }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if member.weight is same as 2 %}
+                <div class="fr-col-xs-12 fr-col-md-8 fr-col-lg-9 my-3">
+                    <div class="fr-card fr-card--no-arrow fr-card--vertical fr-enlarge-link align-items-stretch">    
+                        <div class="fr-card__body">
+                            <div class="fr-card__img align-self-center">
+                                {% if member.image is not empty %}
+                                <img src="{{ member.image }}" class="fr-responsive-img" style="object-fit:contain" aria-label="{{ member.name|raw }}">
+                                {% else %}
+                                    <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="{{ 'content.dataset'|trans }}">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {# First Row End #}
+
+    <div class="row">
+        {% for member in members %}      
+            {% if member.weight is not same as 1 and member.weight is not same as 2 %}
+                <div class="fr-col-xs-12 fr-col-md-6 fr-col-lg-3 my-3">
+                    <div class="fr-card fr-card--no-arrow fr-card--vertical fr-enlarge-link align-items-stretch">    
+                        <div class="fr-card__body">
+                            <div class="fr-card__img h-75 fr-mx-2w align-self-center">
+                                {% if member.image is not empty %}
+                                <img class="img-thumbnail rounded mx-auto d-block" src="{{ member.image }}" class="fr-responsive-img" aria-label="{{ member.name|raw }}">
+                                {% else %}
+                                    <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="{{ 'content.dataset'|trans }}">
+                                {% endif %}
+                            </div>
+                            <div>
+                                {% if member.imgLicence is defined %}
+                                    <small class="text-small pb-4">{{ member.imgLicence|raw }}</small>
+                                {% endif %}
+                                    <p class="fr-text--bold fr-text--sm fr-mb-0 fr-pb-0">{{ member.name }}</p>
+                                {% if member.role is defined %}
+                                    <p class="fr-text--sm">{{ member.role|raw }}</p>
+                                {% endif %}
+                                {% if member.description is defined %}
+                                    <p class="fr-text">{{ member.description|raw }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% endif %}
+</main>

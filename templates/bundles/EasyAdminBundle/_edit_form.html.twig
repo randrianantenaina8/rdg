@@ -1,0 +1,27 @@
+{# templates/bundles/EasyAdminBundle/_edit_form_html.twig #}
+
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <article class="content">
+            <div class="content-header-title mt-3">
+                <h1 class="title">{{ 'bo.media.category.edit'|trans|capitalize }}</h1>
+            </div>
+            <div class="form-group">
+                <div class="form-widget">
+                    {{ form_start(form) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form_row(form.s3FileCategory, {'attr': {'class': 'form-select'}}) }}
+                            </div>
+                            <div class="col-md-4 mt-auto">
+                                <button type="submit" class="btn btn-primary float-right">{{ 'button.save'|trans|capitalize }}</button>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </article>
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+
+{% if logigram is defined and logigram is not empty and logigram.isPublished %}
+	<div class="logigramBody export">
+	 	
+		<h1 class="logigramTitle">
+		</h1>
+
+		<h1 class="logigramSubTitle">
+		</h1>
+
+		<div class="logigram">
+			<div class="logigramContent">
+			</div>
+		</div>
+
+		<button id="export">{{ 'logigram.export'|trans }}</button>
+
+	</div>
+{% endif %}
+
+{% block javascripts %}
+	{% if logigram is defined and logigram is not empty and logigram.isPublished %}
+		<script>
+			let logigramData = {{ logigram|json_encode|raw }};
+
+			console.log("_logigram.html", logigramData)
+
+			const logigramBody = document.querySelector('.logigramBody')
+			logigramBody.setAttribute('data-items', JSON.stringify(logigramData))
+
+			document.getElementById("export").addEventListener("click", function () {
+				let elementToPrint = document.querySelector(".export")
+
+				if (elementToPrint) {
+					let styles = window.getComputedStyle(elementToPrint)
+
+					let content = elementToPrint.innerHTML
+
+					let printWindow = window.open('', '', 'width=600,height=600')
+					printWindow.document.writeln('<!DOCTYPE html>')
+					printWindow.document.write('<html><head><title>Export</title>')
+
+					let stylesheets = document.querySelectorAll('link[rel="stylesheet"]')
+					stylesheets.forEach(function (stylesheet) {
+						printWindow.document.write(stylesheet.outerHTML)
+					})
+					printWindow.document.write('</head><body>')
+
+					printWindow.document.write( content )
+					printWindow.document.write('</body></html>')
+					printWindow.document.close()
+
+					printWindow.focus()
+					setTimeout(function(){printWindow.print()},1000)
+				} else {
+					console.error("Element with ID 'export' not found.")
+				}
+			})
+
+		</script>
+	{% endif %}
+{% endblock %} 

@@ -1,0 +1,161 @@
+{% set spotlight = 'spotlight' %}
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% for lamina in laminas %}
+    {% if lamina.type is same as(spotlight) %}
+        <div class="fr-fluid fr-bt-4">
+            <h4 class="fr-h4">{{ lamina.lamina.title }}</h4>
+            <div class="d-lg-block d-none">
+                <div class="fr-grid-row fr-grid-row--gutters">
+                    {% if lamina.lamina.spotlight.datasets is defined %}
+                        {% for spotlight in lamina.lamina.spotlight.datasets|slice(0, 3) %}
+                            {% set pathDataset = path('front.dataset.show', {'slug': spotlight.slug}) %}
+                            <div class="fr-col-4">
+                                <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-enlarge-link align-items-stretch">
+                                    <div class="fr-card__body fr-pl-0 fr-pr-2w">
+                                        <p class="fr-text--bold fr-text--sm fr-mb-0 fr-pb-0">{{ spotlight.title }}</p>
+                                        <p class="fr-card__desc">{{ spotlight.hook|striptags|u.truncate(lame_highlighted_len_max_hook, '...', false)|raw }}</p>
+                                        <p class="fr-card__detail fr-mb-0 fr-pb-0">{{ spotlight.updatedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</p>
+                                        {% if spotlight.taxonomies is not empty %}
+                                            <div class="fr-py-2w">
+                                                {% for taxonomy in spotlight.taxonomies %}
+                                                    <a href="{{ pathDataset }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs">{{ taxonomy.term }}</a>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <div class="fr-py-1w new-tag-order">
+                                                <a href="{{ pathDataset }}" class="link-hover-background deposer-link-extern-content text-decoration-none fr-text--xs" aria-label="{{ spotlight.title }}"></a>
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                    <div class="fr-card__img h-75 fr-mx-2w align-self-center">
+                                        {% if spotlight.imageLocale is not empty %}
+                                        <img src="{{ spotlight.imageLocale }}" class="fr-responsive-img" alt="{{ spotlight.title|striptags|u.truncate(lame_spotlight_len_max_title, '...', false)|raw }}">
+                                        {% else %}
+                                            <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="{{ 'content.dataset'|trans }}">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="fr-grid-row fr-grid-row--gutters">
+                    {% if lamina.lamina.spotlight.datasets is defined %}
+                        {% for spotlight in lamina.lamina.spotlight.datasets|slice(3, 3) %}
+                            {% set pathDataset = path('front.dataset.show', {'slug': spotlight.slug}) %}
+                            <div class="fr-col-4">
+                                <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-enlarge-link align-items-stretch">
+                                    <div class="fr-card__body fr-pl-0 fr-pr-2w">
+                                        <p class="fr-text--bold fr-text--sm fr-mb-0 fr-pb-0">{{ spotlight.title|striptags|u.truncate(lame_spotlight_len_max_title, '...', false)|raw }}</p>
+                                        <p class="fr-card__desc">{{ spotlight.hook|striptags|u.truncate(lame_highlighted_len_max_hook, '...', false)|raw }}</p>
+                                        <p class="fr-card__detail fr-mb-0 fr-pb-0">{{ spotlight.updatedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</p>
+                                        {% if spotlight.taxonomies is not empty %}
+                                            <div class="fr-py-2w">
+                                                {% for taxonomy in spotlight.taxonomies %}
+                                                    <a href="{{ pathDataset }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs">{{ taxonomy.term }}</a>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <div class="fr-py-1w new-tag-order">
+                                                <a href="{{ pathDataset }}" class="link-hover-background deposer-link-extern-content text-decoration-none fr-text--xs" aria-label="{{ spotlight.title }}"></a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="fr-card__img h-75 fr-mx-2w align-self-center">
+                                        {% if spotlight.imageLocale is not empty %}
+                                        <img src="{{ spotlight.imageLocale }}" class="fr-responsive-img" alt="{{ spotlight.title|striptags|u.truncate(lame_spotlight_len_max_title, '...', false)|raw }}">
+                                        {% else %}
+                                            <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="{{ 'content.dataset'|trans }}">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="datagames-wrapper d-lg-none d-block">
+                <div id="datagamesCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                    {% if lamina.lamina.spotlight.datasets is defined %}
+                        {% for spotlight in lamina.lamina.spotlight.datasets[0:6] %}
+                            {% set pathDataset = path('front.dataset.show', {'slug': spotlight.slug}) %}
+                            {% if loop.first %}
+                            <div class="carousel-item active">
+                                <div class="col-12 col-sm-6 fr-px-3v">
+                                    <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-enlarge-link align-items-stretch">
+                                        <div class="fr-card__body fr-pl-0 fr-pr-2w fr-pl-2w align-self-start">
+                                            <p class="fr-text--bold fr-text--sm fr-mb-0 fr-pb-0">{{ spotlight.title|striptags|u.truncate(lame_spotlight_len_max_title, '...', false)|raw }}</p>
+                                            <p class="fr-card__desc">{{ spotlight.hook|striptags|u.truncate(lame_highlighted_len_max_hook, '...', false)|raw }}</p>
+                                            <p class="fr-card__detail fr-mb-0 fr-pb-0">{{ spotlight.updatedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</p>
+                                            {% if spotlight.taxonomies is not empty %}
+                                                <div class="fr-py-2w">
+                                                    {% for taxonomy in spotlight.taxonomies %}
+                                                    <a href="{{ pathDataset }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs" aria-label="{{ spotlight.title }}">{{ taxonomy.term }}</a>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                <div class="fr-py-1w new-tag-order">
+                                                    <a href="{{ pathDataset }}" class="link-hover-background deposer-link-extern-content text-decoration-none fr-text--xs" aria-label="{{ spotlight.title }}"></a>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="fr-card__img h-75 align-self-center">
+                                            {% if spotlight.imageLocale is not empty %}
+                                                <img src="{{ spotlight.imageLocale }}" class="fr-responsive-img fr-p-2w" alt="{{ spotlight.title|striptags|u.truncate(lame_spotlight_len_max_title, '...', false)|raw }}">
+                                            {% else %}
+                                                <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img fr-p-2w" alt="{{ 'content.dataset'|trans }}">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="carousel-item">
+                                <div class="col-12 col-md-6 fr-px-3v">
+                                    <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-enlarge-link  align-items-stretch">
+                                        <div class="fr-card__body fr-pl-0 fr-pr-2w fr-pl-2w align-self-start">
+                                            <p class="fr-text--bold fr-text--sm fr-mb-0 fr-pb-0">{{ spotlight.title|striptags|u.truncate(lame_spotlight_len_max_title, '...', false)|raw }}</p>
+                                            <p class="fr-card__desc">{{ spotlight.hook|striptags|u.truncate(lame_highlighted_len_max_hook, '...', false)|raw }}</p>
+                                            <p class="fr-card__detail fr-mb-0 fr-pb-0">{{ spotlight.updatedAt|format_datetime(locale='fr',pattern="dd MMMM YYYY") }}</p>
+                                            {% if spotlight.taxonomies is not empty %}
+                                                <div class="fr-py-2w">
+                                                {% for taxonomy in spotlight.taxonomies %}
+                                                <a href="{{ pathDataset }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs">{{ taxonomy.term }}</a>
+                                                {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                <div class="fr-py-1w new-tag-order">
+                                                    <a href="{{ pathDataset }}" class="link-hover-background deposer-link-extern-content text-decoration-none fr-text--xs" aria-label="{{ spotlight.title }}"></a>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="fr-card__img h-75 align-self-center">
+                                            {% if spotlight.imageLocale is not empty %}
+                                            <img src="{{ spotlight.imageLocale }}" class="fr-responsive-img fr-p-2w" alt="{{ spotlight.title|striptags|u.truncate(lame_spotlight_len_max_title, '...', false)|raw }}">
+                                            {% else %}
+                                                <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img fr-p-2w" alt="{{ 'content.dataset'|trans }}">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+                <a class="carousel-control-prev bg-transparent w-aut" href="#datagamesCarousel" role="button" data-bs-slide="prev" aria-label="previous">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next bg-transparent w-aut" href="#datagamesCarousel" role="button" data-bs-slide="next" aria-label="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="fr-fluid__right">
+                <a class="fr-link fr-fi-arrow-right-line fr-link--icon-right" href="{{ url('front.dataset.list') }}">{{ 'front.datasets.more'|trans }}</a>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

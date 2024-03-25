@@ -1,0 +1,150 @@
+{# Solr Search results page #}
+{% extends 'base.html.twig' %}
+
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set path = app.request.getSchemeAndHttpHost() %}
+{% set language = 'en' in currentPath ? '/en/' : '/fr/' %}
+{% set news = 'en' in currentPath ? language ~ 'actuality/' : language ~ 'actualite/' %}
+{% set event = 'en' in currentPath ? language ~ 'event/' : language ~ 'evenement/' %}
+{% set dataset = 'en' in currentPath ? language ~ 'dataset/' : language ~ 'jeu-de-donnee/' %} 
+{% set glossary = 'en' in currentPath ? language ~ 'glossary/' : language ~ 'glossaire/' %}
+{% set team = 'en' in currentPath ? language ~ 'a-multidisciplinary-repository/' : language ~ 'entrepot-pluridisciplinaire' %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+
+    <div id="print-area" class="fr-fluid">
+        <h2 class="fr-card__title fr-h2 my-4">{{ 'front.search.main.results'|trans }}</h2>
+
+        {% if nbResults > 0 %}
+        <p class="fr-h4 my-4">{{ 'front.search.main.number'|trans }} {{ nbResults }} </p>
+        {% include 'partials/common/_printmenu.html.twig' %}
+        <div class="fr-col">
+            {% if results is defined %}
+                {% for result in results %}
+                    <div class="fr-grid-row fr-mb-4w">
+                        <div class="fr-col fr-pt-0">
+                            <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-enlarge-link fr-mb-4w">
+                                <div class="fr-card__body justify-content-center">
+                                    {% if 'news' in result.id or 'dataset' in result.id or 'event' in result.id or 'page' in result.id or 'guide' in result.id %}
+                                        
+                                        {% set title = 'en' in currentPath ? result.title_en : result.title_fr %}
+                                        {% set content  = 'en' in currentPath ? result.content_en : result.content_fr %}
+                                        {% set slug  = 'en' in currentPath ? result.slug_en : result.slug_fr %}
+                                        
+                                        {% if 'news' in result.id %} {# News results #}
+                                            <small class="mb-1">{{ 'content.actuality'|trans|capitalize }}</small>
+                                            <h2 class="fr-card__title">{{ title }}</h2>
+                                            <p class="fr-card__desc">{{ content|striptags|u.truncate(solr_search_len_max_content, '...', false)|raw }}</p>
+                                            <p class="fr-text--sm actu-color-link">
+                                                <a href="{{ path ~ news ~ slug }}" class="fr-card__link">{{ 'front.search.see.more'|trans }}
+                                                    <span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span>
+                                                </a>
+                                            </p>
+                                        {% endif %}
+                                        {% if 'dataset' in result.id %} {# Datasets results #}
+                                            <small class="mb-1">{{ 'content.dataset'|trans|capitalize }}</small>
+                                            <h2 class="fr-card__title">{{ title }}</h2>
+                                            <p class="fr-card__desc">{{ content|striptags|u.truncate(solr_search_len_max_content, '...', false)|raw }}</p>
+                                            <p class="fr-text--sm actu-color-link">
+                                                <a href="{{ path ~ dataset ~ slug }}" class="fr-card__link">{{ 'front.search.see.more'|trans }}
+                                                    <span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span>
+                                                </a>
+                                            </p>
+                                        {% endif %}
+                                        {% if 'page' in result.id %} {# Pages results #}
+                                            <small class="mb-1">{{ 'content.page'|trans|capitalize }}</small>
+                                            <h2 class="fr-card__title">{{ title }}</h2>
+                                            <p class="fr-card__desc">{{ content|striptags|u.truncate(solr_search_len_max_content, '...', false)|raw }}</p>
+                                            <p class="fr-text--sm actu-color-link">
+                                                <a href="{{ path ~ language ~ 'page/' ~ slug }}" class="fr-card__link">{{ 'front.search.see.more'|trans }}
+                                                    <span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span>
+                                                </a>
+                                            </p>
+                                        {% endif %}
+                                        {% if 'event' in result.id %} {# Events results #}
+                                            <small class="mb-1">{{ 'content.event'|trans|capitalize }}</small>
+                                            <h2 class="fr-card__title">{{ title }}</h2>
+                                            <p class="fr-card__desc">{{ content|striptags|u.truncate(solr_search_len_max_content, '...', false)|raw }}</p>
+                                            <p class="fr-text--sm actu-color-link">
+                                                <a href="{{ path ~ event ~ slug }}" class="fr-card__link">{{ 'front.search.see.more'|trans }}
+                                                    <span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span>
+                                                </a>
+                                            </p>
+                                        {% endif %}
+                                        {% if 'guide' in result.id %} {# Guides results #}
+                                            <small class="mb-1">{{ 'content.guide'|trans|capitalize }}</small>
+                                            <h2 class="fr-card__title">{{ title }}</h2>
+                                            <p class="fr-card__desc">{{ content|striptags|u.truncate(solr_search_len_max_content, '...', false)|raw }}</p>
+                                            <p class="fr-text--sm actu-color-link">
+                                                <a href="{{ path ~ language ~ 'guide/' ~ slug }}" class="fr-card__link">{{ 'front.search.see.more'|trans }}
+                                                    <span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span>
+                                                </a>
+                                            </p>
+                                        {% endif %}
+
+                                    {% endif %}
+                                    {% if 'term' in result.id %} {# Glossary terms results #}
+                                        {% set term = 'en' in currentPath ? result.term_en : result.term_fr %}
+                                        {% set definition  = 'en' in currentPath ? result.definition_en : result.definition_fr %}
+                                        <small class="mb-1">{{ 'content.glossary'|trans|capitalize }}</small>
+                                        <h2 class="fr-card__title">{{ term }}</h2>
+                                        <p class="fr-card__desc">{{ definition|striptags|u.truncate(solr_search_len_max_content, '...', false)|raw }}</p>
+                                        <p class="fr-text--sm actu-color-link">
+                                            <a href="{{ path ~ glossary }}" class="fr-card__link">{{ 'front.search.see.more'|trans }}
+                                                <span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span>
+                                            </a>
+                                        </p>
+                                    {% endif %}
+                                    {% if 'faq' in result.id %} {# Faqs results #}
+                                        {% set title = 'en' in currentPath ? result.title_en : result.title_fr %}
+                                        {% set content  = 'en' in currentPath ? result.content_en : result.content_fr %}
+                                        <small class="mb-1">{{ 'content.faqblock'|trans|capitalize }}</small>
+                                        <h2 class="fr-card__title">{{ title }}</h2>
+                                        <p class="fr-card__desc">{{ content|striptags|u.truncate(solr_search_len_max_content, '...', false)|raw }}</p>
+                                        <p class="fr-text--sm actu-color-link">
+                                            <a href="{{ path ~ language ~ 'faq/' }}" class="fr-card__link">{{ 'front.search.see.more'|trans }}
+                                                <span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span>
+                                            </a>
+                                        </p>
+                                    {% endif %}
+                                    {% if 'member' in result.id %} {# Recherche Data Gouv Repository Members results #}
+                                        {% set role = 'en' in currentPath ? result.role_en : result.role_fr %}
+                                        {% set description  = 'en' in currentPath ? result.description_en : result.description_fr %}
+                                        <small class="mb-1">{{ 'content.team'|trans }}</small>
+                                        <h2 class="fr-card__title">{{ result.name_fr }}</h2>
+                                        <p class="fr-card__desc">{{ role }}</p>
+                                        <p class="fr-card__desc">{{ description|striptags|u.truncate(solr_search_len_max_content, '...', false)|raw }}</p>
+                                        <p class="fr-text--sm actu-color-link">
+                                            <a href="{{ path ~ team }}" class="fr-card__link">{{ 'front.search.see.more'|trans }}
+                                                <span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span>
+                                            </a>
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                {% endfor %}
+            {% endif %}
+
+        {% else %}
+            <p class="fr-h4 my-4">{{ 'front.search.main.no.results'|trans }}</p>
+        {% endif %}
+        
+        {% if results is defined and results is not empty %}
+            {{ knp_pagination_render(results) }}
+        {% endif %}
+
+        </div>
+    </div>
+
+    {% include 'partials/footer/_footer.html.twig' %}
+
+<!-- Hide page elements for print commands -->
+<style type="text/css" media="print">
+    .fr-header, .fr-container, .fr-sidemenu,
+    .search-up-data, .fr-footer, .fr-footer__bottom,
+    .backtotop, .print-input { display: none !important }
+</style>
+{% endblock %}

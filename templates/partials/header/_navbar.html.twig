@@ -1,0 +1,74 @@
+<div class="fr-header__menu fr-modal" data-fr-js-modal="true" data-fr-js-header-modal="true" id="modal-menu" aria-labelledby="fr-btn-menu-mobile">
+    <div class="fr-fluid">
+        <button class="fr-link--close fr-link" aria-controls="modal-menu" data-fr-js-modal-button="true">{{ 'front.search.close'|trans }}</button>
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <div class="fr-header__menu-links"></div>
+                <nav class="fr-nav" id="header-navigation" role="navigation" data-fr-js-navigation="true" aria-label="{{ 'front.header.main.menu'|trans }}">
+                {% if headerDatas is defined %}
+                    <ul class="fr-nav__list">
+                        {% for elem in headerDatas %}
+                            {% if elem.childs|length > 0 %}
+                                {% set uuid = "id_collapse_#{random()}" %}
+                                {% if elem.link is not null %}
+                                <li class="fr-nav__item fr-nav__item-link">
+                                    <a class="text-decoration-none fr-nav__link" href="{{ elem.link }}" target="_self" style="flex: 1 1 auto;">{{ elem.label }}</a>
+                                    <button class="fr-nav__btn" aria-expanded="false" aria-controls="{{ uuid }}"></button>
+                                    <div class="fr-collapse fr-menu" id="{{ uuid }}">
+                                        <ul class="fr-menu__list">
+                                            {% for child in elem.childs|sort((a, b) => a.weight <=> b.weight) %}
+                                            <li>
+                                                <a class="fr-nav__link" href="{{ child.link }}" target="_self">{{ child.label }}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                                {% else %}
+                                <li class="fr-nav__item">
+                                    <button class="fr-nav__btn" aria-expanded="false" aria-controls="{{ uuid }}">{{ elem.label }}</button>
+                                    <div class="fr-collapse fr-menu" id="{{ uuid }}">
+                                        <ul class="fr-menu__list">
+                                            {% for child in elem.childs|sort((a, b) => a.weight <=> b.weight) %}
+                                            <li>
+                                                <a class="fr-nav__link" href="{{ child.link }}" target="_self">{{ child.label }}</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                                {% endif %}
+                            {% else %}
+
+                                <li class="fr-nav__item" data-fr-js-navigation-item="true">
+                                {# if menu nav selected add aria-current="page" #}
+                                <a class="text-decoration-none fr-nav__link" href="{{ elem.link }}" target="_self">{{ elem.label }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}  
+                    </ul>
+                {% endif %}
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="fr-grid-row fr-my-6w fr-mx-2w d-lg-none">
+        <div class="fr-col">
+            <div class="d-flex justify-content-between align-items-center">
+                <a class="text-decoration-none txt-color fr-text--sm fr-mr-4w" href="{{ deposit }}" target="_blank" rel="noopener"><span class="fr-pr-1w txt-color fr-text--sm">{{ 'front.deposit.search'|trans }}</span>
+                <span class="txt-color fr-fi-upload-2-line fr-fi--sm fr-pr-2w" aria-hidden="true"></span></a> 
+                <div class="fr-select-group">
+                    {% if switcherLng is defined %}
+                    <select class="fr-select w-auto" id="navbar-select" name="select" onchange="location = this.value;">
+                        {% for lng, url in switcherLng %}
+                        <option value="{{ url }}" {% if lng == app.request.locale %} selected {% endif %}>{{ lng|upper }}</option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,22 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}{{ 'content.glossary'|trans }}{% endblock %}
+
+{% block main %}
+    <h1>{{ 'content.glossary'|trans }}</h1>
+    {% for glossary in glossaries %}
+        <h2>{{ glossary.term }}</h2>
+        <div>{{ glossary.definition }}</div>
+    {% endfor %}
+    {{ knp_pagination_render(glossaries) }}
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ 'glossary.meta_description'|trans }}{% endblock %}
+{% block title %}{{ 'content.glossary'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/glossary/_mainglossary.html.twig' with { 'title' : 'content.glossary'|trans } %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

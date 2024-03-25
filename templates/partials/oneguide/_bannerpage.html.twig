@@ -1,0 +1,15 @@
+{% if introBanner.isEnable %}
+    {% include 'partials/common/_breadcrumbpages.html.twig' %}
+    <div class="fr-container fr-pb-3w padding-body fr-mx-0 fr-mx-md-1w mx-lg-3">
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-2w">{{ introBanner.title }}</h1>
+                <p class="fr-text fr-mt-2w">{{ introBanner.description|raw }}</p>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="fr-pl-md-2w">
+        {% include 'partials/common/_breadcrumbpages.html.twig' %}
+    </div>
+{% endif %}

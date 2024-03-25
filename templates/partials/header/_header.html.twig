@@ -1,0 +1,12 @@
+<header role="banner" class="fr-header">
+    {% block header %}
+        <div class="fr-col">
+            {% include 'partials/header/_linknav.html.twig' %}
+            {% include 'partials/header/_preview.html.twig' %}
+            {% include 'partials/header/_alert.html.twig' %}
+        </div>
+        {% include 'partials/header/_topheader.html.twig' %}
+        {% include 'partials/header/_searchbar.html.twig' %}
+        {% include 'partials/header/_navbar.html.twig' %}
+    {% endblock %}
+</header>

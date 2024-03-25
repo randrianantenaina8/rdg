@@ -1,0 +1,38 @@
+{% block a2lix_translations_widget %}
+    {{ form_errors(form) }}
+
+    {% if form.vars.attr.helper is defined and form.vars.attr.helper is iterable %}
+        {% for help in form.vars.attr.helper %}
+            <small class="form-help">{{ help|trans }}</small>
+        {% endfor %}
+    {% endif %}
+    <div class="a2lix_translations">
+        <div class="a2lix_translationsLocales nav nav-tabs" role="tablist">
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+
+                <button class="nav-link {% if app.request.locale == locale %}active{% endif %}" id="{{ translationsFields.vars.id }}_a2lix_translations-tab" data-bs-toggle="tab" data-bs-target="#{{ translationsFields.vars.id }}_a2lix_translations-fields" type="button" role="tab" aria-controls="{{ translationsFields.vars.id }}_a2lix_translations-fields" aria-selected="{{ app.request.locale == locale }}">
+                    {{ translationsFields.vars.label|default(locale|humanize)|trans }}
+                    {% if form.vars.default_locale == locale %}{{ '[Default]'|trans }}{% endif %}
+                    {% if translationsFields.vars.required %}*{% endif %}
+                </button>
+            {% endfor %}
+        </div>
+
+        <div class="a2lix_translationsFields tab-content">
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+
+                <div id="{{ translationsFields.vars.id }}_a2lix_translations-fields" class="tab-pane fade {% if app.request.locale == locale %}show active{% endif %} {% if not form.vars.valid %}sonata-ba-field-error{% endif %}" role="tabpanel" aria-labelledby="{{ translationsFields.vars.id }}_a2lix_translations-tab">
+                    {{ form_errors(translationsFields) }}
+                    {{ form_widget(translationsFields) }}
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block a2lix_translationsForms_widget %}
+    {{ block('a2lix_translations_widget') }}
+{% endblock %}

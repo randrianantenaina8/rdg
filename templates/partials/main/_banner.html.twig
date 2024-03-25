@@ -1,0 +1,6 @@
+{% if introBanner.isEnable %}
+    <div class="container-fluid banner d-flex flex-column justify-content-center align-items-center">
+        <h1 class="text-center txt-banner-color fr-col-10 fw-bold w-75 p-3">{{ introBanner.title }}</h1>
+        <p class="text-center txt-banner-color fr-col-10 fr-col-lg-6">{{ introBanner.description|raw }}</p>
+    </div>
+{% endif %}

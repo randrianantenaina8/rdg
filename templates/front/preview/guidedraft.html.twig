@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ entity.title }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    <main class="w-100" role="main">
+        {% block main %}
+            {% include 'partials/pages/_bannerpage.html.twig' %}
+            {% block page %}
+                {% include 'partials/oneguide/_oneguide.html.twig' %}
+            {% endblock %}
+            {% include 'partials/common/_search-footer.html.twig' %}
+        {% endblock %}
+    </main>
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

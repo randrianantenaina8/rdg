@@ -1,0 +1,17 @@
+<div class="fr-container fr-pb-3w padding-body fr-mx-0 fr-mx-md-3w fr-pt-2w">
+    <div class="fr-grid-row">
+        <div class="fr-col">
+            <h1 class="fr-h1 actu-title-border fr-mb-1v">{{entity.title}}</h1>
+        </div>
+    </div>
+    <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col">
+            <div class="fr-mt-4w">
+                <span class="fr-text--xs color-grey-666">{{'front.updatedAt'|trans}} {{entity.updatedAt|date("d/m/Y")}}</span>
+                <div class="fr-my-4w">
+                    {{entity.content|raw}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+<div class="fr-container fr-pb-3w padding-body fr-mx-0 fr-mx-md-1w mx-lg-3">
+    {% if introBanner.isEnable %} 
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ introBanner.title }}</h1>
+                <p class="fr-text fr-mt-2w">{{ introBanner.description|raw }}</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-2w">{{'front.actualities.list'|trans }}</h1>
+            </div>
+        </div>
+    {% endif %}
+    <div class="fr-grid-row fr-m-md-3v fr-m-0 fr-mt-4w justify-content-md-center">
+        <div class="fr-col-xl-7 fr-col-12 fr-mr-8w">
+            {% if actualites is defined and actualites is not empty %}
+                {% for actualite in actualites|slice(0, 5) %}
+                    {% set path_actu = path('front.actuality.show', {'slug': actualite.slug }) %}
+                    <div class="fr-grid-row fr-mb-4w">
+                        <div class="fr-col fr-pt-0">
+                            <div class="fr-card fr-card--no-arrow fr-card--horizontal fr-enlarge-link fr-mb-4w">
+                                <div class="fr-card__body justify-content-center">
+                                    <h2 class="fr-card__title">
+                                        <a href="{{ path_actu }}" class="fr-card__link">{{ actualite.title }}</a>
+                                    </h2>
+                                    <p class="fr-card__desc">{{ actualite.content|striptags|u.truncate(actu_len_max_title, '...', false)|raw }}</p>
+                                    <p class="fr-card__detail new-date-order">{{ 'front.pages.published'|trans }} {{ actualite.publishedAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") }}</p>
+                                    {% if actualite.taxonomies is not empty %}
+                                        <div class="fr-py-1w new-tag-order"><a href="{{ path_actu }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs" target="_self">{{ actualite.taxonomies[0].term }}</a></div>
+                                    {% else %}
+                                        <div class="link-hover-background fr-py-1w new-tag-order"><a href="{{ path_actu }}" class="text-decoration-none fr-text--xs" target="_self"></a></div>
+                                    {% endif %}
+                                    <p class="fr-text--sm actu-color-link">{{ 'front.actualities.read'|trans }}<span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span></p>
+                                </div>
+                                <div class="fr-card__img-dataset fr-mx-0 fr-my-0 fr-mx-md-3w fr-my-md-7w">
+                                    {% if actualite.imageLocale is not empty %}
+                                        <img src="{{ actualite.imageLocale}}" class="fr-responsive-img" alt="{{ actualite.title }}"> 
+                                    {% else %}
+                                        <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {{ knp_pagination_render(actualites) }}
+        </div>
+        <div class="fr-col">
+            <a class="fr-link fr-px-0 px-xl-2 mb-4 fr-fi-arrow-right-line fr-link--icon-right fr-text--lg" href="{{ path('front.contact', { 'subject': 'eventSuggest' }) }}">
+                {{ 'front.suggest.event.link'|trans }}
+            </a>
+            <div class="fr-col fr-p-md-3w fr-p-1w content-events">
+                <h2 class="fr-h4 text-center">{{ 'front.events.list'|trans }}</h2>
+                {% if events is defined and events is not empty %}
+                    {% for event in events|slice(0, 5) %}
+                    {% set path_event = path('front.event.show', {'slug': event.slug }) %}
+                    <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+                        <div class="fr-col">   
+                            <div class="fr-card fr-card--no-arrow fr-enlarge-link">
+                                <div class="fr-card__body fr-p-3w">
+                                    <h3 class="fr-card__title fs-6 fr-pt-1w">
+                                        <a href="{{ path_event }}" class="fr-card__link" target="_self">{{ event.title }}</a>
+                                    </h3>
+                                    <div class="fr-card__desc">{{ event.hook|striptags|u.truncate(event_len_max_hook, '...', false)|raw }}</div>
+                                    {% if event.end is null %}
+                                        <div class="d-flex align-items-center justify-content-between order-first">
+                                            <p class="fr-card__detail actu-color-date-event fw-bold fr-text--sm fr-m-0"><span class="fr-fi-calendar-line fr-fi--sm fr-pr-1v" aria-hidden="true"></span>{{ 'front.events.published.one.day'|trans }} {{ event.begin|format_datetime('long', 'short', locale=('/en/' in currentPath ? 'en' : 'fr')) }}</p>
+                                            {% if event.taxonomies is not empty %}
+                                                <div class="fr-py-1w new-tag-order"><a href="{{ path_event }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs" target="_self">{{ event.taxonomies[0].term }}</a></div>
+                                            {% else %}
+                                                <div class="link-hover-background fr-py-1w new-tag-order"><a href="{{ path_event }}" class="text-decoration-none deposer-link-extern-content shadow-none fr-text--xs" target="_self"></a></div>
+                                            {% endif %}
+                                        </div>
+                                    {% else %}
+                                        <div class="d-flex align-items-center flex-row-reverse justify-content-between order-first">
+                                            <div class="fr-grid-row">
+                                                <div class="fr-col">
+                                                    <div class="fr-card__detail actu-color-date-event fw-bold fr-text--sm fr-m-0">
+                                                        {% if event.end and event.end|format_datetime(locale=('/en/' in currentPath ? 'en' : 'fr'), pattern="dd MMMM YYYY") > event.begin|format_datetime(locale=('/en/' in currentPath ? 'en' : 'fr'), pattern="dd MMMM YYYY") %}
+                                                            <span class="fr-fi-calendar-line fr-fi--sm fr-pr-1v" aria-hidden="true"></span>
+                                                            {{ 'front.events.published.from'|trans }} {{ event.begin|format_datetime('long', 'short', locale=('/en/' in currentPath ? 'en' : 'fr')) }}<br />
+                                                            <span class="fr-fi-calendar-line fr-fi--sm fr-pr-1v" aria-hidden="true"></span>
+                                                            {{ 'front.events.published.to'|trans }} {{ event.end|format_datetime('long', 'short', locale=('/en/' in currentPath ? 'en' : 'fr')) }}
+                                                        {% else %}
+                                                            <span class="fr-fi-calendar-line fr-fi--sm fr-pr-1v" aria-hidden="true"></span>
+                                                            {{ 'front.events.published.one.day'|trans }} {{ event.begin|format_datetime('long', 'short', locale=('/en/' in currentPath ? 'en' : 'fr')) }}<br />
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if event.taxonomies is not empty %}
+                                                <div class="fr-py-1w new-tag-order"><a href="{{ path_event }}" class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs" target="_self">{{ event.taxonomies[0].term }}</a></div>
+                                            {% else %}
+                                                <div class="link-hover-background fr-py-1w new-tag-order"><a href="{{ path_event }}" class="text-decoration-none deposer-link-extern-content shadow-none fr-text--xs" target="_self"></a></div>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    <p class="fr-text--sm actu-color-link fr-pt-2w">{{ 'front.actualities.read'|trans }}<span class="fr-fi--sm fr-fi-arrow-right-line fr-pl-1w"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="text-center">
+                    <a class="fr-link" href="{{ path('front.event.list') }}">{{ 'front.actualities.more'|trans }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

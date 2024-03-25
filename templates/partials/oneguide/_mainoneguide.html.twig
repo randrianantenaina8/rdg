@@ -1,0 +1,10 @@
+<main class="fr-fluid" role="main">
+    {% block main %}
+        {% include 'partials/oneguide/_bannerpage.html.twig' %}
+        {% block page %}
+            {% include 'partials/oneguide/_oneguide.html.twig' %}
+        {% endblock %}
+        {% include 'partials/logigrams/_logigram.html.twig' %}
+        {% include 'partials/common/_search-footer.html.twig' %}
+    {% endblock %}
+</main>

@@ -1,0 +1,684 @@
+app.title: 'recherche.data.gouv Homepage'
+app.meta_description: 'Discover Recherche Data Gouv, the ecosystem at the service of sharing and openness of research data'
+auth.user.notactivated: "User is not activated"
+bo.title: 'RDG Administration'
+bo.portal: 'Portal'
+bo.forgotpass.title: 'Forgot password?'
+bo.resetpass.title: 'Reset your password'
+bo.resetpass.send: 'Send password reset email'
+bo.resetpass.reset: 'Reset password'
+bo.menu.type.help: "Which menu should this entry be attached to."
+bo.map.save.point: "Save the point"
+bo.map.reset.point: "Reset the form"
+bo.map.delete.point: "⚠️ Erase point"
+bo.map.btn.add: "📍 Add point on map ⬇️"
+bo.map.btn.modify: "✏️ Modify point on map ⬇️"
+bo.map.see: "See the card"
+bo.map.edit: "Edit map"
+bo.map.preview: 'Actual map preview'
+bo.map.condition.create: 'You must first create your lamina to then be able to edit the map.'
+bo.map.backtolamina: "Back to the lamina"
+bo.map.label.filter: "Places filter"
+bo.map.label.institution: "Institution"
+bo.map.label.dataworkshop: "Data Workshop"
+bo.media.library: 'media library'
+bo.media.category.select: 'select a category'
+bo.media.category.edit: 'edit file category'
+bo.media.category.updated: 'file category successfully updated'
+bo.media.category.update.fail: 'file category update failed'
+bo.team.select.image: 'Select image'
+bo.team.url.copy: "Copy"
+bo.team.url.copied: "Copied!"
+content.media.library: 'media library'
+content.media.library.file: 'add a media'
+bo.media.library.list: 'media list'
+bo.media.library.add: 'add a media'
+bo.media.category.add: 'add a category'
+bo.media.category: 'category'
+bo.media.type.filter: 'media type'
+prop.file: 'media'
+prop.file.upload: 'upload a media'
+prop.mime.type: 'media type'
+prop.origin.name: 'original name'
+prop.image.id: 'media Id'
+bo.add: 'add'
+bo.create.draft: 'create draft'
+bo.draft: 'draft'
+bo.edit: 'edit'
+bo.list: 'list'
+bo.published.list: 'published list'
+bo.draft.list: 'drafts list'
+bo.topublish: 'publish draft'
+bo.foview: 'visualize'
+bo.del: 'delete'
+bo.next: 'next'
+bo.yes: 'yes'
+bo.no: 'no'
+bo.preview: 'Preview'
+bo.lame.back: 'Back to list'
+bo.config.back: 'Back to settings'
+bo.config.cron: 'Cron'
+bo.config.route: 'System routes'
+bo.config.solr: 'SolR'
+bo.config.solr.index: 'Indexation solR'
+bo.config.solr.index.notice: 'Indexing could take up to 2-3 minutes. Please do not leave the page.'
+bo.config.solr.indexed: 'Solr indexing completed !'
+bo.config.solr.results: 'Results:'
+bo.config.solr.index.query: 'Query details:'
+bo.config.solr.index.back: 'Go back to configuration'
+bo.config.solr.indexed.content: ' indexed contents.'
+bo.config.solr.indexation.finished: 'Indexing complete.'
+bo.length.helper.max: 'Maximum length: %len% character(s)'
+bo.length.helper.max.lamina: 'Truncated display, in laminas, to %len_lamina% character(s).'
+bo.length.helper.max.lamina.spotlight: "Truncated display, in 'Spotlight' lamina, to %len_spot% character(s)."
+bo.length.helper.max.lamina.highlighted: "Truncated display, in 'Highlighted' lamina, to %len_high% character(s)."
+notfound.actuality: 'This actuality does not exist.'
+notfound.center: 'This center does not exist.'
+notfound.dataset: 'This dataset does not exist.'
+notfound.guide: 'This guide does not exist.'
+notfound.page: 'This page does not exist.'
+notfound.route: 'This route does not exist.'
+notfound.logigram : 'This Logigram does not exist.'
+button.save: 'Save'
+button.back.list: 'Back to the list'
+button.send: 'Send'
+actuality.prop.title: 'title'
+actuality.prop.content: 'content'
+actuality.prop.img: 'image'
+actualitydraft.prop.actuality: 'published actuality title'
+actualities.meta_description: 'Follow the Recherche Data Gouv news'
+alert.prop.message: 'message'
+alert.prop.name: 'name'
+alert.prop.name.help: 'The name is only displayed on the back office list.'
+alert.prop.msg: 'message'
+alert.prop.msg.help: 'If a message is not fully translated into the other languages, it will not be displayed in those other languages.'
+alert.prop.type: 'type'
+alert.prop.type.help: 'Switch background color (according to government rules): notice -> blue, warning -> orange, alert -> red'
+alert.prop.begin: 'start date'
+alert.prop.begin.help: 'To disable this alert message, remove this date (or just delete this alert message).'
+alert.prop.end: 'end date'
+alert.prop.end.help: 'End date when this message will no longer appear.'
+centermapcoord.prop.name: 'name'
+centermapcoord.prop.name.help: "Point's name could be the city where the center is located."
+centermapcoord.prop.x: 'x-coordinate'
+centermapcoord.prop.y: 'y-coordinate'
+centermapcoord.centers.help: "Select a dataworkshop."
+centermapcoord.prop.institution: 'institution'
+centermapcoord.prop.institution.help: 'If you choose an institution, do not choose a dataworkshop.'
+centermapcoord.prop.dataworkshop: 'dataworkshop'
+centermapcoord.prop.dataworkshop.help: 'If you choose a dataworkshop, do not choose an institution.'
+dataworkshop.prop.acronym: 'acronym'
+dataworkshop.prop.extended: 'extended name'
+dataworkshop.prop.desc: 'description'
+dataworkshop.prop.img: 'logo'
+dataworkshop.prop.urlDataWorkshop: 'data workshop website URL'
+dataworkshop.prop.institutions: 'institutions associated to'
+dataworkshop.prop.institutions.help: "Institutions where this data workshop is associated to."
+dataworkshop.prop.labeled: "Labeled"
+dataworkshop.prop.trajectory: "On trajectory"
+page.create.title: 'Create page'
+page.edit.title: 'Edit page'
+page.prop.title: 'title'
+page.prop.content: 'content'
+pagedraft.prop.page: 'published page title'
+institution.prop.acronym: 'acronym'
+institution.prop.extended: 'extended name'
+institution.prop.desc: 'description'
+institution.prop.img: 'logo'
+institution.prop.urlInstitution: 'institutional website URL'
+institution.prop.urlcollection: 'dataverse collection URL'
+institution.prop.urlcontact: 'contact page URL'
+institution.prop.urlcontact.help: "Institution contact page"
+institution.prop.urlscience: 'openscience page URL'
+institution.prop.urlscience.help: "Institution's open science web page"
+institution.prop.dataworkshops: 'data workshops linked'
+institution.prop.dataworkshops.help: "Data workshop in support of users of the institution."
+introduction.prop.title: 'title'
+introduction.prop.descr: 'description'
+introduction.prop.enable: 'display'
+introduction.prop.routetype: 'route'
+introduction.prop.background: 'background'
+config.prop.name: 'name'
+config.prop.data: 'data'
+config.route.name: 'name'
+config.route.route: 'route'
+config.faq_highlighted.auto: 'show the 5 most recent questions'
+config.faq_highlighted.auto.help: "By activating this option, the label will change to 'Most recent questions' and ignore the list below."
+subject.prop.subject.help: 'Subject will be available in this language in contact form.'
+contact.subject.prop.subject: 'subject'
+dataset.prop.title: 'title'
+dataset.prop.hook: 'editorial hook'
+dataset.prop.content: 'content'
+dataset.prop.quote: "dataset's quote"
+dataset.prop.img: 'image'
+dataset.prop.actuality: 'related news'
+dataset.prop.link: 'link to dataverse'
+dataset.prop.authors: 'authors'
+dataset.prop.proddate: 'production date'
+dataset.front.dicoverdataset: 'Discover dataset'
+datasetdraft.prop.dataset: 'published dataset title'
+datasets.meta_description: 'The datasets to discover at the moment on Recherche Data Gouv'
+event.prop.title: 'title'
+event.prop.hook: 'hook'
+event.prop.hook.help: "Editorial hook."
+event.prop.content: 'content'
+event.prop.begin: 'begin date'
+event.prop.end: 'end date'
+event.prop.repetitionEndDate: 'ends on'
+event.prop.numberOccurrence: 'OR ends after occurrences'
+event.prop.numberOccurrence.help: "Choose a number of occurrences OR an end date of occurrence."
+event.prop.intervalle: 'repeat every'
+event.prop.periodicity: 'period'
+event.prop.terminationMode: 'termination mode'
+event.prop.jours: 'Days'
+event.prop.ouvrables: 'Working days'
+event.prop.semaines: 'Weeks'
+event.prop.mois: 'Months'
+event.prop.ans: 'Years'
+event.prop.massModification: 'Edit mode'
+event.prop.individuel: 'Individual modification'
+event.prop.groupe: 'Editing the group'
+event.prop.place: 'event place'
+event.prop.poster: 'poster'
+event.prop.link: 'external link'
+events.meta_description: 'Recherche Data Gouv events and its ecosystem'
+faqhighlighted.prop.faq: 'question'
+faqblock.prop.title: 'question'
+faqblock.prop.content: 'answer'
+faqblock.prop.headings: 'headings'
+faqblock.prop.headings.help: 'A FAQ item must be included in, at least, one heading. If you have not, create one heading first.'
+headingFaq.prop.weight.help: 'Ascending order of this FAQ item within this heading.'
+faqblock.prop.faqHighlighted: 'frequent question'
+faqs.meta_description: 'Consult the FAQ to find an answer to your question'
+heading.prop.name: 'name'
+heading.prop.faqs: 'FAQ item'
+heading.prop.faqs.help: 'You can directly link this heading to FAQ items.'
+lame.prop.title: 'title'
+lame.prop.type: 'type'
+lame.prop.type.placeholder: 'Choose type lamina'
+lame.prop.content: 'content'
+lame.prop.isPublished: 'published?'
+carousel.prop.entities: 'centers'
+newsLame.group.actualities: 'News selection'
+newsLame.group.actualities.help: "If 'last news' is off, the order will be kept. 'First news' will be always the first displayed..."
+newsLame.prop.autoActu: 'last news'
+newsLame.prop.autoActu.help: 'The last 4 published news will be displayed instead of the selected ones.'
+newsLame.prop.actu1: 'first news'
+newsLame.prop.actu2: 'second news'
+newsLame.prop.actu3: 'third news'
+newsLame.prop.actu4: 'fourth news'
+newsLame.group.events: 'Events selection'
+newsLame.group.events.help: "If 'next events' is off, the order will be kept. 'First Event' will be always the first displayed..."
+newsLame.prop.autoEvent: 'next events'
+newsLame.prop.autoEvent.help: 'The next 5 published events will be displayed instead of the selected ones.'
+newsLame.prop.event1: 'first event'
+newsLame.prop.event2: 'second event'
+newsLame.prop.event3: 'third event'
+newsLame.prop.event4: 'fourth event'
+newsLame.prop.event5: 'fifth event'
+menuBasic.prop.label: 'label'
+menuBasic.prop.label.help: 'Label must be translated in all available languages.'
+menuBasic.prop.external: 'external link'
+menuBasic.prop.system: 'link to a System route'
+menuBasic.prop.page: 'link to a Page content type'
+menuBasic.prop.link.help: 'Only one link is accepted : a Page content, a system route or an external link.'
+menuBasic.prop.isactivated: 'activated'
+menuMultiple.prop.label: 'label'
+menuMultiple.prop.label.help: 'Label must be translated in all available languages.'
+menuMultiple.prop.parent: 'parent'
+menuMultiple.prop.external: 'external link'
+menuMultiple.prop.system: 'link to a System route'
+menuMultiple.prop.page: 'link to a Page content type'
+menuMultiple.prop.link.help: 'Only one link is accepted : a Page content, a system route or an external link.'
+menuMultiple.prop.isactivated: 'activated'
+entity.group.img: 'Header image'
+entity.group.img.help: 'This image will appear at the top of this guide.'
+glossary.prop.term: 'term'
+glossary.prop.plural: 'plural'
+glossary.prop.def: 'definition'
+glossary.meta_description: 'All the technical terms used'
+guide.prop.title: 'title'
+guide.prop.content: 'content'
+guide.prop.img: 'image'
+guide.prop.categories: 'categories'
+guide.prop.categories.help: "Category to which the guide will be associated. A weight must be associated with it in order to order the display of the guides within the category."
+guidedraft.prop.guide: "published guide title"
+guideCategory.group.category: 'Categorization'
+guideCategory.group.category.help: "It is mandatory to associate at least one category, with its weight (within the category), to a guide."
+guideAdditionalHelp.prop.additionalHelp: "Additional helps"
+guideAdditionalHelp.prop.additionalHelp.help: "Once the additional help is selected, don't forget to add a weight."
+guides.meta_description: " Online support to preserve, share, open and reuse research data"
+network.prop.name: 'name'
+network.prop.css: 'network type'
+network.prop.css.help: 'This field defines the government icon to be used on the public portal.'
+network.prop.link: 'link'
+category.prop.name: 'name'
+category.prop.guides: 'guides'
+category.prop.guides.help: 'Guides associated to this category. A weight must be associated with it in order the display of the guides within this category.'
+additionalHelp.prop.name: 'name'
+additionalHelp.prop.description: 'description'
+additionalHelp.prop.guide: 'guide link'
+additionalHelp.group.links: 'Links'
+additionalHelp.group.links.help: 'Provide either a link to a guide or an external link.'
+additionalHelp.prop.link: 'external link'
+additionalHelp.prop.link.help: '[URL] If not specified, the default protocol is https'
+additionalHelp.prop.displayed: 'display as block'
+additionalHelp.prop.displayed.help: "Display as a block on the Online help page."
+additionalHelp.prop.weight.help: "Ascending order of display of the block on the Be accompanied page."
+taxonomy.prop.term: 'term'
+taxonomy.prop.term.help: 'Do not forget to fully translate term.'
+user.prop.username: 'username'
+user.prop.email: 'email'
+user.prop.active: 'activate'
+user.prop.active.help: "The user cannot log in until it is activated."
+user.prop.roles: 'roles'
+content.publish.success: '<p style="text-align: center">The content has been successfully published.<p>'
+content.clone.success: '<p style="text-align: center">The content has been successfully duplicated.<p>'
+content.clone.button: 'Duplicate'
+content.alert: 'alert message'
+content.alerts: 'alert messages'
+content.members: 'members'
+content.project.members: 'Project Team Members'
+content.member.name: "name"
+content.member.role: "role"
+content.member.position: "position"
+content.page: 'page'
+content.pages: 'pages'
+content.published.pages: 'published pages'
+content.draft: 'draft contents'
+content.draft.actuality: 'draft actuality'
+content.draft.actualities: 'draft actualities'
+content.draft.dataset: 'draft dataset'
+content.draft.datasets: 'draft datasets'
+content.draft.page: 'draft page'
+content.draft.pages: 'draft pages'
+content.draft.guide: 'draft guide'
+content.draft.guides: 'draft guides'
+content.contact.subject: 'subject contact'
+content.contact.subjects: 'subjects contact'
+content.contact.recipients: 'recipients'
+content.contact.page: 'contact page'
+content.dataRepository.dataRepositories: 'repositories'
+content.dataRepository.disciplines: 'disciplines'
+content.dataRepository.keywords: 'keywords'
+content.dataRepository.discipline: 'discipline'
+content.dataRepository.disciplines.kewywords: 'disciplines and keywords'
+discipline.prop.title: 'discipline'
+content.discipline: 'discipline'
+content.disciplines: 'disciplines'
+content.dataRepository.disciplinary.area: 'disciplinary area'
+discipline.prop.title.help: 'Do not forget to fully translate discipline.'
+content.dataRepository.keyword: 'keyword'
+content.dataRepository.description: 'description'
+keyword.prop.term: 'term'
+keyword.prop.term.help: 'Do not forget to fully translate term.'
+content.dataRepository.url: 'url'
+content.dataRepository.supportingInstitution: 'supporting institutions'
+content.dataRepository.supportingInstitution.add: "Add a supporting institution"
+content.dataRepository.dataType: 'accepted data'
+content.dataRepository.repository.creation: 'repository creation date'
+content.dataRepository.serversLocation: 'Servers location'
+content.dataRepository.catopidorLink: 'CatOPIDoR link'
+content.dataRepository.catopidorIdentifier: "CatOPIDoR identifier"
+content.dataRepository.re3dataLink: 'Re3Data link'
+content.dataRepository.re3dataIdentifier: 'Re3data Identifier'
+content.dataRepository.certificate: 'Certificate'
+content.dataRepository.embargo: 'Embargo'
+content.dataRepository.repositoryIdentifier: 'Identifier provided by the repository'
+content.dataRepository.volumeLimit: 'volume limit in GB'
+content.dataRepository.file.volumeLimit: 'volume limit per file in GB'
+content.dataRepository.dataset.volumeLimit: 'volume limit per dataset in GB'
+content.dataRepository.repository.moderation: 'repository provided moderation'
+content.dataRepository.retentionPeriod: 'Data retention period'
+content.dataRepository.links: 'Links'
+content.dataRepository.logo: 'logo'
+content.dataRepository.name: 'name'
+content.dataRepository.term: 'term'
+content.dataRepository.title: 'title'
+content.recipient: 'recipient'
+content.dataset: 'dataset'
+content.datasets: 'datasets'
+content.event: 'event'
+content.events: 'events'
+content.actuality: 'news'
+content.actualities: 'actualities'
+content.category: 'category'
+content.categories: 'categories'
+content.additionalHelp: 'additional help'
+content.additionalHelps: 'additional helps'
+content.config: 'configuration'
+content.configs: 'configurations'
+content.faqhighlighted: 'most frequently question'
+content.faqhighlighteds: 'most frequently questions'
+content.faqblock: "FAQ"
+content.faqblocks: "FAQ"
+content.heading: 'heading'
+content.headings: 'headings'
+content.guide: 'guide'
+content.guides: 'guides'
+content.institution: 'institution'
+content.institutions: 'institutions'
+content.introduction: 'intro banner'
+content.introductions: 'intro banners'
+content.dataworkshop: 'data workshop'
+content.dataworkshops: 'data workshops'
+content.team: 'Recherche Data Gouv Repository'
+content.user: 'user'
+content.users: 'users'
+content.label.menuBasic: 'footer menu'
+content.menuBasic: 'footer menu item'
+content.menuBasics: 'footer menu items'
+content.label.menuMultiple: 'main menu'
+content.menuMultiple: 'main menu item'
+content.menuMultiples: 'main menu items'
+content.network: 'social network'
+content.networks: 'social networks'
+content.glossary: 'Glossary'
+content.lame: 'lamina'
+content.lames: 'laminas'
+content.carousel: 'Carousel'
+content.spotlight: 'Spotlight'
+content.highlighted: 'Highlighted'
+content.newsLame: 'News & Events'
+content.centerlame: 'Centers map'
+content.taxonomy: 'taxonomy'
+content.taxonomies: 'taxonomies'
+prop.group.additional: 'Additional information'
+prop.group.additional.help: 'Miscellaneous information to fill in..'
+prop.group.associatedlamina: 'Associated with lamina available'
+prop.group.associatedlamina.help: 'Add/Replace dataset to already existing laminas.'
+prop.group.editEvent: "group edit"
+prop.group.editEvent.help: "If enable, it will edit for the whole group."
+prop.group.repeattime: "Repeat Event"
+prop.group.repeattime.help: "
+optional - Starts at a start date then specify the repetition, and finally specify either an end date or a number of occurrences."
+prop.img.help: "Picture type accepted : .jpg, .jpeg, .png, .webp. Max filesize : 1Go."
+prop.weight: 'weight'
+prop.weight.help: "Ascending display order."
+prop.group.published: 'Publication'
+prop.group.published.help: 'Once published, the publication date is automatically updated. If unpublished, the publication date is removed and the content will no longer appear to users.'
+prop.actualities.publication.schedule: 'Actualities publication schedule.'
+prop.guide.weight: 'guide weight'
+prop.team.member: 'member'
+prop.published: 'publish'
+prop.createdAt: 'created at'
+prop.updatedAt: 'updated at'
+prop.createdBy: 'created by'
+prop.updatedBy: 'updated by'
+prop.workshopType : "Workshop type"
+prop.labelised : 'With Label'
+prop.onTrajectory : 'On trajectory'
+prop.publishedAt: 'published at'
+prop.publication.date: 'publication date'
+prop.img.licence: 'licence'
+prop.img.licence.help: 'Header image licence'
+prop.img.licence.help.symbol: "Write © symbol. Windows: Alt + 0169. Mac: Option Alt clicked + C."
+prop.img.legend: 'caption'
+prop.img.legend.help: 'Header image caption'
+prop.slug: 'slug'
+prop.slug.help: 'If you delete the slug, it will be automatically generated based on the title on save.'
+prop.translations: 'translations'
+prop.translations.help.one: 'All translations fields are mandatory in, at least, one language.'
+prop.translations.help.one.field: 'Field "%field%" ais mandatory in, at least, one language.'
+prop.translations.help.all: 'All translations fields are mandatory in all languages.'
+form.lang: 'lang'
+form.lame.add: 'Add a lamina'
+form.lam.support: "<h4>Advice</h4>
+ <p>To create a lamina, select a type just next to.<p>
+ <p>To edit a lamina, select the linked action on the list below.</p>
+ <p>To disable a lamina, edit it... Or juste delete it (it works too)!</p>
+ <p>Be aware you can create as many lamina as you wish! Due to the fact that the website
+ is not supposed to get hundreds of laminas, there is no pagination on the list below.</p>
+ <p>If the <b>Title</b> of a lamina has this <span class=\"badge badge-secondary\">Null</span>,
+ this means that this lamina will not be available in English (it has therefore not been translated),
+ regardless of whether it has been published.</p>"
+contact.label.subject: 'Your request concerns'
+contact.placeholder.subject: 'Select a subject'
+contact.label.email: 'Your email'
+contact.label.message: 'Your message'
+contact.label.other: 'Request subject'
+contact.placeholder.email: 'Enter your email address'
+contact.field.required: 'All the contact fields are required'
+contact.captcha.error: 'Wrong captcha'
+contact.sending.success: 'Your message has been sent.'
+contact.sending.error: 'Due to an internal error, your message cannot be sent.'
+contact.event.suggest.value: 'Suggest an event to add to the calendar'
+login.label.username: 'Your username'
+login.label.password: 'Your password'
+login.label.login: 'Log in'
+login.label.forgotpass: 'Forgot your password?'
+login.label.rememberme: 'Remember me'
+profile.label.username: 'Username'
+profile.label.email: 'Email'
+profile.label.roles: 'Roles'
+profil.label.password: 'Password'
+profile.label.oldpass: 'Current password'
+profile.label.newpass: 'New password'
+profile.label.newpass2: 'Repeat new password'
+profile.invalid.newpass: 'New password fields must be the same.'
+password.pattern.help: "Pattern: 12 characters with at least 1 lowercase letter, 1 uppercase letter, 1 number and any other type of character except the line break."
+forgotpass.label.message: 'Enter your email address and we will send you a link to reset your password.'
+media.library.file.maxsize.help: 'max weight allowed: 20MB.'
+menu.annex: 'annex'
+menu.entity: 'content'
+menu.entities: 'contents'
+menu.support: 'be accompanied'
+menu.centers: 'centers'
+menu.profile: 'my profile'
+menu.settings: 'settings'
+menu.disconnect: 'Log out'
+menu.label.content: 'Content'
+menu.label.add: 'Add'
+menu.label.list: 'List'
+menu.label.faqhighlighted: 'Frequently questions'
+menu.label.categories: 'Guide categories'
+menu.label.headings: 'Faq headings'
+menu.project.team: "Project Team"
+menu.type.main: 'main'
+menu.type.footer: 'footer'
+role.admin: 'administrator'
+role.coord: 'coordinator'
+role.contrib: 'contributor'
+msg.type.notice: 'information'
+msg.type.warning: 'warning'
+msg.type.alert: 'alert'
+footer.label: 'footer'
+footer.links: 'links'
+footer.networks: 'social network'
+header.label: 'header'
+date.format.help: 'format: dd/mm/yyyy hh:mm'
+simpleDate.format.help: 'format: dd/mm/yyyy'
+route.flash.success.new: 'Route added successfully!'
+route.flash.success.edit: 'Route updated successfully!'
+route.flash.success.delete: 'Route deleted successfully!'
+route.flash.error: 'Route already exist.'
+route.form.support: "<p>
+  <h4>For information</h4>
+  Cette page is <b>only</b> available for <b>Administrators</b>.<br>
+  This means that this setting <b>is not destined</b> to change regularly but is present in order to avoid going to modify the database by hand.
+ </p>
+ <p>
+ <h4>When editing a route</h4>
+ If you change a route, the route will be updated in the menus that use it.<br>
+ However, <b>if you change the route's name</u>, the menu that uses it will return an <u>error</u>.</b>
+ </p>"
+route.form.support.list: "<p><h4>Available routes</h4></p>"
+route.form.name.help: "The name you are going to write will be available when creating a menu item.
+ It is not translatable. So choose a sufficiently clear keyword regardless of the language of the interface."
+route.form.route.help: "The system dynamically tests if the route you write exists.
+ Do not hesitate to consult the attached list."
+resetpass.emailsent.title: 'Password Reset Email Sent'
+resetpass.emailsent.p1: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+  This link will expire in "
+resetpass.emailsent.p2: "If you don't receive an email please check your spam folder or "
+resetpass.emailsent.try: "try again"
+# Template email reset password
+email.resetpass.subject: 'RDG - Your password reset request'
+email.resetpass.title: 'Hi!'
+email.resetpass.p1: 'To reset your password, please visit the following link'
+email.resetpass.p2: 'This link will expire in '
+email.resetpass.end: 'Cheers!'
+back.langtext.label: "Switch locale: "
+rss.all.desc: 'The latest news from the RDG portal'
+breadcrumbs.root: 'home'
+breadcrumbs.contact: 'contact'
+breadcrumbs.glossary: 'glossary'
+breadcrumbs.institutions: 'institutions'
+breadcrumbs.institution: 'institution'
+breadcrumbs.dataworkshops: 'data workshops'
+breadcrumbs.dataworkshop: 'data workshop'
+breadcrumbs.events: 'all events'
+breadcrumbs.event: 'event'
+breadcrumbs.nextevents: 'events to come'
+breadcrumbs.pastevents: 'past events'
+breadcrumbs.actualities: 'actualities'
+breadcrumbs.actuality: 'actuality'
+breadcrumbs.datasets: 'datasets'
+breadcrumbs.dataset: 'dataset'
+breadcrumbs.disciplines: 'disciplines'
+breadcrumbs.team: 'a multidisciplinary repository'
+breadcrumbs.support: 'Online Help'
+breadcrumbs.faq: 'faq'
+breadcrumbs.guide: 'guide'
+breadcrumbs.page: 'page'
+breadcrumbs.see.mobile: "View breadcrumb"
+breadcrumbs.see.here: "You are here:"
+front.footer.communication: 'Talk about Recherche Data Gouv'
+front.footer.communication.link: 'Access to the communication kit'
+front.footer.contact: 'Contact us'
+front.footer.contact.link: 'Access the contact form'
+front.footer.guides: 'Need help?'
+front.footer.guides.link: 'Access online help'
+front.footer.top: "Back to top"
+front.footer.follow: "Follow us"
+front.footer.social: "on social networks"
+front.footer.mention: "Unless otherwise stated, all content on this site is under"
+front.footer.mention.gnu: "source code is under license"
+front.footer.window: "New window"
+front.footer.home: "Back to homepage"
+front.updatedAt: 'Updated at:'
+front.actualities.list: 'Actualities & diary'
+front.actualities.more: 'See more'
+front.actualities.goto: 'Go to the event website'
+front.actualities.read: "Read the article"
+front.search.see.more: 'See more'
+front.datasets: 'Datasets'
+front.faqs: 'Frequently Asked Questions'
+front.faqs.close.all: 'Hide answers'
+front.faqs.open.all: 'Display answers'
+front.faq.all: 'See all questions'
+front.summary: 'Table of content'
+front.guide.homepage: 'Online Help'
+front.header.preview: "Preview"
+front.guide.print: "Print"
+front.guide.download: "Download"
+front.faq.frequent: 'Most Frequently Asked Questions'
+front.faq.recent: 'Recently Asked Questions'
+front.guide.not.answer: "You have not found the answer to your question?"
+front.guide.not.answer.contact: "Contact us and we will get back to you as soon as possible"
+front.header.search: "Search on the site"
+front.header.menu: "Menu"
+front.header.home: "Homepage"
+front.header.main.menu: "Main menu"
+front.header.side.menu: "Side menu"
+front.header.fast.access: "Accès rapide"
+front.suggest.event.link: "Suggest an event"
+front.deposit.search: "Submit / Publish a dataset"
+front.main.searchbar.placeholder: 'Search in the portal'
+front.search.main.results: 'Search results'
+front.search.main.number: 'Found results:'
+front.search.main.no.results: 'This search has no results'
+front.search.data: "Find data"
+front.searchshort.data: "Find"
+front.search.label: "Search"
+front.search.close: "Close"
+front.search.dataset: "Find a dataset"
+front.datasets.more: "See all featured datasets"
+front.institutions.more: "See all institional spaces"
+front.guide.bannertitle: "User manual"
+front.reset.button: "Reset"
+front.events.list: "Find all our events"
+front.dataworkshop.list: "Data workshops"
+front.centermap.institution: "Establishment"
+front.dataworkshop.filter: "Filter places"
+front.dataworkshop.image.alt: "Dataworkshops spread throughout the territory"
+front.institutions.list: "Institutions"
+front.institutions.urlinstitution: "Institutional site URL"
+front.institutions.urlcollection: "Dataverse collection URL"
+front.institutions.urlcollectioncontact: "Contact page URL"
+front.institutions.urlopenscience: "Open science page URL"
+front.institutions.urldataworkshop: "Data workshops site URL"
+front.cookies.url: "Cookies management"
+front.page.500: 'Oops, an error occured.'
+front.page.error.404: '404 Error'
+front.page.404: 'The page you are looking for does not exist.'
+front.page.404.return: 'Back to the homepage'
+front.centermap.institutions: "See all establishments"
+front.centermap.dataworkshop: "See all data workshops"
+front.news.link: "See all news & schedule"
+front.pages.published: "Published on"
+front.events.published: ""
+front.events.published.from: "From"
+front.events.published.one.day: "On"
+front.events.published.to: "To"
+front.events.more: 'See all events'
+front.events.refine: "You can refine your search"
+front.events.past: "Past events"
+front.events.all: "All"
+front.events.come: "Events to come"
+front.bannergame.author: "Author:"
+front.bannergame.establishments: "Establishment:"
+front.errorentity.content: "This content is not available in this language."
+front.oneguide.seetoo: "See as well"
+front.oneguide.menu: "In this section"
+front.footer.name: "Footer"
+front.main.name: "Main content"
+front.ministry.logo.url: "Ministère de l'Enseignement Supérieur et de la Recherche"
+front.link.window: "Open a new window"
+front.instituts.related: "Related establishments"
+front.dataworkshop.related: "Related data workshops"
+front.dataRepository.list: 'Repository'
+front.dataRepositories.related: 'Related repository'
+front.dataRepositories.goto: 'Go to the repository website'
+front.dataRepositories.catopidor: 'Go to CatOPIDoR'
+front.dataRepositories.re3data: 'Go to Re3data'
+dipso.lockedit.error: "Resource already used. Retry later please."
+rgaa.document.homepage.title: "Homepage"
+rgaa.alert.title: "Alert message block"
+rgaa.header.publish: "Authenticate to publish datas"
+spotlightLame.group.spotlights: "Last 6 datasets selection"
+spotlightLame.group.spotlights.help: "If enabled, the last 6 datasets will be displayed in descending order."
+spotlightLame.prop.autoSpotlight: "Last Datasets"
+spotlightLame.prop.autoSpotlight.help: "The last six published datasets will be displayed."
+spotlightLame.group.spotlights2: "6 Last Dataset custom selection"
+spotlightLame.group.spotlights.help2: "Disable the previous option for custom selection."
+spotlightLame.prop.spotlight1: "First dataset"
+spotlightLame.prop.spotlight2: "Second dataset"
+spotlightLame.prop.spotlight3: "Third dataset"
+spotlightLame.prop.spotlight4: "Fourth dataset"
+spotlightLame.prop.spotlight5: "Fifth dataset"
+spotlightLame.prop.spotlight6: "Sixth dataset"
+logigram.onespace : "One space is identified"
+logigram.severalspace: "Several possible spaces are identified"
+logigram.nospace : "No space is identified"
+content.logigram : "Logigram"
+logigram.prop.title : "Titre"
+logigram.prop.title.help : "Choose a title for your logigram"
+logigram.prop.subTitle : "Subtitle"
+logigram.prop.subTitle.help : "Choose a subtitle for your logigram"
+logigram.prop.steps : "Steps"
+logigram.prop.steps.help : "Create the different steps of your logigram"
+logigram.nextStep.title : "Solution"
+logigram.nextStep.info : "Optional response additional info"
+logigram.nextStep.nextStep : "Next step number"
+logigram.step.title : "Question to ask the user"
+logigram.step.info : "Additionnal info for the question"
+logigram.step.choices : "Answers of the question"
+logigram.step.nextSteps : "Proposed solutions and linked next steps"
+logigram.help : "The logigram will be automatically saved after any new step added."
+logigram.nextStep.help : "Put 0 or leave empty if this answer has no next step in the logigram"
+logigram.prop.nameId : "Logigram identifier"
+logigram.prop.isPublished : "Is the logigram published?"
+logigram.slug : "To display the logigram to a specific page, provide its slug"
+logigram.export : "Export logigram"
+logigram.back : "Go back to logigram list"

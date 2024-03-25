@@ -1,0 +1,20 @@
+{% extends 'base_one_type.html.twig' %}
+{% set titleName = 'front.datasets'|trans %}
+{% block meta_description %}{{ 'datasets.meta_description'|trans }}{% endblock %}
+{% block title %}{{ titleName }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+        <main class="fr-fluid" role="main">
+            {% block main %}
+                {% include 'partials/common/_breadcrumb.html.twig' with {'title' : titleName} %}
+
+                {% block content %}
+                    {% include 'partials/dataset/_datasets.html.twig' %}
+                {% endblock %}
+                
+                {% include 'partials/common/_search-footer.html.twig' %}
+            {% endblock %}
+        </main>
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

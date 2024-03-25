@@ -1,0 +1,38 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+
+{% block head_stylesheets %}
+    <link href="{{ asset('build/admin.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+	{% if logigram is defined and logigram is not empty %}
+		<div class="logigramBody">
+			<button onclick="window.history.back()">
+				{{ 'logigram.back'|trans }}
+			</button>
+
+			<h1 class="logigramTitle">
+			</h1>
+
+			<h1 class="logigramSubTitle">
+			</h1>
+
+			<div class="logigram">
+				<div class="logigramContent">
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	{% block javascripts %}
+		<script>		
+			var logigramData = {{ logigram|json_encode|raw }};
+			const logigramBody = document.querySelector('.logigramBody');
+			logigramBody.setAttribute('data-items', JSON.stringify(logigramData));
+		</script>
+		<script src="/build/logigram.js">
+		</script>
+	{% endblock %} 
+
+{% endblock %}

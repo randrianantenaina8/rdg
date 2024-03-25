@@ -1,0 +1,106 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+
+twig:
+  form_themes:
+    - "@FOSCKEditor/Form/ckeditor_widget.html.twig"
+
+fos_ck_editor:
+  # extra plugins
+  plugins:
+    contents:
+      path: "/build/ckeditor/extra-plugins/contents/"
+      filename: "plugin.js"
+    dropoff:
+      path: "/build/ckeditor/extra-plugins/dropoff/"
+      filename: "plugin.js"
+    table2:
+      path: "/build/ckeditor/extra-plugins/table2/"
+      filename: "plugin.js"
+    dialog:
+      path: "/build/ckeditor/extra-plugins/dialog/"
+      filename: "plugin.js"
+    image2:
+      path: "/build/ckeditor/extra-plugins/image2/"
+      filename: "plugin.js"
+    widget:
+      path: "/build/ckeditor/extra-plugins/widget/"
+      filename: "plugin.js"
+    logigram:
+      path: "/build/ckeditor/extra-plugins/logigram/"
+      filename: "plugin.js"
+    comments:
+      path: "/build/ckeditor/extra-plugins/comments/"
+      filename: "plugin.js"
+  #    default_config: default
+  configs:
+    #        default:
+    #            filebrowserBrowseRoute: elfinder
+    #            filebrowserBrowseRouteParameters: []
+    main_config:
+      entities: false
+      toolbar:
+        - {
+            name: "styles",
+            items:
+              [
+                "Bold",
+                "Italic",
+                "Underline",
+                "Strike",
+                "Blockquote",
+                "-",
+                "Link",
+                "-",
+                "RemoveFormat",
+                "-",
+                "NumberedList",
+                "BulletedList",
+                "-",
+                "Outdent",
+                "Indent",
+                "-",
+                "-",
+                "JustifyLeft",
+                "JustifyCenter",
+                "JustifyRight",
+                "JustifyBlock",
+                "-",
+                "Logigram",
+                "Table2",
+                "Image",
+                "Image2",
+                "Comments",
+                "Dialog",
+                "Widget",
+                "-",
+                "Styles",
+                "Contents",
+                "Format",
+                "FontSize",
+                "-",
+                "TextColor",
+                "BGColor",
+                "Source",
+              ],
+          }
+      # FileBrowser
+      filebrowserBrowseRoute: elfinder
+      filebrowserBrowseRouteParameters: []
+      # Min Wysiwyg (textarea) height.
+      # Use the following plugin for an auto-resize : config.extraPlugins = 'autogrow';
+      height: "500px"
+      # Reformat <h> tag option. Ex: heading 1 is now making an <h2> tag.
+      format_h1: { element: "h2" }
+      format_h2: { element: "h3" }
+      format_h3: { element: "h4" }
+      format_h4: { element: "h5" }
+      format_h5: { element: "h6" }
+      format_h6: { element: "h7" }
+      # Extra allowed content
+      extraAllowedContent: "iframe[*], comment"
+      allowedContent: true
+      # Add plugins in config
+      extraPlugins: "contents, dropoff, image2, table2,comments, logigram"
+      # Remove (vanilla) plugins in config
+      removePlugins: "exportpdf, iframe"
+      forcePasteAsPlainText: true

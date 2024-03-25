@@ -1,0 +1,103 @@
+{% set carousel = 'carousel' %}
+{% for lamina in laminas %}
+{% if lamina.type is same as(carousel) %}
+        <div id="institut-wrapper-{{ lamina.id }}" class="institut-wrapper fr-py-6w fr-fluid fr-bt-4">
+            <div class="fr-col">
+                <h4 class="fr-h4">{{ lamina.lamina.title }}</h4>
+                 <div class="d-lg-block d-none">
+                    <div id="institutCarousel-{{ lamina.type }}-{{ lamina.id }}" class="carousel slide" data-bs-ride="carousel">
+
+                        <div class="js-carousel-items" data-items={{ lamina.lamina.entities|json_encode|raw }}>
+                        </div>
+
+                        <div class="carousel-inner" id="institut-carousel-inner" role="listbox">                  
+                        </div>
+
+                        <a id="prev-btn" class="carousel-control-prev bg-transparent w-aut" href="#institutCarousel-{{ lamina.type }}-{{ lamina.id }}" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a id="next-btn" class="carousel-control-next bg-transparent w-aut" href="#institutCarousel-{{ lamina.type }}-{{ lamina.id }}" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-lg-none d-block mobile">
+                    <div id="institutCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="institutions">
+                        <div class="carousel-inner" aria-controls="carousel">
+                            {% for entity in lamina.lamina.entities %}
+                                {% if loop.first %}
+                                    <div class="carousel-item active">
+                                        <div class="col-lg-3 col-sm-6 col-12 fr-px-3v">
+                                            <div class="fr-tile fr-enlarge-link tile-height tile-bottom-color">
+                                                {% if entity.urlCollection is not empty %}
+                                                    <div class="fr-tile__body tile-title-padding">
+                                                        <h4 class="fr-tile__title">
+                                                            <a class="fr-tile__link" href="{{ entity.urlCollection }}" aria-label="{{ entity.acronym }}" target="_blank"></a>
+                                                        </h4>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="fr-tile__body tile-title-padding">
+                                                        <h4 class="fr-tile__title">
+                                                            <a class="fr-tile__link" href="#" aria-label="{{ entity.acronym }}"></a>
+                                                        </h4>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="fr-mx-2w fr-py-2w fr-py-75">
+                                                    {% if entity.image is not empty %}
+                                                        <img src="{{ entity.image}}" class="fr-responsive-img" aria-label="{{ entity.acronym }}">
+                                                    {% else %}
+                                                        <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="">
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item">
+                                        <div class="col-lg-3 col-sm-6 col-12 fr-px-3v">
+                                            <div class="fr-tile fr-enlarge-link tile-height tile-bottom-color">
+                                                {% if entity.urlCollection is not empty %}
+                                                    <div class="fr-tile__body tile-title-padding">
+                                                        <h4 class="fr-tile__title">
+                                                            <a class="fr-tile__link" href="{{ entity.urlCollection }}" aria-label="{{ entity.acronym }}" target="_blank"></a>
+                                                        </h4>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="fr-tile__body tile-title-padding">
+                                                        <h4 class="fr-tile__title">
+                                                            <a class="fr-tile__link" href="#" aria-label="{{ entity.acronym }}"></a>
+                                                        </h4>
+                                                    </div>
+                                                {% endif %}
+                                                    <div class="fr-mx-2w fr-py-2w fr-py-75">
+                                                        {% if entity.image is not empty %}
+                                                            <img src="{{ entity.image}}" class="fr-responsive-img" alt="{{ entity.acronym }}"> 
+                                                        {% else %}
+                                                            <img src="{{ asset('build/images/novisual.png') }}" class="fr-responsive-img" alt="">
+                                                        {% endif %}
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev bg-transparent w-aut" href="#institutCarousel" role="button" data-bs-slide="prev" aria-label="previous">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next bg-transparent w-aut" href="#institutCarousel" role="button" data-bs-slide="next" aria-label="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </a>
+                </div>
+
+
+                </div>
+               
+                 <div class="fr-fluid__right">
+                <a class="fr-link fr-fi-arrow-right-line fr-link--icon-right" href="{{ url('front.institutions.list') }}">{{ 'front.institutions.more'|trans }}</a>
+            </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}

@@ -1,0 +1,10 @@
+{% block lang_switcher %}
+    {% for locale in locales %}
+        {% if locale != app.request.locale %}
+            <a class="dropdown-item" target="_self" referrerpolicy="origin-when-cross-origin" href="{{ path('switch_ln', {'lang': locale}) }}">
+                <i class="fa fa-fw fa-language"></i>
+                <span>{{ 'back.langtext.label'|trans }} <b>{{ locale }}</b></span>
+            </a>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

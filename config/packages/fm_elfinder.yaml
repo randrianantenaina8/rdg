@@ -1,0 +1,128 @@
+fm_elfinder:
+    #assets_path: / # default is /assets, this is where css/js elfinder files are
+    instances:
+        default:
+            locale: '%locale%' # defaults to current request locale
+            editor: ckeditor
+            relative_path: false #default true, will produce absolute urls to specified file(s)
+            #editor_template: custom template for your editor # default null
+            #path_prefix: / # for setting custom assets path prefix, useful for non vhost configurations, i.e. http://127.0.0.1/mysite/
+            #fullscreen: true|false # default is true, applies to simple and ckeditor editors
+            #theme: smoothness # jquery theme, default is 'smoothness'
+            visible_mime_types: [
+                'image/png',
+                'image/jpg',
+                'image/jpeg',
+                'image/webp',
+                'application/pdf',
+                'text/plain',
+                'text/csv',
+                'text/x-xsl',
+                'text/x-markdown',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', #.csv
+                'application/vnd.oasis.opendocument.spreadsheet', #.ods
+                'application/vnd.oasis.opendocument.text', #.odt
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document', #.doc / #.docx
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation' #.ppt
+            ] # only show these mime types, defaults to show all
+            connector:
+                debug: false # defaults to false
+                binds:
+                    upload.presave:
+                        - Plugin.AutoResize.onUploadPreSave
+                plugins:
+                    AutoResize:
+                        enable: true
+                        maxWidth: 750
+                        maxHeight: 750
+                        quality: 90
+                roots:
+                    uploads:
+                        show_hidden: false # defaults to false, hides dotfiles
+                        driver: Flysystem
+                        url: '%endpoint%%bucket_name%' #generate url to retrieve images from Ceph storage 
+                        alias: Médiathèque
+                        flysystem:
+                            type: aws_s3_v3
+                            adapter_service: 'aws' 
+                            options:
+                                aws_s3_v3:
+                                    key: '%key%'
+                                    secret: '%secret%'
+                                    region: '%region%'
+                                    version: '%version%'
+                                    bucket_name: '%bucket_name%'
+                                    endpoint: '%endpoint%'
+                                    use_path_style_endpoint: true
+                        upload_allow: [
+                            'image/png',
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/webp',
+                            'application/pdf',
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                            'application/vnd.openxmlformats-officedocument.presentationml.presentation', #.ppt, .pptx
+                            'text/plain',
+                            'text/x-markdown'
+                        ]
+                        upload_deny: ['all']
+                        upload_max_size: 20M # also file upload sizes restricted in php.ini
+                        # #attributes: example of setting attributes permission
+                        # #    - { pattern: '/(.*?)/', read: true, write: false, locked: true }
+        
+        ## ElFinder settings for entity cover images 
+        image:
+            locale: '%locale%' # defaults to current request locale
+            editor: form
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            relative_path: false
+            visible_mime_types: ['image/png', 'image/jpg', 'image/jpeg', 'image/webp']
+            connector:
+                debug: false # defaults to false
+                binds:
+                    upload.presave:
+                        - Plugin.AutoResize.onUploadPreSave
+                plugins:
+                    AutoResize:
+                        enable: true
+                        maxWidth: 750
+                        maxHeight: 750
+                        quality: 90
+                roots:
+                    uploads:
+                        show_hidden: false # defaults to false, hides dotfiles
+                        driver: Flysystem
+                        url: '%endpoint%%bucket_name%' #generate url to retrieve images from Ceph storage 
+                        alias: Médiathèque
+                        flysystem:
+                            type: aws_s3_v3
+                            adapter_service: 'aws' 
+                            options:
+                                aws_s3_v3:
+                                    key: '%key%'
+                                    secret: '%secret%'    
+                                    region: '%region%'
+                                    version: '%version%'
+                                    bucket_name: '%bucket_name%'
+                                    endpoint: '%endpoint%'
+                                    use_path_style_endpoint: true
+                        upload_allow: [
+                            'image/png',
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/webp',
+                            'application/pdf',
+                            'text/plain',
+                            'text/csv',
+                            'text/x-xsl',
+                            'text/x-markdown',
+                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                            'application/vnd.oasis.opendocument.spreadsheet',
+                            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                            'application/vnd.oasis.opendocument.text'
+                        ]
+                        upload_deny: [ 'all' ]
+                        upload_max_size: 20M # also file upload sizes restricted in php.ini
+                        # #attributes: example of setting attributes permission
+                        # #    - { pattern: '/(.*?)/', read: true, write: false, locked: true }        

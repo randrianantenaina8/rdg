@@ -1,0 +1,67 @@
+security:
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Entity\User:
+            algorithm: auto
+
+    role_hierarchy:
+        ROLE_ADMIN: ["ROLE_ADMIN", "ROLE_COORD", "ROLE_CONTRIB"]
+        ROLE_COORD: ["ROLE_COORD", "ROLE_CONTRIB"]
+        ROLE_CONTRIB: ["ROLE_CONTRIB"]
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        rdg_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+
+    firewalls:
+        healthcheck:
+            pattern: ^/health
+            security: false
+        ping:
+            pattern: ^/ping
+            security: false
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: rdg_provider
+            form_login:
+                login_path: admin.login
+                check_path: admin.login
+                default_target_path: admin
+            logout:
+                path: admin.logout
+                target: admin.login
+            custom_authenticator: App\Security\LoginFormAuthenticator
+            # configure the form authentication as the entry point for unauthenticated users
+            entry_point: form_login
+#            remember_me:
+#                secret: '%kernel.secret%'
+#                lifetime: 604800
+#                path: '/{_locale}/admin'
+        security_area:
+            form_login:
+                enable_csrf: true
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # allow unauthenticated users to access the login form
+        - { path: ^/%locale%/admin/login, roles: PUBLIC_ACCESS }
+
+        - { path: ^/%locale%/admin, roles: ROLE_CONTRIB }
+        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/efconnect, role: ROLE_CONTRIB }
+        - { path: ^/elfinder, role: ROLE_CONTRIB }

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ 'datasetReuseds.meta_description'|trans }}{% endblock %}
+{% block title %}{{ 'front.datasetReuseds.list'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/datasetReuseds/_maindatasetReuseds.html.twig' with { 'title' : 'front.datasetReuseds.list'|trans } %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

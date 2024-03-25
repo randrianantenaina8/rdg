@@ -1,0 +1,74 @@
+{# This file override vendor/helios-ag/fm-elfinder-bundle/src/Resources/views/Form/elfinder_widget.html.twig #}
+
+{% block elfinder_widget %}
+    {# Cover image section #}
+    <div class="col-md-12 mb-4">
+        <img class="clipboard-link" id="{{ id }}" class="responsive-img img-thumbnail mb-2" src="{{ value }}"/>
+        <div>
+            <label>{{ 'bo.team.select.image'|trans }}</label>
+        </div>
+        <div class="input-group mb-3">
+            <input id="{{ id }}" type="text" class="form-control" placeholder="Cliquer dans ce champ pour choisir une image" type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} data-type="elfinder-input-field">
+            <div class="input-group-append">
+                <button class="btn btn-success clipboard-btn mx-2" id="{{ id }}" type="button">{{ 'bo.team.url.copy'|trans }}</button>
+            </div>
+        </div>
+    </div>
+
+    {% if enable and instance is defined %}
+        <script type="text/javascript" charset="utf-8">
+
+            document.querySelector('[data-type="elfinder-input-field"][id="{{ id }}"]').addEventListener('click', async (event) => {
+                const id = "{{ id }}"
+                const qs = document.querySelectorAll('[data-type="elfinder-input-field"][id="{{ id }}"]');
+
+                function sleep(ms) {
+                    return new Promise((resolve) => setTimeout(resolve, ms));
+                }
+
+                if (qs) {
+                    let el = event.target, index = -1; 
+
+                    while (el && ((index = Array.prototype.indexOf.call(qs, el)) === -1)) {
+                        console.log(index)
+                        el = el.parentElement;
+                    }
+
+                    if (index > -1) {
+                        const popup = await window.open("{{path('elfinder', {'instance': instance, 'homeFolder': homeFolder })}}?id={{ id }}", "popupWindow", "height=450, width=900")
+                    
+                        await sleep(3000);
+                        let files = popup.document.querySelectorAll(".elfinder-cwd-file")
+
+                        while (!popup.closed){
+                            await sleep(500);
+                            files = popup.document.querySelectorAll(".elfinder-cwd-file")
+                            for (const file of files) {
+                                file.addEventListener("dblclick", () => {
+                                    const endpoint = '{{ S3_ENDPOINT }}'
+                                    const bucket = '{{ S3_BUCKET }}'
+                                    const dir = popup.document.querySelectorAll('.elfinder-path-dir')
+                                    const title = file.querySelector('.elfinder-cwd-filename').title
+                                    document.querySelector('[data-type="elfinder-input-field"][id="{{ id }}"]').value =  endpoint+bucket+'/'+dir[1].title.split('/')[1]+ '/'+title;     
+                                    popup.close()                    
+                                });
+                            }
+                        }               
+                    }
+                }
+            }) 
+
+            document.querySelector('.clipboard-btn[id="{{ id }}"]').addEventListener('click', async (event) => {
+                let clipboardLink = document.querySelector('.clipboard-link[id="{{ id }}').src
+                try {
+                    await navigator.clipboard.writeText(clipboardLink)
+                    console.log('Content copied to clipboard')
+                    document.querySelector('.clipboard-btn[id="{{ id }}"]').innerHTML = "{{ 'bo.team.url.copied'|trans }}"
+                } catch (err) {
+                    console.error('Failed to copy: ', err)
+                }
+            })   
+  
+        </script>
+    {% endif %}
+{% endblock %}

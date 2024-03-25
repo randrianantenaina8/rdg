@@ -1,0 +1,97 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    locale: 'fr'
+    # This parameter defines the codes of the locales (languages) enabled in the application
+    app_locales: fr|en
+    app.locales: [fr, en]
+    # Set Event number into News & Events Lame
+    app.lame.event.number: '%env(LAME_EVENT_NUMBER)%'
+    # Contact Email
+    email_to: '%env(EMAIL_TO)%'
+    email_from: '%env(EMAIL_FROM)%'
+    # Ceph service S3 storage
+    key: '%env(S3_KEY)%'
+    secret: '%env(S3_SECRET_KEY)%'
+    region: '%env(S3_REGION)%'
+    version: '%env(S3_VERSION)%'
+    bucket_name: '%env(S3_BUCKET)%'
+    endpoint: '%env(S3_ENDPOINT)%'
+    # Solr full text service configuration
+    solr_host: '%env(SOLR_HOST)%'
+    solr_port: '%env(SOLR_PORT)%'
+    solr_path: '%env(SOLR_PATH)%'
+    solr_core: '%env(SOLR_CORE)%'
+    solr_timeout: '%env(SOLR_TIMEOUT)%'
+    # URL to get Metadata in dataverse.
+    dataverse_metadata_url: '%env(DATAVERSE_METADATA_URL)%'
+    search_dataverse_url: '%env(SEARCH_DATAVERSE_URL)%'
+    deposit_dataverse_url: '%env(DEPOSIT_DATAVERSE_URL)%'
+    # URL footer logo
+    ministry_logo_url: 'https://www.enseignementsup-recherche.gouv.fr'
+    # LIMIT TRUNCATE applied in FO and show in BO fields' helper #
+    lame_news_len_max_title: 150
+    lame_spotlight_len_max_title: 60
+    lame_highlighted_len_max_title: 150
+    lame_highlighted_len_max_hook: 80
+    event_len_max_hook: 150
+    actu_len_max_title: 150
+    dataset_len_max_title: 150
+    solr_search_len_max_content: 300
+    # Var URL Migration
+    url_src: '%env(URL_SRC)%'
+    url_target: '%env(URL_TARGET)%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind: # defines the scalar arguments once and apply them to any service defined/created in this file
+            $locales: '%app_locales%'
+#            $defaultLocale: '%locale%'
+            $urlSrc: '%url_src%'
+            $urlTarget: '%url_target%'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+    
+    App\Service\SolrService:
+      bind:
+        $config:
+            host: '%solr_host%'
+            port: '%solr_port%'
+            path: '%solr_path%'
+            core: '%solr_core%'
+            timeout: '%solr_timeout%'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    urlmigration:
+        class: App\Service\MigrationUrlService
+        arguments:
+            $urlSrc: '%url_src%'
+            $urlTarget: '%url_target%'
+    # AWS S3 file service
+    Aws\S3\S3ClientInterface: '@Aws\S3\S3Client'
+    Aws\S3\S3Client:
+        arguments:
+          - version: '%version%'
+            region: '%region%'
+            endpoint: '%endpoint%'
+            credentials:
+              key: '%key%'
+              secret: '%secret%'
+    # Redis service
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+        arguments: ['@snc_redis.default']

@@ -1,0 +1,125 @@
+<div class="fr-container fr-pt-2w">
+    <div class="fr-grid-row fr-grid-row--center fr-grid-row--gutters">
+        <div class="fr-col-lg-6 fr-col-10 fr-pb-2w">
+            {% set subjectParam = requestURI|last %}
+            {% set contactFormOk = app.flashes('success') %}
+            {% set contactFormKo = app.flashes('error') %}
+
+            {% if contactFormOk|length > 0 %}
+
+                {% for message in contactFormOk %}
+                    <div role="alert" class="fr-alert fr-alert--success" style="margin-bottom: 2rem;">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+
+                {% for message in contactFormKo %}
+                    <div role="alert" class="fr-alert fr-alert--error" style="margin-bottom: 2rem;">
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+                
+                <p class="fr-text--sm fr-pb-2w">
+                    <span class="fr-fi-error-warning-line fr-fi--sm" aria-hidden="true"></span>
+                    <span style="color:red;">{{ 'contact.field.required'|trans }}</span>
+                </p>
+                
+                {{ form_start(contactForm, {'method': 'POST', 'attr': {'novalidate': 'novalidate', 'id': 'contactform' }}) }}                
+                
+                {% if 'subject=eventSuggest' in subjectParam %}
+                    <div class="fr-input-group">
+                        <div class="fr-select-group">
+                            {{ form_label(contactForm.subject, '', {
+                                'label_attr': {'class': 'fr-label'}
+                            }) }}
+                            {{ form_widget(contactForm.subject, { 'value': 'contact.event.suggest.value'|trans, 'attr': {'class': 'fr-select'}}) }}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="fr-input-group">
+                        <div class="fr-select-group">
+                            {{ form_label(contactForm.subject, '', {
+                                'label_attr': {'class': 'fr-label'}
+                            }) }}
+                            {{ form_widget(contactForm.subject, { 'attr': {'class': 'fr-select'}}) }}
+                        </div>
+                        <div class="conditional-field">
+                            {{ form_label(contactForm.other, '', {
+                                'label_attr': {'class': 'fr-label'}
+                            }) }}
+                            {{ form_widget(contactForm.other, { 'attr': {'class': 'fr-input'}}) }}
+                            {% if form_errors(contactForm.other) is not empty %}
+                                <div class="fr-error-text form-error-li-none align-items-baseline">
+                                    {{ form_errors(contactForm.other) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                
+                <div class="fr-input-group">
+                    {{ form_label(contactForm.email, '', {
+                        'label_attr': {'class': 'fr-label'}
+                    }) }}
+                    <div class="fr-input-wrap fr-fi-error-warning-line">
+                        {{ form_widget(contactForm.email, { 'attr': {'class': 'fr-input', 'placeholder': 'contact.placeholder.email'|trans }}) }}
+                    </div>
+                    {% if form_errors(contactForm.email) is not empty %}
+                        <div class="fr-error-text form-error-li-none align-items-baseline">
+                            {{ form_errors(contactForm.email) }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                {% if contactForm.captcha is defined %}
+                    <div class="fr-input-group">
+                        {{ form_label(contactForm.captcha, 'Captcha', {
+                            'label_attr': {'class': 'fr-label'}
+                        }) }}
+                        <div class="fr-input-wrap fr-fi-error-warning-line">
+                            {{ form_widget(contactForm.captcha, { 'attr': {'class': 'fr-input'}} ) }}
+                        </div>
+                        {% if form_errors(contactForm.captcha) is not empty %}
+                            <div class="fr-error-text form-error-li-none align-items-baseline">
+                                {{ form_errors(contactForm.captcha) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                
+                {% if contactForm.ref is defined %}
+                    <div class="ref-special">
+                        {{ form_widget(contactForm.ref, { 'attr': {'class': 'ref-special','tabindex':'-1'}} ) }}
+                    </div>
+                {% endif %}
+                
+                <div class="fr-input-group">
+                    {{ form_label(contactForm.message, '', {
+                        'label_attr': {'class': 'fr-label'}
+                    }) }}
+                    <div class="fr-input-wrap fr-fi-error-warning-line">
+                        {{ form_widget(contactForm.message, { 'attr': {'class': 'fr-input'}}) }}
+                    </div>
+                    {% if form_errors(contactForm.message) is not empty %}
+                        <div class="fr-error-text form-error-li-none align-items-baseline">
+                            {{ form_errors(contactForm.message) }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="fr-input-group">
+                    <button type="submit" class="fr-btn">
+                        {{ 'button.send'|trans }}
+                    </button>
+                    <input type="button" id="btnresetform" value="{{ 'front.reset.button'|trans }}" class="fr-btn fr-btn--secondary">               
+                </div>
+                
+                {{ form_end(contactForm) }}
+            
+            {% endif %}
+        
+        </div>
+    </div>
+</div>

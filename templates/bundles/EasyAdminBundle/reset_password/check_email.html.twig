@@ -1,0 +1,13 @@
+{% extends 'bundles/EasyAdminBundle/page/login.html.twig' %}
+
+{% block page_title %}{{ 'resetpass.emailsent.title'|trans }}{% endblock %}
+
+{% block wrapper_wrapper %}
+    <div class="login-wrapper">
+        <section class="content">
+            <p>{{ 'resetpass.emailsent.p1'|trans }}{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+            <p>{{ 'resetpass.emailsent.p2'|trans }}<a href="{{ path('app_forgot_password_request') }}">{{ 'resetpass.emailsent.try'|trans }}</a>.</p>
+        </section>
+    </div>
+
+{% endblock %}

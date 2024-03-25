@@ -1,0 +1,31 @@
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %} 
+{% set map = 'map' %}
+{% for lamina in laminas %}
+    {% if lamina.type is same as(map) %}
+        <div class="fr-fluid fr-split fr-bt-4">
+            <div class="fr-split__2">
+                <h3 class="fr-h3 link-banner-data fr-pb-2w fr-pr-8w">{{ lamina.lamina.title }}</h3>
+                <p>{{ lamina.lamina.content }}</p>
+                <ul class="fr-btns-group fr-btns-group--equisized fr-btns-group--inline fr-btns-group--sm fr-pt-2w justify-content-center justify-content-lg-start fr-pl-0">
+                    <li>
+                        <form action="{{ '/en' in currentPath ? dataworkshop_url_en : dataworkshop_url_fr }}" method="post">
+                            <button type="submit" class="fr-btn fr-px-md-2w fr-px-md-8w">
+                                {{'front.centermap.dataworkshop'|trans}}
+                            </button>
+                        </form>
+                    </li>          
+                </ul>
+            </div>
+            <div>
+                {% set idmap = random()%}
+                
+                <div class="card-interact" id="id_map_{{ idmap }}"> <img src="{{ asset('build/images/France-departements-dom-tom.svg') }}" alt="{{ 'front.dataworkshop.image.alt'|trans }}" /> </div>
+                <div class="card-interact__labels card-interact__labels__none" id="id_labels_{{ idmap }}">
+                    <label class=" card-interact-label-filter-dataworkshop" for="id_input_dataworkshop_{{ idmap }}" style="--bg-check:#8585F6;" id="id_label_datawokshop_{{ idmap }}">{{ 'dataworkshop.prop.labeled'|trans }}</label>
+                    <label class=" card-interact-label-filter-dataworkshop" for="id_input_idataworkshop_{{ idmap }}" style="--bg-check:#56C8B6;" id="id_labels_dataworkshop_{{ idmap }}">{{ 'dataworkshop.prop.trajectory'|trans }}</label>
+                </div>
+            </div>
+            <script>if(!window.POINTS) window.POINTS={}; window.POINTS[{{ idmap }}] = {{ lamina.lamina.points|json_encode|raw }}; if(!window.mapUtils) { window.mapUtils = { uri: { dataworkshop: "{{ path('front.dataworkshop.list') }}", }, translate: { labelSeeLink: "{{ 'bo.map.see'|trans }}" } } } </script>
+        </div>
+    {% endif %}
+{% endfor %}

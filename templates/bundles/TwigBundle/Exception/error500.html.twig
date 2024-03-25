@@ -1,0 +1,17 @@
+{% extends 'base_error.html.twig' %}
+{% block body %}
+    <header role="banner" class="fr-header">
+        {% block header %}
+            {% include 'partials/header/_topheader.html.twig' %}
+        {% endblock %}
+    </header>
+    <div class="fr-container d-block fr-py-6w">
+        <h1 class="fr-display-xl text-center">{{ status_code }}</h1>
+        <h4 class="fr-h4 text-center">{{'front.page.500'|trans}}</h4>
+        <div class="d-flex justify-content-center align-content-center"><a href="{{ path('front.index') }}" class="fr-tag">{{'front.page.404.return'|trans}}</a></div>
+    </div>
+    {% block footer %}
+        {% include 'partials/footer/_error_footer.html.twig' %}
+    {% endblock %}
+{% endblock %}
+

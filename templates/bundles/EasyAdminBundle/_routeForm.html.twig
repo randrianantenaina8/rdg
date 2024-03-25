@@ -1,0 +1,36 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+
+{% block content_title %}
+    Route
+{% endblock %}
+
+{% block page_actions %}
+    <a class="action-index btn btn-secondary" href="{{ ret.url }}">{{ 'action.index'|trans([], 'EasyAdminBundle') }}</a>
+{% endblock %}
+
+{% block main %}
+    <div class="row row-cols-12">
+        <div class="col-md-6">
+            {% form_theme formRoute 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(formRoute) }}
+            {{ form_widget(formRoute) }}
+
+            <input type="hidden" name="_token" value="{{ csrf_token('route') }}"/>
+
+            {{ form_end(formRoute) }}
+        </div>
+        <div class="col-md-6">
+            {{ 'route.form.support'|trans|raw }}
+            <hr>
+            {% if helpList is defined and helpList is iterable %}
+                {{ 'route.form.support.list'|trans|raw }}
+                <ul>
+                {% for route in helpList %}
+                    <li>{{ route }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

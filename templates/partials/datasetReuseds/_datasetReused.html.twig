@@ -1,0 +1,67 @@
+<div id="app">
+    <main role="main">
+
+<div class="content fr-container fr-mb-5w">
+
+    <h1 class="fr-mb-5v fr-h3">
+        {{ entity.publicationTitle }}
+    </h1>
+    <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-md-8">
+            <div class="fr-grid-row fr-grid-row--center">
+                <!--img src="https://static.data.gouv.fr/images/a7/da2f330fcd44b5a66b8d2d23a8d8e7.png" class="mw-100" alt=""-->
+                <img src="{{ entity.image }}" class="fr-responsive-img img-thumbnail" title="{{ entity.publicationTitle }}" alt="{{ entity.publicationTitle }}">
+            </div>
+            <div class="fr-grid-row fr-grid-row--center">
+                <a href="{{ entity.newDatasetUrl }}" rel="nofollow" class="fr-btn fr-btn--sm fr-icon-external-link-line fr-btn--icon-right fr-mt-2w">
+                    {{ 'front.datasetReused.goto'|trans }}
+                </a>
+            </div>
+            <h2 id="description" class="subtitle fr-mt-3v fr-mb-1v">Description</h2>
+            <div class="fr-text--sm fr-mt-0 fr-mb-3v vuejs" data-v-app=""><div class="relative"><div class="read-more" ><div class="markdown"><p>{{ entity.description|raw }}</p></div></div><!----></div></div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+
+            <div class="fr-grid-row fr-grid-row--middle">
+                <p class="fr-col fr-m-0">
+                    <a class="fr-link" href="https://www.data.gouv.fr/fr/organizations/etalab/">
+                        {{ entity.author }}
+                    </a>
+                </p>
+        </div>
+
+
+            <div class="fr-grid-row fr-grid-row--gutters">
+
+                <div class="fr-col">
+                    <h2 class="subtitle fr-mt-3v fr-mb-1v">{{ 'front.datasetReused.authorAffiliation'|trans }}</h2>
+                    <p class="fr-text--sm fr-mt-0 fr-mb-3v">
+                        {{ entity.authorAffiliation }}
+                    </p>
+                </div>
+
+                <div class="fr-col">
+                    <h2 class="subtitle fr-mt-3v fr-mb-1v">{{ 'front.datasetReused.reuseType'|trans }}</h2>
+                    <p class="fr-text--sm fr-mt-0 fr-mb-3v">
+                        {{ entity.reuseType }}
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="subtitle fr-mt-3v fr-mb-1v">{{ 'front.datasetReused.datasetReusedDoi'|trans }}</h2>
+                <p class="fr-text--sm fr-mt-0 fr-mb-3v">
+                    {{ entity.datasetReusedDoi }}
+                </p>
+            <h2 class="subtitle fr-mt-3v fr-mb-1v">{{ 'front.datasetReused.newDatasetDoi'|trans }}</h2>
+            <p class="fr-text--sm fr-mt-0 fr-mb-3v">
+                {{ entity.newDatasetDoi }}
+            </p>
+            <h2 class="subtitle fr-mt-3v fr-mb-1v">{{ 'front.datasetReused.publicationDate'|trans }}</h2>
+            <p class="fr-text--sm fr-mt-0 fr-mb-3v">
+                {{ entity.publicationDate|format_datetime('long', 'short', locale=('/en/' in currentPath ? 'en' : 'fr')) }}
+            </p>
+        </div>
+    </div>
+</div>
+    </main>
+    </div>

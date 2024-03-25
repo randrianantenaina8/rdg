@@ -1,0 +1,50 @@
+<div class="fr-pb-3w fr-mx-0 fr-mx-md-3w">
+    <div class="fr-grid-row">
+        <div class="fr-col">
+            <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ entity.title }}</h1>
+        </div>
+    </div>
+    <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col">
+            <div class="fr-py-1w new-tag-order">
+                {% for taxonomy in entity.taxonomies %}
+                    <p class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs">{{ taxonomy.term }}</p>
+                {% endfor %}
+            </div>
+            <div class="fr-mt-2w">
+                {% if entity.imageLocale is not empty %}
+                    <div class="fr-card__img-dataset">
+                        <img src="{{ entity.imageLocale }}" class="fr-responsive-img img-thumbnail" title="{{ entity.title }}" alt="{{ entity.title }}">
+                        {% if entity.imgLicence or entity.imgLegend is not empty  %}
+                            <div class="color-grey-666">
+                                <figcaption>{{ entity.imgLegend }}</figcaption><small>{{ entity.imgLicence }}</small><br/>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                <span class="fr-text--xs color-grey-666">{{ 'front.updatedAt'|trans }} {{ entity.updatedAt|date("d/m/Y") }}</span>
+                <div class="fr-my-4w hook">
+                    {{ entity.hook|raw }}
+                </div>
+                <div class="fr-my-4w">
+                    {{ entity.content|raw }}
+                </div>
+                <div class="fr-my-4w">
+                    <div class="cite">{{ entity.datasetQuote }}</div>
+                </div>
+                <div class="fr-my-4w fr-buttonbox">
+                {% if entity.actuality.id is defined %}
+                    {% set path_actu = path('front.actuality.show', {'slug': entity.actuality.slug }) %}
+                    <a type="submit" class="fr-tag fr-fi-arrow-right-line fr-tag--icon-right" href="{{ path_actu }}">{{entity.actuality.title }} 
+                    </a>
+                {% endif %}
+                {% if entity.linkDataverse is not null %}
+                    <a type="submit" class="fr-tag link" href="{{ entity.linkDataverse }}" target="_blank">
+                        {{ 'dataset.front.dicoverdataset'|trans }} <span class="fr-pl-1w fr-fi-external-link-line fr-fi--sm" aria-hidden="true"></span> 
+                    </a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

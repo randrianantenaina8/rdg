@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ entity.title }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    <main class="fr-fluid" role="main">
+        {% block main %}
+            {% include 'partials/pages/_bannerpage.html.twig' %}
+            {% block page %}
+                <div class="fr-pb-3w fr-mx-0 fr-mx-md-3w">
+                    <div class="fr-grid-row">
+                        <div class="fr-col">
+                            <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ entity.title }}</h1>
+                        </div>
+                    </div>
+                    <div class="fr-grid-row fr-grid-row--gutters">
+                        <div class="fr-col">
+                            {% if entity.taxonomies is not empty %}
+                                <div class="fr-py-1w new-tag-order">
+                                    {% for taxonomy in entity.taxonomies %}
+                                        <p class="fr-tag color-tag text-decoration-none tag-pad fr-text--xs">{{ taxonomy.term }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="fr-mt-2w">
+                                {% if entity.image is not empty %}
+                                    <div class="fr-card__img-dataset">
+                                        <img src="{{ entity.image }}" class="fr-responsive-img img-thumbnail" alt="{{ entity.title }}">
+                                    </div>
+                                {% endif %}
+                                <span class="fr-text--xs color-grey-666">{{ 'front.updatedAt'|trans }} {{ entity.updatedAt|date("d/m/Y") }}</span>
+                                <div class="fr-my-4w">
+                                    {{ entity.content|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+            {% include 'partials/common/_search-footer.html.twig' %}
+        {% endblock %}
+    </main>
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

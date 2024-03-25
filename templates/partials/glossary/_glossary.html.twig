@@ -1,0 +1,55 @@
+<div class="fr-container fr-pb-3w padding-body fr-mx-0 fr-mx-md-3w">
+    {% if introBanner.isEnable %}
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-1v">{{ introBanner.title }}</h1>
+                <p class="fr-pt-2w">{{ introBanner.description|raw }}</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="fr-grid-row">
+            <div class="fr-col">
+                <h1 class="fr-h1 actu-title-border fr-mb-2w">{{'content.glossary'|trans }}</h1>
+            </div>
+        </div>
+    {% endif %}
+    <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col">
+            <div class="lexicon-links">
+                {% for initial in initials %}
+                    {% if (anchor[initial] == 1) %}
+                        <a href="?initial={{ initial }}">{{ initial }}</a> |
+                    {% else %}
+                        {{ initial }} |
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% if glossaries is defined and glossaries is not empty %}
+                <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+                    <div class="fr-col">
+                        <ul class="fr-accordions-group fr-px-3w fr-py-2w">
+                            {% for glossary in glossaries %}
+                                <li>
+                                    <section class="fr-accordion">
+                                        <div class="d-flex align-items-center justify-content-end order-first">
+                                        </div>
+                                        <h2 class="fr-accordion__title">
+                                            <button class="fr-accordion__btn" aria-expanded="false" aria-controls="accordion-{{ loop.index0 }}">{{ glossary.term }}</button>
+                                        </h2>
+                                        <div class="fr-collapse" id="accordion-{{ loop.index0 }}">
+                                            <div class="fr-callout fr-fi-information-line">
+                                                <p class="fr-callout__title">{{ glossary.term }}</p>
+                                                <p class="fr-callout__text">{{ glossary.definition|raw }}</p>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {{ knp_pagination_render(glossaries) }}
+</div>

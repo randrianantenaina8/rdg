@@ -1,0 +1,15 @@
+{# see script.js #}
+<div class="alert__message"> 
+    {% if alerts is defined and alerts is not empty %}
+        {% for alert in alerts %}
+            {% if alert.dateStart or alert.dateEnd|format_datetime(pattern="dd MMMM YYYY", locale=('/en/' in currentPath ? 'en' : 'fr')) 
+            > alert.dateStart|format_datetime(pattern="dd MMMM YYYY", locale=('/en/' in currentPath ? 'en' : 'fr')) %}
+                <div title="{{ alert.name }}">
+                    <div role="alert" class="fr-alert fr-alert--{{ (alert.type == 1) ? 'info' : (alert.type == 2) ? 'warning' : 'error' }} pt-3 pb-1 py-md-4">
+                        <p class="alert__message--text">{{ alert.message|raw }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}    
+    {% endif %}
+</div>

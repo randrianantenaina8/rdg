@@ -1,0 +1,9 @@
+<main class="fr-fluid" role="main">
+    {% block main %}
+        {% include 'partials/contact/_bannercontact.html.twig' %}
+        {% block page %}
+            {% include 'partials/contact/_contact.html.twig' %}
+        {% endblock %}
+        {% include 'partials/common/_search-footer.html.twig' %}
+    {% endblock %}
+</main>

@@ -1,0 +1,26 @@
+{% if breadcrumbs is defined and breadcrumbs is not empty %}
+    <div class="fr-container padding-body">
+        <div class="fr-grid-row">
+            <div class="fr-col fr-mx-md-3w fr-py-2w fr-mr-0">
+                <nav role="navigation" class="fr-breadcrumb fr-mb-1w" aria-label="{{ 'breadcrumbs.see.here'|trans }}">
+                    <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">{{ 'breadcrumbs.see.mobile'|trans }}</button>
+                    <div class="fr-collapse" id="breadcrumb-1">
+                        <ol class="fr-breadcrumb__list fr-pl-0">
+                            {% for breadcrumb in breadcrumbs %}
+                                {% if loop.last %}
+                                <li>
+                                    <a class="fr-breadcrumb__link fr-text--bold" aria-current="page" href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a class="fr-breadcrumb__link" href="{{ breadcrumb.url }}">{{ breadcrumb.name }}</a>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endif %}

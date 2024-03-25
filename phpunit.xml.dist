@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="tests/bootstrap.php"
+         convertDeprecationsToExceptions="false"
+>
+    <php>
+        <ini name="display_errors" value="true" />
+        <ini name="error_reporting" value="true" />
+        <env name="APP_ENV" value="test" force="true" />
+        <server name="SHELL_VERBOSITY" value="-1" />
+        <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
+        <server name="SYMFONY_PHPUNIT_VERSION" value="9.6" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
+        <env name="XDEBUG_MODE" value="coverage" />
+        <ini name="xdebug.mode" value="coverage" />
+                <server name="KERNEL_CLASS" value="App\Kernel" />
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="dev"/>
+        <env name="APP_SECRET" value="7151e5f029ac1a59f53b0928c7f2d789"/>
+        <!-- ###- symfony/framework-bundle ### -->
+
+        <!-- ###+ doctrine/doctrine-bundle ### -->
+        <!-- Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url -->
+        <!-- IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml -->
+        <!--  -->
+        <!-- DATABASE_URL="mysql://rdg:rdg@db:3306/rdg?serverVersion=mariadb-10.5.1" -->
+        <!-- DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8&charset=utf8mb4" -->
+        <env name="DATABASE_URL" value="mysql://rdg:rdg@db:3306/rdg?serverVersion=mariadb-10.5.1" />
+        <!-- ###- doctrine/doctrine-bundle ### -->
+
+        <!-- ###+ snc/redis-bundle ### -->
+        <!-- passwords that contain special characters (@, %, :, +) must be urlencoded -->
+        <env name="REDIS_URL" value="redis://localhost"/>
+        <!-- ###- snc/redis-bundle ### -->
+    </php>
+
+    <!-- ### Launch tests by groups ### -->
+    <testsuites>
+        <testsuite name="Application">
+            <directory>tests/application</directory>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory>tests/unit</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage includeUncoveredFiles="true"
+              processUncoveredFiles="true"
+              disableCodeCoverageIgnore="false"
+              cacheDirectory="tests/cache"
+              pathCoverage="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <!-- ### Generate html code coverage report ### -->
+        <report>
+            <html outputDirectory="tests/report" />
+        </report>
+    </coverage>
+
+    <!-- ### Generate log journal ### -->
+    <logging>
+        <testdoxHtml outputFile="tests/logs/coverage.html" />
+    </logging>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
+
+    <!-- Run `composer require symfony/panther` before enabling this extension -->
+    <!--
+    <extensions>
+        <extension class="Symfony\Component\Panther\ServerExtension" />
+    </extensions>
+    -->
+</phpunit>

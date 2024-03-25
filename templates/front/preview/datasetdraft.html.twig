@@ -1,0 +1,19 @@
+{% extends 'base_one_type.html.twig' %}
+
+{% block title %}{{ entity.title }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    <main class="fr-fluid" role="main">
+        {% block main %}
+            {% include 'partials/common/_breadcrumbpages.html.twig' %}
+
+            {% block content %}
+                {% include 'partials/dataset/_dataset.html.twig' %}
+            {% endblock %}
+
+            {% include 'partials/common/_search-footer.html.twig' %}
+        {% endblock %}
+    </main>
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

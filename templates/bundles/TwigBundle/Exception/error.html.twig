@@ -1,0 +1,47 @@
+{% extends 'base_error.html.twig' %}
+{% block body %}
+    <header role="banner" class="fr-header">
+        {% block header %}
+            {% include 'partials/header/_topheader.html.twig' %}
+        {% endblock %}
+    </header>
+    <div class="fr-container d-block fr-py-6w">
+        <h1 class="fr-display-xl text-center">{{ status_code }}</h1>
+        <h4 class="fr-h4 text-center">{{'front.page.404'|trans}}</h4>
+        <h4 class="fr-h4 text-center">{{ exception.message }}</h4>
+        <div class="d-flex justify-content-center align-content-center"><a href="{{ path('front.index') }}" class="fr-tag">{{'front.page.404.return'|trans}}</a></div>
+    </div>
+    {% block footer %}
+        <footer class="fr-footer padding-body fr-pt-6w fr-pb-4w" role="contentinfo" id="footer">
+            <div class="fr-container">
+                <div class="fr-grid-row">
+                    <div class="fr-col">
+                        <div class="fr-grid-row">
+                            <div class="fr-col">
+                                <div class="fr-footer__brand fr-enlarge-link">
+                                    <a href="/" title="Retour à l’accueil">
+                                        <p class="fr-logo" title="république française">
+                                            ministère
+                                            <br>de l'enseignement
+                                            <br>supérieur
+                                            <br>et de la recherche
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="fr-col-6">
+                                <div class="fr-grid-row align-items-center h-100">
+                                    <div class="fr-col">
+                                        <h6 class="fr-h6 fr-px-3v fr-mb-1v">{{'front.footer.contact'|trans}}</h6>
+                                        <a class="fr-link fr-fi-arrow-right-line fr-link--icon-right fr-text--sm" href="{{ url('front.contact') }}">{{'front.footer.contact.link'|trans}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+{% endblock %}
+

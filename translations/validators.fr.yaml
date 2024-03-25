@@ -1,0 +1,43 @@
+username.invalid: "Le nom d'utilisateur doit être formé uniquement de caractères alphanumeriques."
+username.nonunique: "Ce nom d'utilisateur est déjà utilisé par un autre utilisateur."
+user.email.nonunique: 'Cette addresse email est déjà utilisée par un autre utilisateur.'
+user.roles.invalid: 'Rôle inexistant.'
+password.match: 'Les deux mots de passe ne sont pas identique.'
+password.pattern: "Le mot de passe ne respecte pas le schéma requis."
+password.missing: 'Veuillez renseigner un mot de passe.'
+route.notexist: "Cette route n'existe pas."
+menu.link.missing: 'Un des champs Lien doit être renseigné.'
+menu.link.toomany: 'Seulement un lien : externe OU interne.'
+center.type.invalid: "Vous n'avez pas sélectionné correct."
+email.missing: 'Veuillez écrire votre courriel.'
+page.missing.title: 'Le Titre est manquant.'
+page.missing.content: 'Le Contenu est manquant.'
+page.missing.prop: "Un champ n'est pas traduit."
+translations.missing: "Les champs de traductions sont obligatoire, au moins, dans une langue."
+translations.all.missing: 'Les champs de traductions sont obligatoires dans toutes les langues.'
+translations.field.missing: "Tous les champs traductibles sont obligatoire dans une langue."
+entity.mandatory.onelocale: 'Tous les champs traductibles sont obligatoire dans, au moins, une langue.'
+subject.translation.missing: "Le sujet doit être présent dans, au moins, une langue."
+translations.field.title.missing: "Le titre doit être présent dans, au moins, une langue."
+flash.success.password.created: 'Votre mot de passe a été mis à jour.'
+flash.error.oldpassword.incorrect: 'Ancien mot de passe incorrect'
+introduction.field.nodescription: 'Si une description est présente, un titre est obligatoire.'
+category.field.nodescription: 'Si une description est présente, un nom est obligatoire.'
+entity.field.nocontent: 'Si un contenu est présent, un titre est obligatoire.'
+entity.field.locale.lengthmax: 'Le champ : "%field%", dans la langue : "%lng%", fait "%len%" caractères. Longueur maximale autorisée : "%lengthmax%"'
+entity.field.locale.min: 'Le champ : "%field%", dans la langue : "%lng%", doit faire au moins "%len%" caractère(s).'
+categoryGuide.field.missing: 'Le champ : "%field%" est obligatoire.'
+guide.field.category.missing: 'Une catégorie (avec son poids) doit être associée au guide.'
+headingFaq.field.missing: 'Le champ : "%field%" est obligatoire.'
+faqblock.field.heading.missing: 'Une rubrique (avec son poids) doit être associée à cet item de FAQ.'
+weight.invalid.value: 'Le poids doit être un nombre entier.'
+menu.parent.children: "Cet item a d'autres items en dessous de lui et ne peut donc avoir d'item parent."
+guide.additionalhelp.fields.missing: "Lors de l'ajout d'une aide additionnelle, tous les champs sont obligatoires."
+additionalhelp.field.link.toolong: 'Le champ lien est trop long.'
+additionalHelp.links.atleastone: 'Il doit y avoir AU MOINS un lien vers un guide OU un lien externe.'
+category.contains.guide: 'Action non authorisée. Cette catégorie contient encore au moins un guide.'
+heading.contains.faq: 'Action non authorisée. Cette rubrique contient encore au moins une FAQ.'
+event.field.end.sooner: 'La date de fin ne peut pas être plus tôt que la date de début.'
+centermapcoord.coordinates.notnumeric: "La coordonnée n'est pas numérique."
+centermapcoord.centers.notboth: 'Vous ne pouvez sélectionner un établissement ET un atelier de la donnée.'
+centermapcoord.centers.notboth.empty: "Vous devez sélectionner un établissement OU un atelier de la donnée."

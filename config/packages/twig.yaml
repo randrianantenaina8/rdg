@@ -1,0 +1,32 @@
+twig:
+  default_path: "%kernel.project_dir%/templates"
+  globals:
+    locales: "%app.locales%"
+    search: "%search_dataverse_url%"
+    deposit: "%deposit_dataverse_url%"
+    ministry_url: "%ministry_logo_url%"
+    # Truncate field constant
+    lame_news_len_max_title: "%lame_news_len_max_title%"
+    lame_spotlight_len_max_title: "%lame_spotlight_len_max_title%"
+    lame_highlighted_len_max_title: "%lame_highlighted_len_max_title%"
+    lame_highlighted_len_max_hook: "%lame_highlighted_len_max_hook%"
+    event_len_max_hook: "%event_len_max_hook%"
+    actu_len_max_title: "%actu_len_max_title%"
+    dataset_len_max_title: "%dataset_len_max_title%"
+    solr_search_len_max_content: "%solr_search_len_max_content%"
+    # MATOMO ENV VARIABLE
+    MATOMO_SITEID: "%env(MATOMO_SITEID)%"
+    MATOMO_URL: "%env(MATOMO_URL)%"
+    # Fast-Fix data workshop url list
+    dataworkshop_url_fr: "%env(DATAWORKSHOP_URL_FR)%"
+    dataworkshop_url_en: "%env(DATAWORKSHOP_URL_EN)%"
+    # URL footer communication kit
+    url_communication_kit_fr: "%env(URL_COMMUNICATION_KIT_FR)%"
+    url_communication_kit_en: "%env(URL_COMMUNICATION_KIT_EN)%"
+    S3_ENDPOINT: "%env(S3_ENDPOINT)%"
+    S3_BUCKET: "%env(S3_BUCKET)%"
+    S3_KEY: "%env(S3_KEY)%"
+
+when@test:
+  twig:
+    strict_variables: true

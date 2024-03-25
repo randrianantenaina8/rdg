@@ -1,0 +1,185 @@
+{% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% set requestURI = app.request.requestUri|split('/') %}
+<!DOCTYPE html>
+<html lang="{{ requestURI[1] }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=4">
+    <meta name="description" content="{% block meta_description %}{{ 'app.meta_description'|trans }}{% endblock %}">
+    <meta name="google-site-verification" content="51XxMUHT5cG7LlJLM8ukE_Z5A22qCfdhxWa8dOoUzVM" />
+    <title>{% block title %}{{ 'app.title'|trans }}{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('build/images/icons/favicon.ico') }}" sizes="any">
+    <link rel="apple-touch-icon" type="image/x-icon" href="{{ asset('build/images/icons/apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('build/images/icons/site.webmanifest') }}">
+    {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+    <link rel="stylesheet" href="/build/css/dsfr-theme-tac.min.css"></link>
+    <link rel="stylesheet" href="/build/dsfr/dsfr/dsfr.min.css"></link>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
+    {# Matomo settings #}
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        _paq.push(['HeatmapSessionRecording::disable']);
+        _paq.push(["setDoNotTrack", true]);
+        (function() {
+            var u="//matomo9.ethibox.fr/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '{{ MATOMO_SITEID }}']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    {# End Matomo settings #}
+</head>
+
+<body>
+<div id="top" title="Haut de page"></div>
+<div class="fr-grid-row">
+    {% block body %}
+        {% include 'partials/header/_header.html.twig' %}
+        {% include 'partials/main/_main.html.twig' %}
+        {% include 'partials/footer/_footer.html.twig' %}
+    {% endblock %}
+</div>
+<script type="module" src="/build/dsfr/dsfr/dsfr.module.min.js"></script>
+<script type="text/javascript" nomodule src="/build/dsfr/dsfr/dsfr.nomodule.min.js"></script>
+<script src="/build/tarteaucitron/tarteaucitron.js"></script>
+
+
+<script>
+    // Init TAC
+    tarteaucitronForceLanguage = 'fr';
+    tarteaucitron.init({
+        /* General */
+        "groupServices" : false,
+        "privacyUrl": "",                /* Privacy policy url . Si vide, le lien Politique de confidencialité du bandeau ne s'affiche pas*/
+        "hashtag": "#consentement",      /* La gestionnaire de consentement s'ouvre avec ce hashtag lorsqu'il est placé dans l'url */
+        "cookieName": "tarteaucitron",   /* L'identifiant du cookie déposé sur le poste utilisateur */
+        "bodyPosition": "top",           /* Position à laquelle le gestionnaire - niveau 2 -  est inséré dans la page (top ou bottom). Pour que les technologies d'assistance puisse y acceder rapidement à la navigation, 'top' est la valeur privilégiée. */
+        "adblocker": false,              /* Show a Warning if an adblocker is detected */
+        "highPrivacy": true,             /* Retire le consentement implicite (au scroll ou à la navigation) Activé par défaut, donc on peut le retirer de cette config */
+        "handleBrowserDNTRequest": false,/* Active ou désactive la prise en compte du Do Not track Navigateur. Si le DNT est activé, aucun cookie n'est déposé */
+        "useExternalCss": true,         /* Active ou non une css custom - désactive ou non la css par défaut */
+
+        /* Niveau 1 : bandeau d'information cookies*/
+        "orientation": "bottom",/* Position de la bannière de niveau 1 (middle - top - bottom). Si la position est middle, il y a un overlay derrière donc laisser à top ou bottom. */
+        "DenyAllCta" : true,    /* Affiche le bouton 'Tout refuser' sur le bandeau de niveau 1 */
+        "AcceptAllCta" : true,  /* Affiche le bouton 'Tout accepter' sur le bandeau de niveau 1 */
+        "closePopup":false,    /* ajoute une croix de fermeture */
+
+        /*Niveau 2: Gestionnaire de cookies*/
+        "removeCredit": true, /* Affiche ou non les credit TAC */
+        "moreInfoLink": true,/*  Affiche ou non le liens vers les infos*/
+        "readmoreLink": true,/* Change the default readmore link pointing to tarteaucitron.io */
+        "mandatory": true,    /* Message à propos des cookies dits fonctionnels  */
+
+
+        /* Sticky d'ouverture niveau 2 */
+        /* Blocs 'Gestion des cookies' */
+        "showAlertSmall": false, /* 'bouton' sticky (en bas a droite) permettant d'ouvrir le gestionnaire de niveau 2*/
+        "cookieslist": false,   /* Ajoute le nombre de services au 'block' sticky */
+        /* Icone sticky */
+        "showIcon": false,             /* affichage du Bouton sticky (icone citron) pour ouvrir le gestionnaire */
+        "iconPosition": "BottomLeft", /* Position du Bouton sticky BottomRight, BottomLeft, TopRight and TopLeft */
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<script>
+    const div = document.querySelector('.fr-my-4w');
+    if (div !== null) {
+        const tables = document.querySelectorAll('table')
+        tables.forEach((table, i) => {
+            classname='cke-table'+i.toString()
+            table.className= classname
+            let cellspace = table.getAttribute('cellspacing') 
+            let cellpad = table.getAttribute('cellpadding') 
+            const style = document.createElement('style');
+            style.innerHTML = `
+                .${classname} {
+                border-collapse: separate; 
+                border-spacing: ${cellspace}px;
+                }
+                .${classname} td {
+                    padding: ${cellpad}px
+                }
+                .${classname} th {
+                    padding: ${cellpad}px
+                }
+                 .${classname} th{
+                    padding: ${cellpad}px
+                }
+                `;
+        document.head.appendChild(style);
+        })
+    }
+</script>
+
+<script>
+    jQuery(document).ready(function($) {
+        let content = ''
+        let glossaries = []
+
+        $.ajax({
+             url: '{{ path('get_term_list') }}',
+             method: 'GET',
+             data: {glossaries:glossaries}
+        }).done(function (response) {
+            glossaries = response.data
+
+            $('a').each(function() {
+                let document = $(this)
+                let term = $(this).text()
+                let term_minus = term.toLowerCase()
+                let content = ''
+
+                if (glossaries.includes(term_minus)) {
+                    if (!document[0].classList.contains('fr-sidemenu__faq')) {
+                        $(this).css({
+                            'text-decoration': 'none',
+                            'border-bottom': 'dotted 2px #000',
+                            'box-shadow': 'none'
+                        })
+                    }
+
+                    $.ajax({
+                        url: '{{ path('get_term_definition') }}',
+                        method: 'POST',
+                        error: function(xhr, status, error) {},
+                        data: {term: term}
+                    }).done(function (response) {
+                        content = response.data;
+                    }).then(data => {
+                        $(this).attr('tooltipData', content)
+                    })
+                }
+            })
+            
+        })
+
+        $(this).tooltip({
+            items: 'a',
+            content: function () {
+                let element = $(this)
+                if (element.is('a') && !element[0].classList.contains('fr-sidemenu__faq')) {
+                    return element.attr('tooltipData')
+                }
+            }
+        })
+
+    })
+</script>
+
+</body>
+</html>

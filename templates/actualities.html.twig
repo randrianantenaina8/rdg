@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block meta_description %}{{ 'actualities.meta_description'|trans }}{% endblock %}
+{% block title %}{{ 'front.actualities.list'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/actualities/_mainactu.html.twig' with { 'title' : 'front.actualities.list'|trans } %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

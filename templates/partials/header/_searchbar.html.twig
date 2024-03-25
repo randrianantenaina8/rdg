@@ -1,0 +1,9 @@
+{# Header Searchbar - Dsfr design #}
+<div class="fr-fluid">
+    <div class="fr-search-bar fr-search-bar--md justify-content-lg-end justify-content-md-center align-items-center mb-2">
+        <form class="fr-search-bar fr-col-lg-4" action="{{ path('front.search.index') }}" method="get">
+            <input type="text" class="fr-input" name="q" placeholder="{{ 'front.main.searchbar.placeholder'|trans }}">
+            <button type="submit" class="fr-btn"></button>
+        </form>
+    </div>
+</div>

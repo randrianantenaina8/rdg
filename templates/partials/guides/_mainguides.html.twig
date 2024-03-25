@@ -1,0 +1,7 @@
+<main class="fr-fluid" role="main">
+    {% block main %}
+        {% include 'partials/common/_breadcrumb.html.twig' with {'title' : title} %}
+        {% include 'partials/guides/_guides.html.twig' %}
+        {% include 'partials/common/_search-footer.html.twig' %}
+    {% endblock %}
+</main>

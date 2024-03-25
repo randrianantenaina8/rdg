@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'front.dataworkshop.list'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/dataworkshop/_maindataworkshop.html.twig' with { 'title' : 'front.dataworkshop.list'|trans } %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}

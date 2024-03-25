@@ -1,0 +1,22 @@
+{% for actuality in actualities %}
+<item>
+    <title>{{ actuality.title }}</title>
+    {% if actuality.image is not empty %}<image
+        rdf:about="{{ absolute_url(actuality.image) }}"
+        image:size="medium"
+        >
+        <title>{{actuality.title}}</title>
+        <url>{{ actuality.image }}</url>
+        </image>{% endif %}
+    <content:encoded><![CDATA[{{ actuality.content|raw }}]]></content:encoded>
+    <link>{{ absolute_url(path('front.actuality.show', {'slug': actuality.slug })) }}</link>
+{% if app.request.locale == 'fr' %}
+    <created>{{ actuality.createdAt|date("d/m/Y H:i") }}</created>
+    <updated>{{ actuality.updatedAt|date("d/m/Y H:i") }}</updated>
+{% else %}
+    <created>{{ actuality.createdAt|date("m/d/Y g:i a") }}</created>
+    <updated>{{ actuality.updatedAt|date("m/d/Y g:i a") }}</updated>
+{% endif %}
+    <locale>{{ app.request.locale }}</locale>
+</item>
+{% endfor %}

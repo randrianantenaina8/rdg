@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'front.dataRepository.list'|trans }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header/_header.html.twig' %}
+    {% include 'partials/discipline/_maindiscipline.html.twig' with { 'title' : 'front.dataRepository.list'|trans } %}
+    {% include 'partials/footer/_footer.html.twig' %}
+{% endblock %}
